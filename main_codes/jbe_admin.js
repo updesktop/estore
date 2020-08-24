@@ -660,11 +660,13 @@ function my_location(){
 
 function showQR(){
   var h=H_BODY-100;
+  var txt='https://updesktop.github.io/estore/app/'+CURR_SITE;
   var dtl=      
     '<div id="main_qr" data-zoom=0 data-close="" style="width:100%;height:'+h+'px;text-align:center;background-color:white;">'+      
-        '<div style="width:100%;height:100%;padding:2px;background:none;">'+
-            '<div id="qrcode" style="margin:0 auto;margin-top:'+((h-270)/2)+'px;width:250px;height:250px;padding:2px;background:none;"></div>'+
-        '</div>'+
+      '<div style="width:100%;height:90%;padding:2px;background:none">'+
+          '<div id="qrcode" style="margin:0 auto;margin-top:'+((h-300)/2)+'px;width:250px;height:250px;padding:2px;background:none;"></div>'+          
+      '</div>'+
+      '<div style="width:100%;height:10%;padding:2px;font-size:12px;background:none;">'+txt+'</div>'+          
     '</div>';
   var dtl2=      
     '<div style="width:100%;height:100%;padding:11px 0 0 0;text-align:center;color:'+JBE_TXCLOR1+';background:none;">'+
@@ -675,8 +677,8 @@ function showQR(){
     width: 246,
     height: 246
   });
+  //https://updesktop.github.io/estore/app/ee/
   
-  var txt='https://updesk.heliohost.org/app/'+CURR_SITE;
   //alert(txt);
   qrcode.makeCode(txt);
 }
