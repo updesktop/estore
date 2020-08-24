@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="theme-color" content="navy"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>E-STORE APP</title>
+<link rel="shortcut icon" href="main_gfx/favicon.ico">
+<link rel="icon" href="main_gfx/favicon.ico">
+<link rel="apple-touch-icon" href="main_gfx/apple-touch-icon.png">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<!--link rel="manifest" href="./ENADSTORE.webmanifest"-->
+
+<script>
+  var JBE_API='';  
+  JBE_API='http://localhost/api/';
+  JBE_API='https://aidfimonitoring.com/api/';
+
+  var CURR_LOCATION=window.location.href;
+  
+  var thisFile;
+  var CURR_IDX_DB='';
+  var CURR_JBE_USER='';
+  var CURR_CLIENTNO='';
+   
+  var JBE_MOBILE=true;
+
+  var H_WRAPPER=0;
+  var H_HEADER=0;
+  var H_FOOTER=0;
+  var H_BODY=0;
+  var H_VIEW=0;
+
+  var f_MainPage=true;
+  var f_reload=true;
+  var JBE_MOBILE=true;
+  var JBE_ONLINE=false;
+  var JBE_DIR='app/';
+
+  var DB_SYS=[];
+  var DB_USER=[];
+
+  var JBE_CLOR='black'; 
+  var JBE_CLOR2='#434343'; 
+  var JBE_CLOR3='lightgray'; 
+  var JBE_CLOR4='whitesmoke'; 
+
+  var JBE_TXCLOR1='white'; 
+  var JBE_TXCLOR2='#434343'; 
+  var JBE_TXCLOR3='lightgray'; 
+  var JBE_TXCLOR4='whitesmoke'; 
+
+  const JBE_HEADER = {
+    "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+    "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Origin": "*"
+  } 
+
+  var MAIN_STORE_IDX = [   
+    { "id":0, "flename":"SysFile", "numrec":0 , "init":1 }
+  ];
+
+  /*
+  //======================================================
+  
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('SW_ENADSTORE.js', { scope: './' }).then(function(registration) {
+			console.log('Service worker registration succeeded:', registration);
+		}).catch(function(error) {
+			console.log('Service worker registration failed:', error);
+		});
+	} else {
+		console.log('Service workers are not supported.');
+  }
+  
+  
+  //======================================================
+  */
+	
+  window.addEventListener('load', function() {
+    window.history.pushState({ noBackExitsApp: true }, '');    
+  })
+
+  window.addEventListener('popstate', function(event) {
+    window.history.pushState({ noBackExitsApp: true }, '');
+    console.log(event.state);
+    
+    if (event.state) {
+      if(f_MainPage){     
+        //refreshIDX();                
+        MSG_SHOW(vbYesNo,"CONFIRM: ","Close the App?",function(){          
+          window.history.go(0);
+          f_reload=true;
+        },function(){});                          
+      }
+    }
+  })
+
+  
+
+  //var JBE_DIR='site/'+aryDB["site"]+'/gfx';
+  
+
+</script>
+
+</head>
+<body>
+<div id="snackbar"></div> 
+
+<!--************************* blocker-->
+<div id="je_msg" tabindex="0" data-rval="SAGBAYAN" class="modal" style="display:none;z-index:1100;" onkeydown="javascript:if(event.keyCode==27) closeModal()">
+  <div class="modal-content">
+    <div id="modal-header" class="modal-header" style="background:none;">
+      <!--span class="closeBtn" onclick="closeModal()">&times;</span-->
+      <span id="DivPrompt">
+        <h1>Modal Header</h1>
+      </span>				
+    </div>
+    <div id="modal-body" class="modal-body" style="background:lightgrey;">
+      <div id="msgBody">        
+      </div>	
+      <div style="height:auto;text-align:center;margin-top:5px;background:none;">
+        <div id="msgDivPrompt" style="display:none;margin-bottom:5px;">
+          <input class="je_msg_btn" type="text" id="txtPrompt" onkeydown="javascript:if(event.keyCode==13) MSG_CLICK(1)" style="width:40%;height:20px;border:1px solid black;text-align:center;" value="" />
+        </div>
+        <div id="msgDivOk" style="display:none;">
+          <!--input type="button" onclick="closeModal()" class="button" value="OK" /-->
+          <input type="text" id="txOk" style="display:none;width:100px;"/>
+          <input class="je_msg_btn" type="button" id="btnOk" onclick="MSG_CLICK(1)" onkeydown="javascript:if(event.keyCode==13) MSG_CLICK(1)" value="OK" />
+        </div>
+        <div id="msgDivYesNo" style="display:none;">
+          <input class="je_msg_btn" type="button" id="btnYes" onclick="MSG_CLICK(1)" value="Yes" />
+          <input class="je_msg_btn" type="button" id="btnNo"  onclick="MSG_CLICK(2)" value="No" style="margin-left: 2%;" />
+        </div>
+      </div>				
+    </div>
+    <div id="modal-footer" class="modal-footer" style="color:white;text-align:right;height:auto;">
+      EnadSys Dialog Ver 1.01 Copyright (c) 2018
+    </div>
+  </div>	
+</div>  
+
+
+<!-- *************************PAGES*************************************************** -->
+<div id="loading" class="modal" style="z-index:450;">      
+  <div style="display:block;width:150px;height:150px;background:none;
+          position: absolute;  z-index: 1000;  top: 50%;  left: 50%;  
+          -webkit-transform: translate(-50%, -50%);  transform: translate(-50%, -50%);">      
+    <img src="main_gfx/proc_logo.gif" alt="proc image" style="float:right;height:100%;width:100%;" />
+  </div>
+</div>  
+<!-- *************************PAGES*************************************************** -->
+
+<div id="wrapper" style="position:relative;display:block;height:100%;background-image: url('gfx/app_bg.jpg');background-repeat:no-repeat;
+                          background-position: center;background-size:cover;">
+
+  <div id="myJBox" class="modal_box"  style="bottom:0px;"></div>                          
+
+  <div id="myView1" data-page=0 data-open=0 data-close="" data-JBEpage=0 class="page_class myView" style="display:none;">
+    <div style="width:100%;height:30px;"></div>
+    <div class="back_main">      
+      <div id="back_view1" onclick="closeView(1)" class="back_class">
+        <img id="back_view_img1" src="main_gfx/jback.png" style="height:100%;" />
+        <span>Back</span>
+      </div>      
+      <div id="cap_myView1" class="cap_class"></div>
+      <div id="cap_viewMid1" class="cap_mid_class"></div>
+    </div>
+    <div id="dtl_myView1" class="myView_dtl">
+    </div>        
+  </div>  
+    
+  <div id="myView2" data-page=0 data-open=0 data-close="" class="page_class myView" style="display:none;">
+    <div style="width:100%;height:30px;"></div>
+    <div class="back_main">
+      <div id="back_view2" onclick="closeView(2)" class="back_class">
+        <img id="back_view_img2" src="main_gfx/jback.png" style="height:100%;" />
+        <span>Back</span>
+      </div>
+      <div id="cap_myView2" class="cap_class"></div>
+      <div id="cap_viewMid2" class="cap_mid_class"></div>
+    </div>
+    <div id="dtl_myView2" class="myView_dtl">
+      <!--dtl-->
+    </div>       
+  </div>
+
+  <div id="myView3" data-page=0 data-open=0 data-close="" class="page_class myView" style="display:none;">
+    <div style="width:100%;height:30px;"></div>    
+    <div class="back_main">
+      <div id="back_view3" onclick="closeView(3)" class="back_class">
+        <img id="back_view_img3" src="main_gfx/jback.png" style="height:100%;" />
+        <span>Back</span>
+      </div>
+      <div id="cap_myView3" class="cap_class"></div>
+      <div id="cap_viewMid3" class="cap_mid_class"></div>
+    </div>
+    <div id="dtl_myView3" class="myView_dtl">
+      <!--dtl-->
+    </div>       
+  </div>
+  
+  <div id="myView4" data-page=0 data-open=0 data-close="" class="page_class myView" style="display:none;">
+    <div style="width:100%;height:30px;"></div> 
+    <div class="back_main">
+      <div id="back_view4" onclick="closeView(4)" class="back_class">
+        <img id="back_view_img4" src="main_gfx/jback.png" style="height:100%;" />
+        <span>Back</span>
+      </div>
+      <div id="cap_myView4" class="cap_class"></div>
+      <div id="cap_viewMid4" class="cap_mid_class"></div>
+    </div>
+    <div id="dtl_myView4" class="myView_dtl">
+      <!--dtl-->
+    </div>       
+  </div>
+  <div id="myView5" data-page=0 data-open=0 data-close="" class="page_class myView" style="display:none;">
+    <div style="width:100%;height:30px;"></div> 
+    <div class="back_main">
+      <div id="back_view5" onclick="closeView(5)" class="back_class">
+        <img id="back_view_img5" src="main_gfx/jback.png" style="height:100%;" />
+        <span>Back</span>
+      </div>
+      <div id="cap_myView5" class="cap_class"></div>
+      <div id="cap_viewMid5" class="cap_mid_class"></div>
+    </div>
+    <div id="dtl_myView5" class="myView_dtl">
+      <!--dtl-->
+    </div>       
+  </div>
+
+  <!-- ******************************************************************************************* -->
+  <div id="page_main" class="page_class" style="height:100%;width:100%;padding:0px;background:none;">
+    <div id="div_header" style="position:relative;height:70px;width:100%;padding:0px;background:none;">
+      <div style="height:100%;width:100%;opacity:.3;background:white;">
+      </div> 
+     
+      <!--div style="position:absolute;top:0px;left:0px;height:100%;width:auto;padding:5px;background-color:none;">
+        <img src="main_gfx/jham.png" onclick="fm_apps()" style="height:100%;"/>
+      </div--> 
+      <div style="position:absolute;font-size:25px;top:20px;left:0px;height:auto;width:100%;text-align:center;color:white;background:none;
+                  font-weight:bold;text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;">
+        Enad Store Ver. 1.01
+      </div> 
+    </div> 
+    
+    <div id="user_client" data-clientno="" style="display:block;width:100%;height:100px;margin-top:0px;padding:30px 5px 5px 5px;overflow:auto;background:none;">
+    </div>
+
+
+    
+  </div> 
+  <div id="div_footer" class="jfooter" style="width:100%;height:70px;padding:0px;background:none;">
+      
+    <div id="mnu_main" class="menu_class" style="display:block;width:100%;height:100%;padding:10px;">        
+      <div style="width:100%;height:100%;border:2px solid white;border-radius:10px;background:none;font-size:16px;color:white;
+            text-align:center;padding:15px 0 0 0;background:none;font-weight:bold;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
+        &copy; 2020  EnadSys Soft. Bacolod City
+      </div>
+    </div>
+
+    <div id="mnu_offline" class="menu_class" style="display:none;width:100%;height:100%;padding:10px;">        
+      <div style="width:100%;height:100%;border:2px solid white;border-radius:10px;background:none;font-size:16px;color:red;
+            text-align:center;padding:15px 0 0 0;background:none;font-weight:bold;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
+        OFFLINE
+      </div>
+    </div>
+
+    <div id="mnu_disp_site" class="menu_class" style="display:none;width:100%;height:100%;padding:5px 10px 5px 10px;">
+
+      <div style="width:100%;height:100%;border:2px solid white;border-radius:10px;background:none;font-size:16px;color:white;
+            text-align:center;padding:5px;background:none;font-weight:bold;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
+
+        <div style="float:left;width:24%;height:100%;background: none;">          
+          <div class="class_footer" onclick="fm_site(2)">
+            <img src="main_gfx/jedit.png"  alt="home image" />          
+            <span>Edit</span>
+          </div>
+        </div>    
+        <div style="float:left;width:24%;height:100%;background: none;">          
+          <div class="class_footer" onclick="delSite()">
+            <img src="main_gfx/jdele.png"  alt="home image" />          
+            <span>Delete</span>
+          </div>
+        </div>    
+        <div style="float:left;width:24%;height:100%;background: none;">          
+          <div class="class_footer" onclick="updateSite()">
+            <img src="main_gfx/jproduct.png"  alt="home image" />          
+            <span>Update</span>
+          </div>
+        </div>    
+        <div style="float:right;width:28%;height:100%;background: none;">            
+          <div class="class_footer" onclick="gotoSite()">
+            <img src="main_gfx/jsite.png" alt="call image" />          
+            <span>View App</span>
+          </div>                
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="mnu_fm_site" class="menu_class" style="display:none;width:100%;height:100%;padding:10px;">
+      <div style="width:100%;height:100%;border:2px solid white;border-radius:10px;background:none;font-size:16px;color:white;
+            text-align:center;padding:5px;background:none;font-weight:bold;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
+
+        <div style="margin:0 auto;width:30%;height:100%;background:none;">          
+          <div onclick="save_site()" class="class_footer">
+            <img src="main_gfx/jsave.png"  alt="home image" />          
+            <span>Save</span>
+          </div>
+        </div>            
+
+      </div>
+    </div>
+
+    <div id="mnu_add_app" class="menu_class" style="display:none;width:100%;height:100%;padding:10px;">
+      <div style="width:100%;height:100%;border:2px solid white;border-radius:10px;background:none;font-size:16px;color:white;
+            text-align:center;padding:5px;background:none;font-weight:bold;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
+
+        <div style="margin:0 auto;width:30%;height:100%;background:none;">          
+          <div onclick="save_site()" class="class_footer">
+            <img src="main_gfx/jproduct.png"  alt="home image" />          
+            <span>Create App</span>
+          </div>
+        </div>            
+
+      </div>
+    </div>
+    
+  </div> <!--footer div-->
+
+</div> <!--main div-->
+
+<link rel="stylesheet" href="main_codes/main_styles.css">
+<link rel="stylesheet" href="main_codes/mobile.css">
+<script type='text/javascript' src='main_jslib/axios.min.js'></script>
+
+<script type='text/javascript' src='main_codes/main_lib.js'></script>
+<script type='text/javascript' src='main_codes/jbelib.js'></script>
+<script type='text/javascript' src='main_jslib/je_msg.js'></script>
+<script type='text/javascript' src='main_jslib/coke.js'></script>
+<script type='text/javascript' src='main_codes/jbe_db.js'></script>
+<script type='text/javascript' src='mainlib.js'></script>
+
+<script>
+	
+  var JBE_CLOR='blue'; 
+  je_msg_color('white',JBE_CLOR);
+  var DB_SYS=[];  
+
+  
+  
+  function showMainPage0(){ 
+    //alert('showMainPage0');
+    f_MainPage=true;    
+    document.getElementById("myView1").setAttribute('data-JBEpage',0); //reset openview page to 0
+    if(f_reload){
+      snackBar('Press Back key to Exit');    
+      f_reload=false;
+    }    
+    console.log('mainpage '+f_MainPage);
+    openPage('page_main');      
+    showMenu('mnu_main');   
+    if(!JBE_ONLINE){ showMenu('mnu_offline'); }
+  } 
+
+  function dispClients(){
+    //alert('func dispclients');
+    document.getElementById("myView1").setAttribute('data-JBEpage',0); //reset openview page to 0
+    document.getElementById('page_main').style.display='block';
+    var m=0;
+    if(!JBE_ONLINE){ 
+      m=1; 
+      showMenu('mnu_offline');
+    }else{
+      showMenu('mnu_main');
+    }
+    var n = new Date().toLocaleTimeString('it-IT');
+    var aryDB=DB_SYS; 
+    //aryDB.sort(sortByMultipleKey(['appname']));      
+    var dtl=''  
+    //alert(aryDB.length);
+    for(i=0;i<aryDB.length;i++){       
+      var v_clientno=aryDB[i]['clientno'];    
+      //alert('dispclient: '+v_clientno);
+      var v_appname=aryDB[i]['appname'];     
+      var v_site=aryDB[i]['site'];     
+      var v_photo='app/'+v_site+'/gfx/'+aryDB[i]['logo']+'?'+n;  
+      if(!JBE_ONLINE){        
+        v_photo='data:image/png;base64,' + btoa(JBE_GETFLD('logo',DB_SYS,'clientno',v_clientno));
+      }
+      dtl=dtl+      
+        '<div id="div_'+v_clientno+'" class="class_items" onclick="disp_site(&quot;'+v_clientno+'&quot;)">'+
+          '<div style="position:relative;height:75%;width:100%;border-radius:10px;border:1px solid lightgray;background:gray;">'+
+            '<div class="class_center_div">'+
+              '<img id="photo_'+v_clientno+'" src="'+v_photo+'" alt="category image" style="border-radius:8px;height:auto;max-height:100%;width:auto;max-width:100%;background:none;"/>'+
+            '</div>'+
+          '</div>'+
+          '<div id="descrp_'+v_clientno+'" style="width:100%;height:25%;font-size:11px;color:black;overflow:auto;font-weight:bold;text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;background:none;">'+v_appname+'</div>'+        
+        '</div>';  
+    }  
+
+    dtl=dtl+      
+      '<div id="div_add" class="class_items" onclick="fm_site(1)">'+
+        '<div style="position:relative;height:75%;width:100%;border-radius:10px;border:1px solid white;background:gray;">'+
+          '<div class="class_center_div">'+
+            '<img  src="main_gfx/jadd.png" alt="category image" style="border:1px solid red;border-radius:50%;height:auto;max-height:100%;width:auto;max-width:100%;background:red;"/>'+
+          '</div>'+
+        '</div>'+
+        '<div style="width:100%;height:25%;font-size:11px;color:black;overflow:auto;font-weight:bold;text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;background:none;">Add New Site</div>'+        
+      '</div>';  
+    //alert(dtl);
+    document.getElementById("user_client").innerHTML=dtl;
+  }
+
+  
+  function disp_site(clientno){
+    if(!JBE_ONLINE) { 
+      snackBar('OFFLINE');
+      return;
+    }
+    
+    if(!CURR_JBE_USER) { 
+      showLOGIN();
+      return; 
+    }
+       
+    window.history.pushState({ noBackExitsApp: true }, '');
+    f_MainPage=false;
+    
+    document.getElementById('div_footer').style.display='block';
+    var n = new Date().toLocaleTimeString('it-IT');   
+    var aryDB=JBE_GETARRY(DB_SYS,'clientno',clientno);     
+    var v_logo=JBE_DIR+aryDB['site']+'/gfx/'+aryDB['logo']+'?'+n;
+    var dtl=      
+      '<div id="div_site" data-clientno="'+clientno+'" data-appname="'+aryDB['appname']+'" data-site="'+aryDB['site']+'" style="width:100%;height:100%;padding:0px;background:none;">'+
+        
+        '<div style="width:100%;height:2px;margin-top:0px;background:white;"></div>'+
+        
+        '<div style="margin:0 auto;width:70%;height:auto;margin-top:30%;padding:10px;background:none;'+
+            'border-radius:10px;border:2px solid white;text-align:center;">'+
+
+          '<div style="width:100%;height:200px;background:none;">'+                
+            '<div style="width:100%;height:80%;margin-top:5px;padding:2px;background:none;">'+
+                '<img src="'+v_logo+'" alt="category image" style="border-radius:2%;border:2px solid white;height:auto;max-height:100%;width:auto;max-width:100%;background:none;"/>'+
+              '</div>'+
+            '<div style="width:100%;height:20%;padding:2px;font-size:20px;color:white;background:none;">'+aryDB['appname']+'</div>'+
+          '</div>'+          
+        '</div>'+
+        
+
+      '</div>';
+
+    openView(dtl,'Site Maintenance','close_disp_site');
+    showMenu('mnu_disp_site');
+  }
+  function close_disp_site(){    
+    showMainPage0();
+  }
+
+  function delSite(){
+    var clientno=document.getElementById('div_site').getAttribute('data-clientno');
+    var site=document.getElementById('div_site').getAttribute('data-site');
+    MSG_SHOW(vbYesNo,"CONFIRM: ","Are you sure to Delete this Site: "+site+"?",function(){
+      showProgress(true);  
+      axios.post(JBE_API+'main.php', { clientno:clientno, request: 4,    
+        site:site
+      },JBE_HEADER)
+      .then(function (response) {    
+        showProgress(false); 
+        console.log(response.data); 
+        //alert('tapos delete: '+response.data);
+        DB_SYS=response.data;    
+        dispClients();
+        showMainPage0();
+      })    
+      .catch(function (error) { console.log(error); showProgress(false); });
+    },function(){return;});  
+  }
+  
+  function updateSite(){      
+      var clientno=document.getElementById('div_site').getAttribute('data-clientno');
+      var site=document.getElementById('div_site').getAttribute('data-site');
+      var appname=document.getElementById('div_site').getAttribute('data-appname');
+      var vDate=new Date();  
+      var vTime = vDate.toLocaleTimeString('it-IT'); 
+      vDate = new Date(vDate.getTime() - (vDate.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];  
+      var sw_version=vDate+'_'+vTime;
+      sw_version = sw_version.replace(/-/g, "").replace(/:/g, "").replace("T", "-");            
+      showProgress(true);  
+      axios.post(JBE_API+'main.php', { clientno:clientno, request: 5,    
+          appname:appname,
+          site:site,        
+          sw_version:sw_version
+      },JBE_HEADER)
+      .then(function (response) {    
+          showProgress(false); 
+          //console.log(response.data); 
+          //alert(response.data); 
+          //DB_SYS=response.data;    
+          dispClients();
+          showMainPage0();
+          snackBar('SITE UPDATED');
+      })    
+      .catch(function (error) { console.log(error); showProgress(false); });   
+  }
+
+  function gotoSite(){        
+    var v_site=document.getElementById('div_site').getAttribute('data-site');
+    var v_clientno=document.getElementById('div_site').getAttribute('data-clientno');
+    eraseCookie('cok_user_'+v_clientno);
+    eraseCookie('cok_axtype_'+v_clientno);
+    eraseCookie('cok_name_'+v_clientno);
+    v_site='./app/'+v_site;
+    window.open(v_site);
+    closeView();
+  }
+
+//=============================================================================
+
+  function fm_site(vmode){
+    //alert(DB_SYS.length);
+    if(!JBE_ONLINE) { 
+      snackBar('OFFLINE');
+      return;
+    }
+    
+    if(!CURR_JBE_USER) { 
+      showLOGIN();
+      return; 
+    }
+    /*
+    if(vmode==1){
+      var pathloc=window.location.href;      
+      if( pathloc != 'http://localhost/enadstore/') { 
+        showLOGIN();
+        return; 
+      }
+    }
+    */
+
+    window.history.pushState({ noBackExitsApp: true }, '');
+    f_MainPage=false;
+    var n = new Date().toLocaleTimeString('it-IT');   
+    var vDate=new Date();  
+    var vTime = vDate.toLocaleTimeString('it-IT'); 
+    vDate = new Date(vDate.getTime() - (vDate.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];  
+    //var clientno='CN#_'+vDate+'_'+vTime;
+    //clientno = clientno.replace(/-/g, "").replace(/:/g, "").replace("T", "-");   
+
+    var clientno='';
+    
+    var tilt='Add New App';
+    var btnPrompt="Create App";
+    var vdisabled='';
+    var vcolor='white';
+
+    var v_logo='main_files/gfx/logo.jpg';
+    var j_logo='';
+    
+    var v_appname='';
+    var v_shortname='';
+    var v_descrp='';
+    var v_site='';
+
+    if(vmode==2){ 
+      clientno=document.getElementById('div_site').getAttribute('data-clientno');
+      tilt='Edit Site'; 
+      btnPrompt="Save"; 
+      vdisabled='disabled';
+      vcolor='gray';
+      
+      var aryDB=JBE_GETARRY(DB_SYS,'clientno',clientno);         
+      v_appname=aryDB['appname'];
+      v_shortname=aryDB['shortname'];
+      v_descrp=aryDB['descrp'];
+      v_site=aryDB['site'];
+
+      v_logo=JBE_DIR+v_site+'/gfx/'+aryDB['logo']+'?'+n;
+      j_logo=aryDB['logo'];
+
+      showMenu('mnu_fm_site');
+    }else{
+      showMenu('mnu_add_app');
+    }
+    
+    var dtl=
+      '<div id="div_fm_site" data-mode='+vmode+' data-clientno="'+clientno+'" style="width:100%;height:100%;text-align:center;padding:0px;background:none;">'+
+        '<div style="width:100%;height:2px;margin-top:0%;background:white;"></div>'+        
+        '<div style="width:100%;height:auto;margin-top:10px;padding:5px;color:white;background:none;">STORE LOGO</div>'+
+        '<div id="dv_avatar" style="position:relative;margin:0 auto;width:100px;height:100px;border-radius:8%;border:2px solid white;padding:5px;text-align:center;background:none;">'+
+          '<img id="id_logo'+vmode+'" data-img="'+j_logo+'" name="id_logo'+vmode+'" src="'+v_logo+'" style="border-radius:50%;width:100%;height:100%;padding:0px;border:2px solid white;"/>'+
+          '<div id="div_avatar" style="display:block;position:absolute;top:50%;left:50%;cursor:pointer;border-radius:50%;border:1px solid black;height:40px;width:40px;padding:3px;background:#434343;">'+
+            '<input type="file" id="id_file_logo'+vmode+'" name="id_file_logo'+vmode+'" hidden="hidden" />'+
+            '<img src="main_gfx/jcam.png" onclick="JBE_PICK_IMAGE(id_file_logo'+vmode+'.id,id_logo'+vmode+'.id,&quot;&quot;)" style="width:95%;"/>'+
+          '</div>'+
+        '</div>'+
+
+        '<div class="cs_fm_site" style="margin:0 auto;height:auto;margin-top:10px;text-align:left;font-size:14px;background:none;">'+
+          
+          '<div style="width:100%;height:25px;margin-top:0px;padding:1px;background:none;">'+
+            'Client No. :<input id="dvClientno" maxlength=15 onchange="valClientno(this.value)" type="text" '+vdisabled+' style="float:right;color:'+vcolor+';width:60%;height:100%;text-transform:uppercase;" placeholder="Client Code" value="'+clientno+'"/></span>'+
+          '</div>'+
+          
+          '<div style="width:100%;height:25px;margin-top:2px;padding:1px;background:none;">'+
+            'App Name :<input id="dvAppname" type="text" style="float:right;width:60%;height:100%;" value="'+v_appname+'"/></span>'+
+          '</div>'+
+          '<div style="width:100%;height:25px;margin-top:2px;padding:1px;background:none;">'+
+            'Short Name :<input id="dvShortname" type="text" style="float:right;width:60%;height:100%;" value="'+v_shortname+'"/></span>'+
+          '</div>'+
+          '<div style="width:100%;height:25px;margin-top:2px;padding:1px;background:none;">'+
+            'Description :<input id="dvDescrp" type="text" style="float:right;width:60%;height:100%;" value="'+v_descrp+'"/></span>'+
+          '</div>'+
+          '<div style="width:100%;height:25px;margin-top:2px;padding:1px;background:none;">'+
+            'Site URL :<input id="dvSite" type="text" '+vdisabled+' style="float:right;color:'+vcolor+';width:60%;height:100%;" value="'+v_site+'"/></span>'+
+          '</div>'+
+
+        '</div>'+
+
+      '</div>';
+
+    openView(dtl,tilt,'close_fm_site');
+    if(vmode==1){ document.getElementById('dvClientno').focus(); }    
+  }
+  function close_fm_site(){    
+    var vmode=document.getElementById('div_fm_site').getAttribute('data-mode');
+    if(vmode==1){ 
+      showMainPage0(); 
+    }else{ 
+      showMenu('mnu_disp_site'); 
+    }
+  }
+
+  function valClientno(clientno){
+    if(clientno.trim().length==0){ 
+      MSG_SHOW(vbOk,'ERROR:','Client Code is Empty!',function(){
+        document.getElementById('dvClientno').value='';
+        document.getElementById('dvClientno').focus();
+        return;
+      },function(){});
+    }
+    // see if clientno already exist
+    clientno=clientno.toUpperCase();
+    for(var i=0;i<DB_SYS.length;i++){
+      if(clientno==DB_SYS[i]['clientno']){
+        MSG_SHOW(vbOk,'ERROR:','Client Code Already Exist!',function(){
+          document.getElementById('dvClientno').value='';
+          document.getElementById('dvClientno').focus();
+          return;
+        },function(){});    
+        break;
+      }
+    }    
+  }
+
+  function save_site(){
+    var vmode=document.getElementById('div_fm_site').getAttribute('data-mode');      
+
+    var f_icon=false;
+    if(thisFile){ f_icon=true; }
+    //alert(f_icon);
+    var clientno=document.getElementById('dvClientno').value;
+    var dvAppname=document.getElementById('dvAppname').value;    
+    var dvShortname=document.getElementById('dvShortname').value;
+    var dvDescrp=document.getElementById('dvDescrp').value;
+    var dvSite=document.getElementById('dvSite').value;
+
+    if(vmode==1){
+	    var f_found=false;
+	    for(var i=0;i<DB_SYS.length;i++){
+	      if(dvSite==DB_SYS[i]['site']){
+	        f_found=true;    
+	        break;        
+	      }
+	    }   
+	    if(f_found){
+	      MSG_SHOW(vbOk,'ERROR:','Client App Site Already Exist!',function(){
+	        document.getElementById('dvSite').value='';
+	        document.getElementById('dvSite').focus();
+	        return;
+	      },function(){});    
+	      return;
+	    }
+	}
+    
+    var dvLogo=document.getElementById('id_logo'+vmode).getAttribute('data-img');
+    
+    if(clientno=='' || dvAppname=='' || dvShortname=='' || dvDescrp=='' || dvSite=='' || dvLogo==''){
+      var vmsg='';
+      if(clientno==''){ vmsg='Client Code is Empty'; }
+      else if(dvAppname==''){ vmsg='App Name is Empty'; }
+      else if(dvShortname==''){ vmsg='Shortname is Empty'; }
+      else if(dvDescrp==''){ vmsg='Description is Empty'; }      
+      else if(dvSite==''){ vmsg='Site URL is Empty'; }
+      else if(dvLogo==''){ vmsg='Logo is Empty'; }
+
+      MSG_SHOW(vbOk,"ERROR: Pls. complete the form.",vmsg,function(){},function(){});
+      return;
+    }
+    //alert(dvLogo);
+    dvLogo=document.getElementById('id_logo'+vmode).src;
+    if(vmode==1){
+      clientno=clientno.toUpperCase();
+    }
+    var dir='../../'+JBE_DIR+dvSite+'/gfx/';
+
+    alert(CURR_LOCATION);
+
+    var vDate=new Date();  
+    var vTime = vDate.toLocaleTimeString('it-IT'); 
+    vDate = new Date(vDate.getTime() - (vDate.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];  
+    var sw_version=vDate+'_'+vTime;
+    sw_version = sw_version.replace(/-/g, "").replace(/:/g, "").replace("T", "-");   
+
+    var req=2;
+    if(vmode==2){ req=3; }
+    showProgress(true);     
+    alert(dvSite);
+    axios.post(JBE_API+'main.php', { clientno:clientno, request: req,    
+      appname:dvAppname,
+      shortname:dvShortname,
+      descrp:dvDescrp,
+      site: dvSite,
+      logoImg:dvLogo,
+      f_icon:f_icon,      
+      logo:'logo.jpg',      
+      dir:dir,
+      curr_loc:CURR_LOCATION,
+      sw_version:sw_version
+    },JBE_HEADER)
+    .then(function (response) {     
+      showProgress(false);
+      //alert('save site: '+response.data.length); 
+      alert('BANTAY: '+response.data);
+      DB_SYS=response.data;
+      dispClients();      
+      showMainPage0();      
+    })    
+    .catch(function (error) { console.log(error); showProgress(false); });
+  }
+
+  function showMenu(m){  
+    document.querySelectorAll('.menu_class').forEach(function(el) {
+      //alert(el.id);
+      el.style.display = 'none';
+    });    
+    document.getElementById(m).style.display='block';       
+  }
+
+  function get_db_main(){
+    DB_SYS=[];
+    showProgress(true);
+    axios.post(JBE_API+'main.php', { clientno:'', request: 0 }, JBE_HEADER) 
+    .then(function (response) {  
+      showProgress(false);       
+      DB_SYS = response.data;      
+      //alert(DB_SYS);
+      dispClients(); 
+    })    
+    .catch(function (error) { console.log(error); showProgress(false); }); 
+  }
+  
+  
+
+  function initDbEnadStore() {
+    console.log('initDb activated...'+JBE_ONLINE);
+    var request = indexedDB.open(CURR_IDX_DB, dbVersion);
+    
+    request.onerror = function(e) {    
+      console.error('Unable to open database.');
+    }
+
+    request.onsuccess = function(e) {
+      db = e.target.result;
+      console.log('db opened');  
+    }
+
+    request.onupgradeneeded = function(e) {
+      db = e.target.result;      
+      db.createObjectStore('SysFile', { keyPath:'id' });      
+      dbReady = true;
+    }
+  }
+
+  function showLOGIN(){ 
+    window.history.pushState({ noBackExitsApp: true }, '');
+    f_MainPage=false;
+    var d = new Date();  
+    var n = d.toLocaleTimeString('it-IT');
+    var sagb=d.toString().substring(0,25);
+    var jbepass='JBE'+sagb.substr(6,1)+sagb.substr(19,2)+sagb.substr(2,1).toUpperCase();  
+    jbepass=jbepass.toUpperCase();        
+    var dtl=      
+      '<div id="divLogin" data-jbepass="'+jbepass+'" style="text-align:center;width:100%;height:150px;padding:2px;background:none;">'+        
+        '<form onsubmit="return false"  style="margin:0 auto;width:250px;height:auto;margin-top:10px;text-align:center;background:none;">'+
+          '<div style="width:100%;height:40px;font-size:14px;padding:10px 0 0 0;background:none;">Enter your password</div>'+
+          '<input id="ffpass" name="ffpass" autocomplete="off" type="password" placeholder="Password"'+
+                ' maxlength=20 onkeydown="javascript:if(event.keyCode==13) chkpass(ffpass.value,&quot;'+
+                jbepass+'&quot;)" style="width:100%;height:40px;text-align:center;font-weight:bold;color:white;background:black;"/>'+
+          '<div style="width:100%;height:auto;font-size:11px;padding:10px 0 0 0;background:none;">Today is: '+sagb+'</div>'+                
+        '</form>'+   
+      '</div>';      
+
+    var dtl2=      
+      '<div style="width:100%;height:100%;padding:0px;text-align:center;color:white;background:none;">'+
+        '<input type="button" onclick="chkpass(ffpass.value,&quot;'+jbepass+'&quot;)" style="width:200px;height:100%;" value="Log In" />'+
+      '</div>'; 
+
+    JBE_OPENBOX('divLogin','LOG IN',dtl,dtl2);  
+  }
+  function chkpass(p,j){ 
+    if(p=='') { snackBar('Empty Password...'); return; }
+    p=p.toUpperCase();
+    if(p==j){
+      CURR_JBE_USER='JBE';
+      snackBar('Log In successful!');
+      JBE_CLOSEBOX();
+      showMainPage0();
+    }else{
+      snackBar('Wrong Password');
+    }
+  }
+
+  function start_app(){
+    JBE_ONLINE_NAVI=navigator.onLine;  
+    JBE_ONLINE=false;   
+    //****************
+    JBE_ONLINE_NAVI=true;
+    //****************
+    //**********INIT APP FIRST PAGE************************    
+    const xhead = {
+    "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+    "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Origin": "*"
+  }
+    alert(JBE_API+'main.php');
+    axios.post(JBE_API+'main.php', { clientno:'', request: 404 },xhead)     
+    .then(function (response) {   
+      alert(response.data);
+      //alert('online: '+response.data[0]+'  navi: '+JBE_ONLINE_NAVI);
+      if(response.data[0] == 'ONLINE' && JBE_ONLINE_NAVI){
+        //alert('yes');
+        JBE_ONLINE=true;
+        DB_SYS=response.data[1];
+        
+        //clearStore(MAIN_STORE_IDX[0]['flename']); 
+        //writeAllToIDX(DB_SYS,0); 
+        ////get_db_main();        
+        //alert('clearStore passed');
+        dispClients();       
+      }else{
+        JBE_ONLINE=false;
+        //readAllFromIDX();
+      }      
+      //FOR DEBUG PURPOSES, NO LOGIN            
+      var pathloc=window.location.href;
+      //alert(pathloc);
+      CURR_JBE_USER='';      
+      if(pathloc == 'http://localhost/estore/' || pathloc == 'http://localhost:8080/estore/') { 
+        CURR_JBE_USER='JBE';        
+      }
+      showMainPage0(); 
+    })
+    .catch(function (error) { 
+      alert('sala');
+      if (!error.response) {
+        // network error (server is down or no internet)
+        console.log('JBE Found: network error (server is down or no internet)');
+      } else {
+        // http status code
+        const code = error.response.status;
+        // data from server while error
+        const response = error.response.data;
+        alert('sala gd');
+        console.log(code+' vs '+response);
+        MSG_SHOW(vbOk,"INTERNAL ERROR:","CODE:"+code+". Server Response: "+response+". <br>Please Refresh.",function(){},function(){}); 
+      }      
+         
+    });
+    
+  }
+
+  
+
+  //init boxes height
+  
+  var H_BAR=60;
+  
+  H_HEADER=parseInt(document.getElementById('div_header').style.height);  
+  H_FOOTER=parseInt(document.getElementById('div_footer').style.height);
+  
+  H_WRAPPER=window.innerHeight;
+  H_BODY=window.innerHeight - (H_FOOTER);  
+  H_VIEW=window.innerHeight - (H_FOOTER+H_BAR);
+  
+  document.getElementById('wrapper').style.height=(window.innerHeight)+'px';
+
+  document.querySelectorAll('.page_class').forEach(function(el) {    
+    el.style.height=H_BODY+'px';    
+    //el.style.backgroundColor='blue';
+  });
+  
+  document.getElementById('user_client').style.height=window.innerHeight - (H_HEADER+H_FOOTER)+'px';
+  // done
+
+  //************************************************
+  CURR_JBE_USER=readCookie('cok_jbe_user'); 
+  if(!CURR_JBE_USER){ CURR_JBE_USER=''; }
+  CURR_IDX_DB='DB_ENADSTORE';
+  //initDbEnadStore();      
+  alert(CURR_LOCATION);
+  start_app();  
+  
+</script>
+
+</body>
+</html>
