@@ -1,0 +1,22 @@
+{
+      "name": "ee",
+      "short_name": "ee",
+      "start_url": ".",
+      "display": "standalone",
+      "orientation": "portrait",
+      "background_color": "#a9a9a9",
+      "theme_color": "#a9a9a9",
+      "description": "ee",
+      "icons": [
+        {
+          "src": "gfx/icon-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png"
+        },
+        {
+          "src": "gfx/icon-logo.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
