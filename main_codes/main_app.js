@@ -6,7 +6,7 @@ function start_app(){
   //****************
   JBE_ONLINE_NAVI=true;
   //**************** 
-  alert('start_app api dir: '+JBE_API);
+  //alert('start_app api dir: '+JBE_API);
   //alert('atay: '+JBE_HEADER);
 
   var v_banner=JBE_API+'app/'+CURR_SITE+'/gfx/banner.jpg?'+n;  
@@ -21,6 +21,7 @@ function start_app(){
     "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Origin": "*"
   }
+  //alert('zOnline '+JBE_API);
   axios.post(JBE_API+'z_online.php',JBE_HEADER)     
   .then(function (response) {
     //alert('start: '+parseInt(response.data));
@@ -32,7 +33,7 @@ function start_app(){
     }           
   })
   .catch(function (error) { 
-    alert('naunsa na! '+error);
+    //alert('naunsa na! '+error);
     snackBar('ERROR: '+error);
     if (!error.response) {
       // network error (server is down or no internet)
@@ -225,7 +226,7 @@ function get_db_cat(){
     //alert('alert yyyy '+response.data.length); 
     console.log(response.data); 
     DB_CAT = response.data;     
-    alert('get_db_cat '+JBE_STORE_IDX[0]['numrec']+' db cat: '+DB_CAT.length);
+    //alert('get_db_cat '+JBE_STORE_IDX[0]['numrec']+' db cat: '+DB_CAT.length);
     if(JBE_STORE_IDX[0]['numrec'] != DB_CAT.length){ 
       clearStore(JBE_STORE_IDX[0]['flename']); 
       //  JBE_STORE_IDX[0]['numrec']=DB_CAT.length;

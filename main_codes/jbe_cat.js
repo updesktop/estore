@@ -58,7 +58,7 @@ function mnu_cat_add(){
 
 
 function dispAllCategory(){
-  alert('dispAllCategory');
+  //alert('dispAllCategory');
   var m=0;
   if(!JBE_ONLINE){ m=1; }  
   var n = new Date().toLocaleTimeString('it-IT');
@@ -184,7 +184,7 @@ function close_add_edit_cat(){
 }
 
 function saveCatRec(){    
-  alert('goint to save category');
+  //alert('goint to save category');
   //alert(document.getElementById('prev_photo_cat').src);
   if(!JBE_ONLINE) { 
     snackBar('OFFLINE');
@@ -220,7 +220,7 @@ function saveCatRec(){
     
   var orient=getImgOrient('prev_photo_cat');  
   var targetDIR=JBE_API+'app/'+CURR_SITE+'/upload/';
-  alert(targetDIR);
+  //alert(targetDIR);
   
   axios.post(JBE_API+'z_cat.php', { clientno:CURR_CLIENT, request: req,    
     descrp: descrp,    
