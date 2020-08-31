@@ -6,7 +6,7 @@ function start_app(){
   //****************
   JBE_ONLINE_NAVI=true;
   //**************** 
-  alert('start_app api dir xxx: '+JBE_API);
+  alert('start_app api dir: '+JBE_API);
   //alert('atay: '+JBE_HEADER);
 
   var v_banner=JBE_API+'app/'+CURR_SITE+'/gfx/banner.jpg?'+n;  
@@ -22,7 +22,6 @@ function start_app(){
     "Access-Control-Allow-Origin": "*"
   }
   //alert('zOnline '+JBE_API);
-  /*
   axios.post(JBE_API+'z_online.php',{ request:0 },JBE_HEADER)  
   .then(function (response) {
     alert('z_online: '+parseInt(response.data));
@@ -49,8 +48,6 @@ function start_app(){
     }
     showOffline();          
   });
-  */
-  showOnline();
 }
 
 function showOnline(){
