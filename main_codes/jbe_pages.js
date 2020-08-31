@@ -35,7 +35,8 @@ function fm_promo(){
     var v_mcode=promo[i]['stockno'];    
     var v_mname=promo[i]['descrp']; 
     var v_mprice=promo[i]['price']; 
-    var v_mphoto='upload/'+promo[i]['photo']+'?'+n;  
+    //var v_mphoto='upload/'+promo[i]['photo']+'?'+n;  
+    var v_mphoto=JBE_API+'app/'+CURR_SITE+'/upload/'+promo[i]['photo']+'?'+n;   
 
     dtl=dtl+      
       '<div id="fm_promo_'+v_mcode+'" class="class_items" style="float:left;text-align:center;border:0px solid red;padding:5px;background:lightgray;">'+
@@ -71,11 +72,12 @@ function select_promo(){
       var v_mcode=aryPromos[i]['stockno'];    
       var v_mname=aryPromos[i]['descrp']; 
       var v_mprice=aryPromos[i]['price']; 
-      var v_mphoto=aryPromos[i]['photo']+'?'+n;           
+      //var v_mphoto=aryPromos[i]['photo']+'?'+n;      
+      var v_mphoto=JBE_API+'app/'+CURR_SITE+'/upload/'+aryPromos[i]['photo']+'?'+n;        
       dtl=dtl+
         '<div id="sel_promo_'+v_mcode+'" onclick="func_promo('+(ctr+1)+',&quot;'+v_mcode+'&quot;)" style="float:left;text-align:center;width:107px;height:125px;margin-top:4px;margin-left:4px;padding:2px;background:none;">'+        
           '<div class="class_items" style="width:100%;height:70%;padding:5px;border:1px solid lightgray;border-radius:10px;background:none;">'+        
-            '<img src="upload/'+v_mphoto+'?'+n+'" alt="promo image" class="asyncImage" style="height:auto;max-height:100%;width:auto;max-width:100%;background:none;" />'+
+            '<img src="'+v_mphoto+'" alt="promo image" class="asyncImage" style="height:auto;max-height:100%;width:auto;max-width:100%;background:none;" />'+
           '</div>'+
           '<div style="width:100%;height:auto;max-height:20%;font-size:11px;overflow-x:hidden;overflow-y:auto;color:black;background:none;">'+v_mname+'</div>'+
           '<div style="width:100%;height:10%;font-size:11px;color:red;background:none;">&#8369; '+formatNumber2(v_mprice)+'</div>'+
