@@ -22,6 +22,7 @@ function start_app(){
     "Access-Control-Allow-Origin": "*"
   }
   //alert('zOnline '+JBE_API);
+  /*
   axios.post(JBE_API+'z_online.php',{ request:0 },JBE_HEADER)  
   .then(function (response) {
     alert('z_online: '+parseInt(response.data));
@@ -48,6 +49,8 @@ function start_app(){
     }
     showOffline();          
   });
+  */
+  showOnline();
 }
 
 function showOnline(){
