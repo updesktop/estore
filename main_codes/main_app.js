@@ -6,7 +6,7 @@ function start_app(){
   //****************
   JBE_ONLINE_NAVI=true;
   //**************** 
-  //alert('start_app api dir: '+JBE_API);
+  alert('start_app api dir: '+JBE_API);
   //alert('atay: '+JBE_HEADER);
 
   var v_banner=JBE_API+'app/'+CURR_SITE+'/gfx/banner.jpg?'+n;  
@@ -266,6 +266,7 @@ function get_db_cart(u){
 }
 function get_db_comments(){
   DB_COMMENT=[];
+  alert('get_db_comments() '+JBE_API);
   axios.post(JBE_API+'z_comment.php', { clientno:CURR_CLIENT,request: 0 },JBE_HEADER) 
   .then(function (response) { DB_COMMENT = response.data; console.log(DB_COMMENT); })    
   .catch(function (error) { console.log(error); }); 
@@ -648,7 +649,8 @@ function showPromos(){
     var v_mprice=aryDB[i]['price']; 
     //var v_mphoto='upload/'+aryDB[i]['photo']+'?'+n;   
     if(m==0){
-      var v_mphoto='upload/'+aryDB[i]['photo']+'?'+n;
+      //var v_mphoto='upload/'+aryDB[i]['photo']+'?'+n;
+      var v_mphoto=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB[i]['photo']+'?'+n;   
     }else{
       var v_mphoto='data:image/png;base64,' + btoa(aryDB[i]['photo']);
     }
