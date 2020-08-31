@@ -24,7 +24,7 @@ function start_app(){
   //alert('zOnline '+JBE_API);
   axios.post(JBE_API+'z_online.php',{ request:0 },JBE_HEADER)  
   .then(function (response) {
-    //alert('start: '+parseInt(response.data));
+    alert('z_online: '+parseInt(response.data));
     //alert('start: '+response.data);
     if(parseInt(response.data) > 0 && JBE_ONLINE_NAVI){
       showOnline();
