@@ -6,7 +6,7 @@ function start_app(){
   //****************
   JBE_ONLINE_NAVI=true;
   //**************** 
-  alert('start_app api dir: '+JBE_API);
+  alert('start_app api dir xxx: '+JBE_API);
   //alert('atay: '+JBE_HEADER);
 
   var v_banner=JBE_API+'app/'+CURR_SITE+'/gfx/banner.jpg?'+n;  
