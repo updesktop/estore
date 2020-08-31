@@ -22,7 +22,7 @@ function start_app(){
     "Access-Control-Allow-Origin": "*"
   }
   //alert('zOnline '+JBE_API);
-  axios.post(JBE_API+'z_online.php',JBE_HEADER)     
+  axios.post(JBE_API+'z_online.php',{ request:0 },JBE_HEADER)  
   .then(function (response) {
     //alert('start: '+parseInt(response.data));
     //alert('start: '+response.data);
