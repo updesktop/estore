@@ -15,18 +15,13 @@ function start_app(){
   document.getElementById('div_header').style.background='url("'+v_banner+'") center no-repeat';
   document.getElementById('ds1').style.background='url("'+dir_gfx+'slide1.jpg?'+n+'") center no-repeat';
   document.getElementById('ds2').style.background='url("'+dir_gfx+'slide2.jpg?'+n+'") center no-repeat';
-  
-  const xhead = {
-    "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-    "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-    "Access-Control-Allow-Origin": "*"
-  }
+   
   //alert('zOnline '+JBE_API);
-  axios.post(JBE_API+'z_online.php',{ request:0 },JBE_HEADER)  
+  axios.post(JBE_API+'z_online.php',JBE_HEADER)  
   .then(function (response) {
-    alert('z_online: '+parseInt(response.data));
-    //alert('start: '+response.data);
-    if(parseInt(response.data) > 0 && JBE_ONLINE_NAVI){
+    var res=parseInt(response.data);
+    alert('z_online: '+res);
+    if(res > 0 && JBE_ONLINE_NAVI){
       showOnline();
     }else{
       showOffline();

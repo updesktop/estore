@@ -239,7 +239,8 @@ async function putDataToIDX(i,aryDB,n){
 	//alert('async : '+aryDB.length);
 	var xox=aryDB.length;
   if(n==0){    
-    var jimg='upload/'+aryDB[i]['photo'];
+    //var jimg='upload/'+aryDB[i]['photo'];
+    var jimg=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB[i]['photo'];   
     await JBE_BLOB(n,jimg).then(result => jimg=result);
     ob = { //categorgy
       id:i,
@@ -250,7 +251,8 @@ async function putDataToIDX(i,aryDB,n){
       bal:aryDB[i]['bal'],            
     };
   }else if(n==1){ //stock
-    var jimg='upload/'+aryDB[i]['photo'];
+    //var jimg='upload/'+aryDB[i]['photo'];
+    var jimg=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB[i]['photo'];   
     await JBE_BLOB(n,jimg).then(result => jimg=result);
     ob = {
       id:i,

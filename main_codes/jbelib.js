@@ -293,6 +293,8 @@ function JBE_getBLOB(n,jimg,callback){
   const context = canvas.getContext('2d');
   var img = new Image();
     
+  
+  img.setAttribute('crossorigin', 'anonymous'); // works for me
   img.src=jimg;
   if(!JBE_ONLINE){
     img.onerror=img.onerror=null;img.src="../../main_gfx/jsite.png"; 
