@@ -77,7 +77,7 @@ function close_showOrder(){
 }
 
 function dispOrders(c,v){
-  //alert('Client: '+c+' | selected: '+v);
+  alert('dispOrders Client: '+c+' | selected: '+v);
   var vmode=document.getElementById('div_main_order').getAttribute('data-vmode');
   var aryDB=DB_ORDER;  
   aryDB.sort(sortByMultipleKey(['*trano']));
@@ -116,7 +116,8 @@ function dispOrders(c,v){
     var v_img='../../main_gfx/avatar.png';   
     var v_siteImg='../../main_gfx/landmark.png';   
     if(v_mphoto != ''){    
-      v_img='upload/users/'+v_mphoto+'?'+n; 
+      //v_img='upload/users/'+v_mphoto+'?'+n; 
+      v_img=JBE_API+'app/'+CURR_SITE+'/upload/users/'+v_mphoto+'?'+n;   
     }
 
     var stat_clor='black';

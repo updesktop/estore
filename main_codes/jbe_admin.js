@@ -72,6 +72,7 @@ function chk_lognow(){
     login_ok(1);
     return;
   }
+  alert('watch');
 
   showProgress(true);
   axios.post(JBE_API+'z_user.php',{ clientno:CURR_CLIENT, request: 101,     
@@ -101,7 +102,7 @@ function chk_lognow(){
     }
   })    
   .catch(function (error) { 
-    console.log(error); showProgress(false);
+    console.log(error); alert('login err '+error);showProgress(false);
   });
 }
 
@@ -510,6 +511,7 @@ function save_profile(){
   })
   .catch(function (error) { console.log(error); 
     showProgress(false);
+    alert('saving '+error);
   });  
 }
   

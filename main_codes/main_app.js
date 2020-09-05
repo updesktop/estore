@@ -15,20 +15,24 @@ function start_app(){
   document.getElementById('div_header').style.background='url("'+v_banner+'") center no-repeat';
   document.getElementById('ds1').style.background='url("'+dir_gfx+'slide1.jpg?'+n+'") center no-repeat';
   document.getElementById('ds2').style.background='url("'+dir_gfx+'slide2.jpg?'+n+'") center no-repeat';
-   
   //alert('zOnline '+JBE_API);
+  //axios.post(JBE_API+'z_cat.php',{ clientno:CURR_CLIENT, request: 0 },JBE_HEADER)  
+  showOnline();
+  /*
   axios.post(JBE_API+'z_online.php',JBE_HEADER)  
   .then(function (response) {
     var res=parseInt(response.data);
-    alert('z_online: '+res);
-    if(res > 0 && JBE_ONLINE_NAVI){
-      showOnline();
+    alert('z_online:  '+res);    
+    if(res > 0 && JBE_ONLINE_NAVI){         
+      //showOnline();
+      get_app_default();
+      alert('yes');
     }else{
       showOffline();
     }           
   })
   .catch(function (error) { 
-    //alert('naunsa na! '+error);
+    alert('naunsa na! '+error);
     snackBar('ERROR: '+error);
     if (!error.response) {
       // network error (server is down or no internet)
@@ -43,6 +47,7 @@ function start_app(){
     }
     showOffline();          
   });
+  */
 }
 
 function showOnline(){
@@ -87,7 +92,7 @@ function showOffline(){
   
   document.getElementById('jtime').innerHTML='OFFLINE';
   document.getElementById('div_bar').style.display='block';  
-  //alert('offline ko oo666xba!');
+
   allow_start(true);
   showMainPage(); 
 }
@@ -172,10 +177,10 @@ function mySearch() {
 //=======APP DB AND DISPLAY==========================================================
 function get_app_default(){    
   //alert('tan awa : '+CURR_CLIENT);
+  get_db_sys();
   get_db_cat();
   get_db_stock();
   get_db_comments();    
-  get_db_sys();
   get_db_clients();
 }
 function get_app_var(u,f_showprofile){
@@ -212,7 +217,6 @@ function get_db_clients(){
 }
 
 function get_db_cat(){
- 
   DB_CAT=[];
   //axios.post('http://localhost/api_rphs/z_rphs.php', { request: 0 }, xhead)
   axios.post(JBE_API+'z_cat.php', { clientno:CURR_CLIENT, request: 0 },JBE_HEADER) 
@@ -222,11 +226,13 @@ function get_db_cat(){
     console.log(response.data); 
     DB_CAT = response.data;     
     //alert('get_db_cat '+JBE_STORE_IDX[0]['numrec']+' db cat: '+DB_CAT.length);
+    /*
     if(JBE_STORE_IDX[0]['numrec'] != DB_CAT.length){ 
       clearStore(JBE_STORE_IDX[0]['flename']); 
       //  JBE_STORE_IDX[0]['numrec']=DB_CAT.length;
-      saveDataToIDX(DB_CAT,0); 
+      //saveDataToIDX(DB_CAT,0); 
     } 
+    */
     showCategories();     
   })
   .catch(function (error) { console.log(error); }); 
@@ -238,10 +244,12 @@ function get_db_stock(){
       console.log(response.data); 
       DB_STOCK = response.data; 
       //alert('get_db_stock '+JBE_STORE_IDX[1]['numrec']+' db stock: '+DB_STOCK.length);
+      /*
       if(JBE_STORE_IDX[1]['numrec'] != DB_STOCK.length){ 
          clearStore(JBE_STORE_IDX[1]['flename']); 
          saveDataToIDX(DB_STOCK,1); 
       }  
+      */
       showPromos(); 
       showItems(); 
       initSearch();
@@ -261,7 +269,7 @@ function get_db_cart(u){
 }
 function get_db_comments(){
   DB_COMMENT=[];
-  alert('get_db_comments() '+JBE_API);
+  //alert('get_db_comments() '+JBE_API);
   axios.post(JBE_API+'z_comment.php', { clientno:CURR_CLIENT,request: 0 },JBE_HEADER) 
   .then(function (response) { DB_COMMENT = response.data; console.log(DB_COMMENT); })    
   .catch(function (error) { console.log(error); }); 
@@ -284,7 +292,7 @@ function get_db_sys(){
     }     
     showSystem(); 
   })    
-  .catch(function (error) { console.log(error); }); 
+  .catch(function (error) { showOffline(); console.log(error); }); 
 }
 function get_db_order(u){
   DB_ORDER=[];DB_ORDER2=[];
