@@ -139,7 +139,7 @@
     <!--  ************************* PERMANENT *************************************************** -->
     <div id="page_main" class="page_class" style="display:block;width:100%;height:auto;background-color:none;">
     
-    <div id="div_header" class="jheader" style="width:100%;height:70px;opacity:0;position:absolute;z-index:5;text-align:center;padding:0px;border:0px solid gray;background:url(gfx/banner.jpg) center no-repeat;">              
+    <div id="div_header" class="jheader" onclick="jeff();" style="width:100%;height:70px;opacity:0;position:absolute;z-index:5;text-align:center;padding:0px;border:0px solid gray;background:url(gfx/banner.jpg) center no-repeat;">              
     </div>
     
     <div id="divUL" style="display:none;position:absolute;width:100%;height:200px;padding:2px;top:70px;overflow:auto;background:none;">
@@ -501,9 +501,9 @@
 
 <script>
   var JBE_API=window.location.origin+'/api/';  
-  //alert('index: '+JBE_API);  
   JBE_API='https://aidfimonitoring.com/api/';
-
+  alert('index: '+JBE_API+'\nOnline: '+navigator.onLine);  
+  
   var thisFile;
   var jbe_screen_mode=0;
   
@@ -563,8 +563,9 @@
   var JBE_MOBILE=true;
 
   const JBE_HEADER = {
-    "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+    "Access-Control-Allow-Headers": "*,Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token",
     "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+    "Content-Type": "application/x-www-form-urlencoded",
     "Access-Control-Allow-Origin": "*"
   }
 
