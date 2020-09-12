@@ -465,14 +465,13 @@
 <script type='text/javascript' src='../../main_jslib/je_msg.js'></script>
 <script type='text/javascript' src='../../main_jslib/qrcode.min.js'></script>
 
+<script type='text/javascript'  src='../../main_codes/main_lib.min.js'></script>
+<script type='text/javascript'  src='../../main_codes/jbelib.min.js'></script>
 
 <script type='text/javascript'  src='../../main_codes/jbe_db.js'></script>
-
-<script type='text/javascript'  src='../../main_codes/main_app.js'></script>
-<script type='text/javascript'  src='../../main_codes/main_lib.js'></script>
-
 <script type='text/javascript'  src='../../main_codes/jbe_pages.js'></script>
-<script type='text/javascript'  src='../../main_codes/jbelib.js'></script>
+<script type='text/javascript'  src='../../main_codes/main_app.js'></script>
+
 
 <script type='text/javascript'  src='../../main_codes/jbe_cat.js'></script>
 <script type='text/javascript'  src='../../main_codes/jbe_stock.js'></script>
@@ -482,9 +481,8 @@
 <script type='text/javascript'  src='../../main_codes/jbe_notif.js'></script>
 
 <script type='text/javascript'  src='../../main_codes/jbe_admin.js'></script>
-
 <script type='text/javascript'  src='../../main_codes/jbe_sys.js'></script>
-<script type='text/javascript'  src='../../main_codes/jbelib.js'></script>
+
 
 <!--link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
@@ -502,7 +500,7 @@
 <script>
   var JBE_API=window.location.origin+'/api/';  
   JBE_API='https://aidfimonitoring.com/api/';
-  alert('index: '+JBE_API+'\nOnline: '+navigator.onLine);  
+  //alert('index: '+JBE_API+'\nOnline: '+navigator.onLine);  
   
   var thisFile;
   var jbe_screen_mode=0;
@@ -563,7 +561,7 @@
   var JBE_MOBILE=true;
 
   const JBE_HEADER = {
-    "Access-Control-Allow-Headers": "*,Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token",
+    "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token",
     "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
     "Content-Type": "application/x-www-form-urlencoded",
     "Access-Control-Allow-Origin": "*"
