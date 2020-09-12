@@ -203,7 +203,7 @@ function getDataFromIDX(i,db2) {
 }  
 
 function refreshIDX(){    
-  //alert('refreshIDX '+DB_SYS.length+' = '+DB_SYS[0]['clientname']);
+  alert('refreshIDX '+DB_SYS.length+' = '+DB_SYS[0]['clientname']);
   if(JBE_STORE_IDX[0]['numrec'] != DB_CAT.length){ clearStore(JBE_STORE_IDX[0]['flename']); saveDataToIDX(DB_CAT,0); }
   if(JBE_STORE_IDX[1]['numrec'] != DB_STOCK.length){ clearStore(JBE_STORE_IDX[1]['flename']); saveDataToIDX(DB_STOCK,1); }  
   if(JBE_STORE_IDX[2]['numrec'] != DB_SYS.length){ clearStore(JBE_STORE_IDX[2]['flename']); saveDataToIDX(DB_SYS,2); }
@@ -226,7 +226,7 @@ function jdata(){
 
 function saveDataToIDX(aryDB,n) {    
   //alert(n);
- //alert('saveDataToIDX File '+JBE_STORE_IDX[n]['flename']+' == db array '+aryDB.length);
+  //alert('saveDataToIDX File '+JBE_STORE_IDX[n]['flename']+' == db array '+aryDB.length);
   JBE_STORE_IDX[n]['numrec']=aryDB.length;
   //alert('una : '+JBE_STORE_IDX[n]['numrec']);
   for(var i=0;i<aryDB.length;i++){
@@ -268,14 +268,19 @@ async function putDataToIDX(i,aryDB,n){
       promo:aryDB[i]['promo']
     };        
   }else if(n==2){ //sysfile
-    var jimg='gfx/banner.jpg'; //'+aryDB[i]['banner'];
+    //var jimg='gfx/banner.jpg'; //'+aryDB[i]['banner'];
     //document.getElementById('bar_avatar').src=jimg;
     //alert(jimg+' bar avatar : '+n);
+
+    //var jimg=JBE_API+'app/'+CURR_SITE+'/gfx/banner.jpg';
+    var jimg='gfx/banner.jpg';
     await JBE_BLOB(n,jimg).then(result => jimg=result);
     var slide1,slide2,slide3; 
-    await JBE_BLOB(n,'gfx/slide1.jpg').then(result => slide1=result);
-    await JBE_BLOB(n,'gfx/slide2.jpg').then(result => slide2=result);
-    await JBE_BLOB(n,'gfx/slide3.jpg').then(result => slide3=result);
+    var jimg2='gfx/'; 
+    //var jimg2=JBE_API+'app/'+CURR_SITE+'/gfx/';
+    await JBE_BLOB(n,jimg2+'slide1.jpg').then(result => slide1=result);
+    await JBE_BLOB(n,jimg2+'slide2.jpg').then(result => slide2=result);
+    await JBE_BLOB(n,jimg2+'slide3.jpg').then(result => slide3=result);
     ob = {
       id:i,
       banner:jimg,
@@ -297,7 +302,8 @@ async function putDataToIDX(i,aryDB,n){
       slide3:slide3
     };  
   }else if(n==3){ //user
-    var jimg='upload/users/'+aryDB[i]['photo'];
+    //var jimg='upload/users/'+aryDB[i]['photo'];
+    var jimg=JBE_API+'app/'+CURR_SITE+'/upload/users/'+aryDB[i]['photo'];   
     await JBE_BLOB(n,jimg).then(result => jimg=result);
     ob = {
       id:i,

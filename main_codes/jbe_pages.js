@@ -257,12 +257,12 @@ function disp_comm(stockno){
     if(CURR_AXTYPE > 0){
       v_dele='block';
     }
-
+    var v_mphoto=JBE_API+'app/'+CURR_SITE+'/upload/users/'+aryDB[i]['usercode']+'.jpg?'+n;  
     dtlComm=dtlComm+   
       
       '<div style="width:98%;height:auto;margin-left:2%;text-align:left;font-size:14px;margin-top:10px;background-color:none;padding:0px;">'+ 
         '<div style="float:left;width:100%;height:30px;margin-top:10px;background:none;">'+
-          '<img src="upload/users/'+aryDB[i]['usercode']+'.jpg" style="float:left;height:30px;width:30px;border-radius:50%;border:1px solid gray;background:none;"/>'+
+          '<img src="'+v_mphoto+'" style="float:left;height:30px;width:30px;border-radius:50%;border:1px solid gray;background:none;"/>'+
           '<div style="float:left;margin-left:5px;height:30px;width:auto;padding:3px 0 0 0;color:black;background:none;"/>'+aryDB[i]['username']+'</div>'+
         '</div>'+     
 
