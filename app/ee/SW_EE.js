@@ -56,17 +56,13 @@ self.addEventListener('activate', e => {
   self.clients.claim();
 });
 
-self.addEventListener('fetch', async e => {
-  const req = e.request;
-  const url = new URL(req.url);
-
-  if(url.origin === location.origin) {
-    e.respondWith(cacheFirst(req));
-  } else {
-    e.respondWith(networkAndCache(req));
-  }
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    fetch(event.request).catch(function() {
+      return caches.match(event.request);
+    })
+  );
 });
-
 
 async function cacheFirst(req) {
   const cache = await caches.open(cacheName);
