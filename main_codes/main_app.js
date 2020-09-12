@@ -6,7 +6,8 @@ function start_app(){
   //****************
   JBE_ONLINE_NAVI=true;
   //**************** 
-  alert('start_app api dir: '+JBE_API);
+  //alert('start_app api dir: '+JBE_API);
+  //alert('zOnline '+JBE_API);
   //alert('atay: '+JBE_HEADER);
 
   var v_banner=JBE_API+'app/'+CURR_SITE+'/gfx/banner.jpg?'+n;  
@@ -15,24 +16,24 @@ function start_app(){
   document.getElementById('div_header').style.background='url("'+v_banner+'") center no-repeat';
   document.getElementById('ds1').style.background='url("'+dir_gfx+'slide1.jpg?'+n+'") center no-repeat';
   document.getElementById('ds2').style.background='url("'+dir_gfx+'slide2.jpg?'+n+'") center no-repeat';
-  //alert('zOnline '+JBE_API);
+  
   //axios.post(JBE_API+'z_cat.php',{ clientno:CURR_CLIENT, request: 0 },JBE_HEADER)  
-  showOnline();
-  /*
+  //showOnline();
+  
   axios.post(JBE_API+'z_online.php',JBE_HEADER)  
   .then(function (response) {
     var res=parseInt(response.data);
-    alert('z_online:  '+res);    
+    //alert('z_online:  '+res);    
     if(res > 0 && JBE_ONLINE_NAVI){         
-      //showOnline();
-      get_app_default();
-      alert('yes');
+      showOnline();
+      //get_app_default();
+      //alert('yes');
     }else{
       showOffline();
     }           
   })
   .catch(function (error) { 
-    alert('naunsa na! '+error);
+    //alert('naunsa na! '+error);
     snackBar('ERROR: '+error);
     if (!error.response) {
       // network error (server is down or no internet)
@@ -47,11 +48,10 @@ function start_app(){
     }
     showOffline();          
   });
-  */
+  
 }
 
 function showOnline(){
-  //alert('showOnline activated');
   JBE_ONLINE=true;    
   
   document.getElementById('div_bar').style.display='block';
