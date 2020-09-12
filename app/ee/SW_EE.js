@@ -2,7 +2,7 @@ const cacheName = '5020122_083235';
 const staticAssets = [
   './',
   './index.html',
-  './gfx/banner.jpg',     './gfx/slide1.jpg',  './gfx/slide2.jpg',  './gfx/slide3.jpg',  
+  //'./gfx/banner.jpg',     './gfx/slide1.jpg',  './gfx/slide2.jpg',  './gfx/slide3.jpg',  
   './gfx/icon-logo.png',  './gfx/icon-512x512.png',  
   './gfx/logo.jpg',       '../../main_gfx/jadmin.jpg',
 
