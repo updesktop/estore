@@ -77,7 +77,7 @@ function close_showOrder(){
 }
 
 function dispOrders(c,v){
-  alert('dispOrders Client: '+c+' | selected: '+v);
+  //alert('dispOrders Client: '+c+' | selected: '+v);
   var vmode=document.getElementById('div_main_order').getAttribute('data-vmode');
   var aryDB=DB_ORDER;  
   aryDB.sort(sortByMultipleKey(['*trano']));

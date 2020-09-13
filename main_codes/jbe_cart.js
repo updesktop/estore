@@ -40,7 +40,8 @@ function disp_cartDtl(){
     var v_mprice=formatNumber2(JBE_GETFLD('price',DB_STOCK,'stockno',v_mcode));   
     
     if(JBE_ONLINE){
-      var v_mphoto='upload/'+JBE_GETFLD('photo',DB_STOCK,'stockno',v_mcode)+'?'+n+'456';   
+      //var v_mphoto='upload/'+JBE_GETFLD('photo',DB_STOCK,'stockno',v_mcode)+'?'+n+'456';   
+      var v_mphoto=JBE_API+'app/'+CURR_SITE+'/upload/'+JBE_GETFLD('photo',DB_STOCK,'stockno',v_mcode)+'?'+n;   
     }else{
       var v_mphoto='data:image/png;base64,' + btoa(JBE_GETFLD('descrp',DB_STOCK,'stockno',v_mcode));
     };
@@ -265,7 +266,8 @@ function do_checkout(){
     
     
     if(JBE_ONLINE){
-      var v_mphoto='upload/'+JBE_GETFLD('photo',DB_STOCK,'stockno',v_mcode)+'?'+n+'456';   
+      //var v_mphoto='upload/'+JBE_GETFLD('photo',DB_STOCK,'stockno',v_mcode)+'?'+n+'456';   
+      var v_mphoto=JBE_API+'app/'+CURR_SITE+'/upload/'+JBE_GETFLD('photo',DB_STOCK,'stockno',v_mcode)+'?'+n;   
     }else{
       var v_mphoto='data:image/png;base64,' + btoa(JBE_GETFLD('descrp',DB_STOCK,'stockno',v_mcode));
     };
