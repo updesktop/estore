@@ -203,7 +203,7 @@ function getDataFromIDX(i,db2) {
 }  
 
 function refreshIDX(){    
-  alert('refreshIDX '+DB_SYS.length+' = '+DB_SYS[0]['clientname']);
+  //alert('refreshIDX '+DB_SYS.length+' = '+DB_SYS[0]['clientname']);
   if(JBE_STORE_IDX[0]['numrec'] != DB_CAT.length){ clearStore(JBE_STORE_IDX[0]['flename']); saveDataToIDX(DB_CAT,0); }
   if(JBE_STORE_IDX[1]['numrec'] != DB_STOCK.length){ clearStore(JBE_STORE_IDX[1]['flename']); saveDataToIDX(DB_STOCK,1); }  
   if(JBE_STORE_IDX[2]['numrec'] != DB_SYS.length){ clearStore(JBE_STORE_IDX[2]['flename']); saveDataToIDX(DB_SYS,2); }
