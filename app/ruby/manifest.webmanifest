@@ -1,6 +1,6 @@
 {
       "name": "Ruby's Flower Gallery",
-      "short_name": "Ruby's",
+      "short_name": "Ruby's Gallery",
       "start_url": ".",
       "display": "standalone",
       "orientation": "portrait",
