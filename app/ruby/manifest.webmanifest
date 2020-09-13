@@ -1,12 +1,12 @@
 {
-      "name": "Ruby's Garder",
+      "name": "Ruby's Flower Gallery",
       "short_name": "Ruby's",
       "start_url": ".",
       "display": "standalone",
       "orientation": "portrait",
       "background_color": "#a9a9a9",
       "theme_color": "#a9a9a9",
-      "description": "Our very own garden",
+      "description": "Our very own little garden",
       "icons": [
         {
           "src": "gfx/icon-512x512.png",
