@@ -19,8 +19,8 @@ const staticAssets = [
   '../../main_codes/jbe_db.js',     '../../main_codes/jbe_map.js',  
   '../../main_codes/jbe_notif.js',  '../../main_codes/jbe_order.js',  
   '../../main_codes/jbe_pages.js',  '../../main_codes/jbe_stock.js',  
-  '../../main_codes/jbe_sys.js',    '../../main_codes/jbelib.js',     
-  '../../main_codes/main_app.js',   '../../main_codes/main_lib.js', 
+  '../../main_codes/jbe_sys.js',    '../../main_codes/jbelib.min.js',     
+  '../../main_codes/main_app.js',   '../../main_codes/main_lib.min.js', 
 
   '../../main_codes/main_styles.css',   '../../main_codes/mobile.css',
   
