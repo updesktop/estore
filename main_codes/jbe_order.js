@@ -21,7 +21,7 @@ function showOrder(vmode){
   
   var vsel='All';
   if(vmode==1){ vsel=CURR_USER; }
-  dispOrders(vsel,-1);
+  dispOrders(vmode,vsel,-1);
   
   if(!JBE_ONLINE){
     mnu_offline();
@@ -41,12 +41,12 @@ function mnu_showorder(vmode){
   '<div style="width:100%;height:100%;">'+
     '<div id="ds_client" style="display:'+vdisp+';float:left;width:49.5%;height:100%;">'+
       '<span style="width:100%;height:50%;">Client:</span>'+
-      '<select id="div_sel_client" '+vdisabled+' name="div_sel_client" onchange="dispOrders(this.value,div_sel_orders.value)" style="width:100%;height:50%;">'+
+      '<select id="div_sel_client" '+vdisabled+' name="div_sel_client" onchange="dispOrders(vmode,this.value,div_sel_orders.value)" style="width:100%;height:50%;">'+
       '</select>'+
     '</div>'+
     '<div style="'+vselstyle+';height:100%;">'+
       '<span style="width:100%;height:50%;">Select:</span>'+
-      '<select id="div_sel_orders" name="div_sel_orders" onchange="dispOrders(div_sel_client.value,this.value)" style="width:100%;height:50%;">'+
+      '<select id="div_sel_orders" name="div_sel_orders" onchange="dispOrders(vmode,div_sel_client.value,this.value)" style="width:100%;height:50%;">'+
       '</select>'+
     '</div>'+
   '</div>';
@@ -76,7 +76,7 @@ function close_showOrder(){
   showMainPage();
 }
 
-function dispOrders(c,v){
+function dispOrders(vmode,c,v){
   //alert('dispOrders Client: '+c+' | selected: '+v);
   var vmode=document.getElementById('div_main_order').getAttribute('data-vmode');
   var aryDB=DB_ORDER;  
@@ -128,7 +128,7 @@ function dispOrders(c,v){
 
       '<div style="height:50px;width:98%;margin-top:5px;margin:1%;padding:5px;font-size:14px;font-weight:bold;background:none;padding:1px;">'+
 
-        '<div style="float:left;width:15%;height:100%;text-align:right;background:none;">'+
+        '<div style="display:'+vdisp+';float:left;width:15%;height:100%;text-align:right;background:none;">'+
             '<img src="'+v_img+'" style="border:1px solid black;width:40px;height:40px;border-radius:50%;background:pink;" onclick="JBE_ZOOM(&quot;'+v_img+'&quot;,&quot;&quot;)" />'+
         '</div>'+
 
@@ -268,7 +268,7 @@ function delCancel(t,u){
     .then(function (response) {     
       //alert(response.data); 
       DB_ORDER=response.data;  
-      dispOrders('All',-1);
+      dispOrders(vmode,'All',-1);
       showProgress(false);                 
     })    
     .catch(function (error) { console.log(error); showProgress(false); });
@@ -293,7 +293,7 @@ function chgItemStat(u,t,s){
       //alert('chgitem '+response.data);
       DB_ORDER=response.data;
       document.getElementById('div_sel_orders').value=s;
-      dispOrders(document.getElementById('div_sel_client').value,document.getElementById('div_sel_orders').value);
+      dispOrders(vmode,document.getElementById('div_sel_client').value,document.getElementById('div_sel_orders').value);
   })
   .catch(function (error) {
       console.log(error);
