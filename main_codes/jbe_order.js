@@ -231,8 +231,8 @@ function ret_items_order(trano){
     
     var v_price=formatNumber2(aryORDER[i]['price']);    
     var v_qty=aryORDER[i]['qty'];  
-    var v_photo='upload/'+JBE_GETFLD('photo',DB_STOCK,'stockno',v_code)+'?'+n;   
-    
+    //var v_photo='upload/'+JBE_GETFLD('photo',DB_STOCK,'stockno',v_code)+'?'+n;   
+    var v_photo=JBE_API+'app/'+CURR_SITE+'/upload/'+JBE_GETFLD('photo',DB_STOCK,'stockno',v_code)+'?'+n;   
     dtl+=
       
       '<div style="height:60px;width:98%;border:1px solid lightgray;margin:1%;margin-bottom:0px;padding:5px;background:whitesmoke;">'+                  
