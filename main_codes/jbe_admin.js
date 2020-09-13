@@ -72,7 +72,6 @@ function chk_lognow(){
     login_ok(1);
     return;
   }
-  alert('watch');
 
   showProgress(true);
   axios.post(JBE_API+'z_user.php',{ clientno:CURR_CLIENT, request: 101,     

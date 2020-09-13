@@ -240,6 +240,7 @@ async function putDataToIDX(i,aryDB,n){
 	var xox=aryDB.length;
   if(n==0){    
     //var jimg='upload/'+aryDB[i]['photo'];
+    //var jimg=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB[i]['photo'];      
     var jimg=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB[i]['photo'];   
     await JBE_BLOB(n,jimg).then(result => jimg=result);
     ob = { //categorgy
