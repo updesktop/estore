@@ -1,6 +1,6 @@
 {
-      "name": "ee",
-      "short_name": "ee",
+      "name": "E-Store",
+      "short_name": "E-Store",
       "start_url": ".",
       "display": "standalone",
       "orientation": "portrait",
