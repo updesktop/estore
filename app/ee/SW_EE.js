@@ -1,9 +1,8 @@
-const cacheName = '5020122_083235';
+const cacheName = '5020122_081735';
 const staticAssets = [
   './',
   './index.html',
-  //'./gfx/banner.jpg',     './gfx/slide1.jpg',  './gfx/slide2.jpg',  './gfx/slide3.jpg',  
-  './gfx/icon-logo.png',  './gfx/icon-512x512.png',  
+  './gfx/icon-logo.png',  './gfx/icon-512x512.png',  './gfx/icon-192x192.png',  
   './gfx/logo.jpg',       '../../main_gfx/jadmin.jpg',
 
   '../../main_jslib/leaflet.js',              '../../main_jslib/leaflet.css',
@@ -24,7 +23,6 @@ const staticAssets = [
   '../../main_codes/main_app.js',   '../../main_codes/main_lib.js', 
 
   '../../main_codes/main_styles.css',   '../../main_codes/mobile.css',
-
   
   '../../main_gfx/proc_logo.gif',  
 
@@ -42,7 +40,7 @@ const staticAssets = [
   '../../main_gfx/jsearch.png',   '../../main_gfx/jsend.png',
   '../../main_gfx/jsite.png',     '../../main_gfx/jsms.png', 
   '../../main_gfx/landmark.png',  
-  
+    
   './manifest.webmanifest'
 ];
 
@@ -55,15 +53,8 @@ self.addEventListener('install', async e => {
 self.addEventListener('activate', e => {
   self.clients.claim();
 });
-/*
-self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    fetch(event.request).catch(function() {
-      return caches.match(event.request);
-    })
-  );
-});
-*/
+
+
 self.addEventListener('fetch', event => {
   // Let the browser do its default thing
   // for non-GET requests.
@@ -87,6 +78,28 @@ self.addEventListener('fetch', event => {
   }());
 });
 
+/*
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    fetch(event.request).catch(function() {
+      return caches.match(event.request);
+    })
+  );
+});
+*/
+
+/*
+self.addEventListener('fetch', async e => {
+  const req = e.request;
+  const url = new URL(req.url);
+
+  if(url.origin === location.origin) {
+    e.respondWith(cacheFirst(req));
+  } else {
+    e.respondWith(networkAndCache(req));
+  }
+});
+
 async function cacheFirst(req) {
   const cache = await caches.open(cacheName);
   const cached = await cache.match(req);
@@ -104,3 +117,4 @@ async function networkAndCache(req){
     return cached;
   }
 }
+*/

@@ -6,8 +6,8 @@
 <meta name="theme-color" content="#ffff00"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-<link rel="shortcut icon" href="gfx/favicon.ico">
-<link rel="icon" href="gfx/favicon.ico">
+<link rel="shortcut icon" href="../../main_gfx/favicon.ico">
+<link rel="icon" href="../../main_gfx/favicon.ico">
 <link rel="apple-touch-icon" href="../../main_gfx/apple-touch-icon.png">
 
 <link rel="manifest" href="./manifest.webmanifest">
@@ -139,7 +139,7 @@
     <!--  ************************* PERMANENT *************************************************** -->
     <div id="page_main" class="page_class" style="display:block;width:100%;height:auto;background-color:none;">
     
-    <div id="div_header" class="jheader" onclick="jeff();" style="width:100%;height:70px;opacity:0;position:absolute;z-index:5;text-align:center;padding:0px;border:0px solid gray;background:url(gfx/banner.jpg) center no-repeat;">              
+    <div id="div_header" class="jheader" onclick="jeff();" style="width:100%;height:70px;opacity:0;position:absolute;z-index:5;text-align:center;padding:0px;border:0px solid gray;">              
     </div>
     
     <div id="divUL" style="display:none;position:absolute;width:100%;height:200px;padding:2px;top:70px;overflow:auto;background:none;">
@@ -149,9 +149,9 @@
     <div id="user_main" onscroll="myScroll()" style="display:block;width:100%;margin-top:0px;height:auto;padding:0px;overflow:auto;background:lightgray;">
         
 	    <div style="width:100%;height:120px;">
-            <div id="div_slider" style="position:relative;height:100%;padding:0px;text-align:center;">
-                <div id="ds1" style="width:100%;height:100%;background:url('gfx/slide1.jpg') center no-repeat;"></div>
-            </div>
+        <div id="div_slider" style="position:relative;height:100%;padding:0px;text-align:center;">
+          <div id="ds1" style="width:100%;height:100%;"></div>
+        </div>
 	    </div>
       
 	    <div class="rowclass_dots">
@@ -159,8 +159,8 @@
 	        <input src="../../main_gfx/dots.png" onclick="fm_promo()" class="dots" type="image" alt="dots image" /> 
 	    </div>              
         <div class="rowclass" style="position:relative;width:100%;height:140px;padding:0px;transform:translate3d(0,0,0);overflow:hidden;background:white;">         
-            <div id="div_promo">
-                <div id="ds2" style="width:100%;height:100%;background:url('gfx/slide2.jpg') center no-repeat;"></div>   
+          <div id="div_promo">
+            <div id="ds2" style="width:100%;height:100%;"></div>   
 	        </div>        
 	    </div>
 	
@@ -465,10 +465,10 @@
 <script type='text/javascript' src='../../main_jslib/je_msg.js'></script>
 <script type='text/javascript' src='../../main_jslib/qrcode.min.js'></script>
 
-<!--script type='text/javascript'  src='../../main_codes/main_lib.min.js'></script>
-<script type='text/javascript'  src='../../main_codes/jbelib.min.js'></script-->
-<script type='text/javascript'  src='../../main_codes/main_lib.js'></script>
-<script type='text/javascript'  src='../../main_codes/jbelib.js'></script>
+<script type='text/javascript'  src='../../main_codes/main_lib.min.js'></script>
+<script type='text/javascript'  src='../../main_codes/jbelib.min.js'></script>
+<!--script type='text/javascript'  src='../../main_codes/main_lib.js'></script>
+<script type='text/javascript'  src='../../main_codes/jbelib.js'></script-->
 
 <script type='text/javascript'  src='../../main_codes/jbe_db.js'></script>
 <script type='text/javascript'  src='../../main_codes/jbe_pages.js'></script>
@@ -562,10 +562,15 @@
   var f_reload=true;
   var JBE_MOBILE=true;
 
-  const JBE_HEADER = {
+  var JBE_HEADER = {
+    /*
     "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token",
     "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
     "Content-Type": "application/x-www-form-urlencoded",
+    "Access-Control-Allow-Origin": "*"
+    */
+    "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+    "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Origin": "*"
   }
 
