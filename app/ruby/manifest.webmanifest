@@ -1,12 +1,12 @@
 {
-      "name": "ee",
-      "short_name": "ee",
+      "name": "Ruby's Garder",
+      "short_name": "Ruby's",
       "start_url": ".",
       "display": "standalone",
       "orientation": "portrait",
       "background_color": "#a9a9a9",
       "theme_color": "#a9a9a9",
-      "description": "ee",
+      "description": "Our very own garden",
       "icons": [
         {
           "src": "gfx/icon-512x512.png",
