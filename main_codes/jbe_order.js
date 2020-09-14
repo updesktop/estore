@@ -133,7 +133,7 @@ function dispOrders(vmode,c,v){
         '</div>'+
 
         '<div style="float:left;width:58%;height:100%;padding:0 0 0 5px;background:none;">'+
-            '<div style="height:70%;width:100%;overflow:auto;background:none;">'+v_musername+'</div>'+
+            '<div style="display:'+vdisp+';height:70%;width:100%;overflow:auto;background:none;">'+v_musername+'</div>'+
             '<div style="height:30%;width:100%;font-size:12px;font-weight:bold;color:blue;background:none;">Ref #: '+v_mtrano+'</div>'+
         '</div>'+
 

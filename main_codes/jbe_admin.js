@@ -192,7 +192,7 @@ function fm_admin(){
         '<div style="float:right;height:100%;width:auto;border-radius:50%;border:2px solid white;background:none;">'+
           '<img id="admin_avatar" src="'+profileImg+'" style="height:100%;width:40px;border-radius:50%;border:1px solid black;background:none;" alt="ai" >'+
         '</div>'+
-        '<div id="admin_username" style="float:right;height:100%;width:auto;margin-right:5px;padding:10px 0 0 0;font-weight:bold;font-size:18px;">'+
+        '<div id="admin_username" style="float:right;height:100%;width:auto;margin-right:5px;padding:10px 0 0 0;font-weight:bold;font-size:18px;color:white;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">'+
           username+
         '</div>'+
       '</div>'+
