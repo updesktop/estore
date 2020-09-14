@@ -228,7 +228,7 @@ function get_db_cat(){
     //alert('get_db_cat '+JBE_STORE_IDX[0]['numrec']+' db cat: '+DB_CAT.length);
     
     if(JBE_STORE_IDX[0]['numrec'] != DB_CAT.length){ 
-      //clearStore(JBE_STORE_IDX[0]['flename']);  saveDataToIDX(DB_CAT,0); 
+      clearStore(JBE_STORE_IDX[0]['flename']);  saveDataToIDX(DB_CAT,0); 
     } 
     
     showCategories();     
@@ -244,7 +244,7 @@ function get_db_stock(){
       //alert('get_db_stock '+JBE_STORE_IDX[1]['numrec']+' db stock: '+DB_STOCK.length);
       
       if(JBE_STORE_IDX[1]['numrec'] != DB_STOCK.length){ 
-         //clearStore(JBE_STORE_IDX[1]['flename']); saveDataToIDX(DB_STOCK,1); 
+        clearStore(JBE_STORE_IDX[1]['flename']); saveDataToIDX(DB_STOCK,1); 
       }  
       
       showPromos(); 
