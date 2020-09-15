@@ -14,13 +14,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
 <!-- ********************* -->
-<title></title>
+<title>EEE</title>
 <script>
   var CURR_CLIENT='EE';
   var CURR_SITE='ee';   
-  var CURR_IDX_DB;
+
   var JBE_API=window.location.origin+'/api/';  
-  //JBE_API='https://aidfimonitoring.com/api/';  
+  JBE_API='https://aidfimonitoring.com/api/';  
 </script>
 <!-- ********************* -->
 
@@ -634,7 +634,7 @@
   myResizeFunction();   
   document.getElementById('divUL').style.height=(H_BODY-H_HEADER)+'px';
     
-  CURR_IDX_DB='DB_'+CURR_CLIENT;      
+  var CURR_IDX_DB='DB_'+CURR_CLIENT;      
   initDb();      
   window.history.pushState({ noBackExitsApp: true }, '');
   f_MainPage=false;
