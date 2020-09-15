@@ -73,7 +73,8 @@ function mnu_showorder(vmode){
 }
 
 function close_showOrder(){ 
-  showMainPage();
+  return;
+  //showMainPage();
 }
 
 function dispOrders(vmode,c,v){
@@ -222,6 +223,7 @@ function saveCharges(trano,i){
 function ret_items_order(trano){
   //  alert('ret_items '+trano);
   var dtl='';
+  var n = new Date().toLocaleTimeString('it-IT'); 
   var aryORDER=DB_ORDER2;
   for(var i=0;i<aryORDER.length;i++){          
     if(aryORDER[i]['trano'] != trano) { continue; }    
@@ -239,7 +241,7 @@ function ret_items_order(trano){
       
         '<div style="float:left;position:relative;height:100%;width:25%;border-radius:10px;border:1px solid lightgray;background:none;">'+
           '<div class="class_center_div">'+
-            '<img id="cart_img_'+v_code+'" src="'+v_photo+'" onclick="JBE_ZOOM(&quot;'+v_photo+'&quot;,&quot;&quot;)" class="asyncImage" alt="category image" style="height:auto;max-height:100%;width:auto;max-width:100%;background:none;"/>'+        
+            '<img id="cart_img_'+v_code+'" src="'+v_photo+'" onclick="view_dtl_stock(false,&quot;'+v_code+'&quot;,2)" class="asyncImage" alt="category image" style="height:auto;max-height:100%;width:auto;max-width:100%;background:none;"/>'+        
           '</div>'+
         '</div>'+
 

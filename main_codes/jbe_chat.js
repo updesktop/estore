@@ -77,6 +77,8 @@ function sendMsg(){
                     .toISOString()
                     .split("T")[0];
 
+  var targetDIR=JBE_API+'app/'+CURR_SITE+'/upload/chat/';
+  
   if(thisFile){      
     newName = trano + '.jpg';//+getExt(thisFile.name);    
     document.getElementById('pre_img').src='gfx/jimage.png';   
@@ -108,7 +110,7 @@ function sendMsg(){
         let ob = [
           { "div":trano }
         ];
-        uploadNOW(thisFile,newName,'upload/chat/',ob); 
+        uploadNOW(thisFile,newName,targetDIR,ob); 
       }  
       
       newName='';
@@ -155,7 +157,8 @@ function dispChatDtl(){
     var v_img='';
     var v_dispImg='none';
     if(aryChat[i]['photo'] != ''){    
-      v_img='upload/chat/'+aryChat[i]['photo']+'?'+n;
+      v_img=JBE_API+'app/'+CURR_SITE+'/upload/chat/'+aryChat[i]['photo']+'?'+n;
+      //v_img='upload/chat/'+aryChat[i]['photo']+'?'+n;
       v_img_h=50;      
       v_dispImg='block';
     }
@@ -165,7 +168,20 @@ function dispChatDtl(){
     var v_unread=parseInt(aryChat[i]['unread']);    
     var v_date=aryChat[i]['trandate'];
     var v_time=aryChat[i]['trantime'];
-    var v_userImg=JBE_GETFLD('photo',DB_CLIENTS,'usercode',v_usercode);  
+    //var v_userImg=JBE_GETFLD('photo',DB_CLIENTS,'usercode',v_usercode);  
+    if(v_admin!=''){ v_admin=v_admin+'.jpg'; }
+    var v_userImg=JBE_API+'app/'+CURR_SITE+'/upload/users/'+JBE_GETFLD('photo',DB_CLIENTS,'usercode',v_usercode)+'?'+n;
+    if(CURR_AXTYPE>0){ 
+      if(v_sender==1){      
+        v_userImg=JBE_API+'app/'+CURR_SITE+'/upload/users/'+v_admin+'?'+n;
+      }
+    }else{
+      var vdispDel='none'; 
+      if(v_sender==1){      
+        v_userImg=JBE_API+'app/'+CURR_SITE+'/upload/users/'+v_admin+'?'+n;
+      }
+    }
+    
     var v_username=JBE_GETFLD('username',DB_CLIENTS,'usercode',v_usercode);
     dtl+=ret_chatDtl(v_sender,v_trano,v_username,v_userImg,v_msg,v_img,v_date,v_time,v_admin);
   }
@@ -177,6 +193,8 @@ function dispChatDtl(){
 }
 
 function ret_chatDtl(v_sender,v_trano,v_username,v_userImg,v_msg,v_img,v_date,v_time,v_admin){  
+  //alert(JBE_API+' 333 '+v_userImg);
+  var n = new Date().toLocaleTimeString('it-IT'); 
   var v_kulay='black';
   var v_dispImg='block';
   var h_img=50;
@@ -185,8 +203,9 @@ function ret_chatDtl(v_sender,v_trano,v_username,v_userImg,v_msg,v_img,v_date,v_
     h_img=0;
   }
 //alert(v_userImg);
-  v_userImg='upload/users/'+v_userImg;
-
+  //v_userImg='upload/users/'+v_userImg;
+  //v_userImg=JBE_API+'app/'+CURR_SITE+'/upload/chat/users/'+v_userImg+'?'+n;
+  //alert(v_userImg);
   if(CURR_AXTYPE>0){ 
     var vdispDel='block'; 
     if(v_sender==0){      
@@ -194,7 +213,8 @@ function ret_chatDtl(v_sender,v_trano,v_username,v_userImg,v_msg,v_img,v_date,v_
       var v_dispUserImg='block';      
       var v_bg='lightgray';
     }else{      
-      v_userImg='upload/users/'+v_admin+'.jpg';
+      //v_userImg='upload/users/'+v_admin+'.jpg';
+      //v_userImg=JBE_API+'app/'+CURR_SITE+'/upload/chat/'+aryChat[i]['photo']+'?'+n;
       v_username=JBE_GETFLD('username',DB_CLIENTS,'usercode',v_admin);
       var direksyon='right';
       var v_dispUserImg='block'; 
@@ -203,7 +223,7 @@ function ret_chatDtl(v_sender,v_trano,v_username,v_userImg,v_msg,v_img,v_date,v_
   }else{
     var vdispDel='none'; 
     if(v_sender==1){      
-      v_userImg='upload/users/'+v_admin+'.jpg';
+      //v_userImg='upload/users/'+v_admin+'.jpg';
       v_username=JBE_GETFLD('username',DB_CLIENTS,'usercode',v_admin);
       var direksyon='left';
       var v_dispUserImg='block';      

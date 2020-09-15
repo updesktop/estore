@@ -4,7 +4,7 @@ function start_app(){
   JBE_ONLINE_NAVI=navigator.onLine;    
   JBE_ONLINE=false;   
   //****************
-  JBE_ONLINE_NAVI=true;
+  //JBE_ONLINE_NAVI=true;
   //**************** 
   //alert('start_app api dir: '+JBE_API);
   //alert('zOnline '+JBE_API);
@@ -137,7 +137,7 @@ function initSearch(){
 function seek_item(stockno){
   showUL(false);
   //showMainPage();
-  view_dtl_stock(stockno,1);
+  view_dtl_stock(true,stockno,1);
 }
 
 function showUL(vmode){    
@@ -226,11 +226,9 @@ function get_db_cat(){
     console.log(response.data); 
     DB_CAT = response.data;     
     //alert('get_db_cat '+JBE_STORE_IDX[0]['numrec']+' db cat: '+DB_CAT.length);
-    
     if(JBE_STORE_IDX[0]['numrec'] != DB_CAT.length){ 
       clearStore(JBE_STORE_IDX[0]['flename']);  saveDataToIDX(DB_CAT,0); 
     } 
-    
     showCategories();     
   })
   .catch(function (error) { console.log(error); }); 
@@ -239,17 +237,16 @@ function get_db_stock(){
   DB_STOCK=[];
   axios.post(JBE_API+'z_stock.php', { clientno:CURR_CLIENT,request: 0 },JBE_HEADER) 
   .then(function (response) { 
-      console.log(response.data); 
-      DB_STOCK = response.data; 
-      //alert('get_db_stock '+JBE_STORE_IDX[1]['numrec']+' db stock: '+DB_STOCK.length);
-      
-      if(JBE_STORE_IDX[1]['numrec'] != DB_STOCK.length){ 
+    console.log(response.data); 
+    DB_STOCK = response.data; 
+    //alert('get_db_stock '+JBE_STORE_IDX[1]['numrec']+' db stock: '+DB_STOCK.length);  
+    if(JBE_STORE_IDX[1]['numrec'] != DB_STOCK.length){ 
         clearStore(JBE_STORE_IDX[1]['flename']); saveDataToIDX(DB_STOCK,1); 
-      }  
-      
-      showPromos(); 
-      showItems(); 
-      initSearch();
+    }  
+    
+    showPromos(); 
+    showItems(); 
+    initSearch();
   })    
   .catch(function (error) { console.log(error); }); 
 }
@@ -276,16 +273,13 @@ function get_db_sys(){
   DB_SYS=[]; DB_SLIDER=[];
   axios.post(JBE_API+'z_sysfile.php', { clientno:CURR_CLIENT,site:CURR_SITE,request: 1 },JBE_HEADER) 
   .then(function (response) { 
-      console.log(DB_SYS);     
-        
+    console.log(DB_SYS);             
     //alert('get_db_sys:  Slider : '+response.data);
-
     DB_SYS = response.data[0]; 
     DB_SLIDER = response.data[1];
-
     if(DB_SYS.length > 0){ 
       //alert('xxxcopy sysfile to idx '+DB_SYS.length);      
-      //clearStore(JBE_STORE_IDX[2]['flename']); saveDataToIDX(DB_SYS,2);       
+      clearStore(JBE_STORE_IDX[2]['flename']); saveDataToIDX(DB_SYS,2);       
     }     
     showSystem(); 
   })    
@@ -496,7 +490,7 @@ function showCategories(){
       '<div onclick="view_dtl_cat(&quot;'+v_mcode+'&quot;)" class="class_items" style="float:left;text-align:center;width:94px;height:46%;margin-top:1%;margin-left:1%;padding:5px;background:none;">'+      
         '<div style="position:relative;height:75%;width:100%;border-radius:10px;border:1px solid lightgray;background:none;">'+
           '<div class="class_center_div">'+          
-            '<img src="'+v_mphoto+'" class="asyncImage" onerror="imgOnError(this)" alt="category image" style="height:auto;max-height:100%;width:auto;max-width:100%;border-radius:8px;background:none;"/>'+
+            '<img id="ci_img'+v_mcode+'" src="'+v_mphoto+'" class="asyncImage" onerror="imgOnError(this)" alt="category image" style="height:auto;max-height:100%;width:auto;max-width:100%;border-radius:8px;background:none;"/>'+
           '</div>'+
         '</div>'+
         '<div style="height:25%;width:100%;">'+
@@ -536,7 +530,7 @@ function showItems(){
      
     //alert('stock: '+v_mphoto);
     dtl=dtl+
-      '<div onclick="view_dtl_stock(&quot;'+v_mcode+'&quot;,1)" class="class_items" style="background:none;">'+        
+      '<div onclick="view_dtl_stock(true,&quot;'+v_mcode+'&quot;,1)" class="class_items" style="background:none;">'+        
         '<div style="position:relative;height:70%;width:100%;border-radius:10px;border:1px solid lightgray;background:none;">'+          
           '<div class="class_center_div">'+
             '<img id="si_img'+v_mcode+'" src="'+v_mphoto+'" onerror="imgOnError(this)"  class="asyncImage" alt="item image" style="height:auto;max-height:100%;width:auto;max-width:100%;border-radius:8px;background:none;"/>'+
@@ -659,7 +653,7 @@ function showPromos(){
     }
 
     dtl+=              
-      '<div onclick="view_dtl_stock(&quot;'+v_mcode+'&quot;,1)" class="clsDiv" style="background:white;">'+       
+      '<div onclick="view_dtl_stock(true,&quot;'+v_mcode+'&quot;,1)" class="clsDiv" style="background:white;">'+       
           '<div class="clsImg" style="height:72%">'+      
               '<img src="'+v_mphoto+'" class="asyncImage" style="height:auto;max-height:100%;width:auto;max-width:100%;border-radius:8px;background:none;" alt/>'+
           '</div>'+
