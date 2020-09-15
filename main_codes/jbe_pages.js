@@ -141,7 +141,7 @@ function mnu_view_dtl_owner(){
   dispMenu(false,jmenu);  
 }
 
-function view_dtl_stock(stockno,pg){
+function view_dtl_stock(f_showComm,stockno,pg){
   window.history.pushState({ noBackExitsApp: true }, '');
   f_MainPage=false;
   
@@ -151,6 +151,8 @@ function view_dtl_stock(stockno,pg){
   }else{
     mnu_view_dtl();
   }
+  var vdisp="block";
+  if(!f_showComm){ vdisp="none"; dispMenu(false,'');   }
 
   if(CURR_AXTYPE > 0){ mnu_view_dtl_owner(); }; 
   var n = new Date().toLocaleTimeString('it-IT');
@@ -196,7 +198,7 @@ function view_dtl_stock(stockno,pg){
         '</div>'+
       '</div>'+
       
-      '<div style="margin-top:5px;width:100%;height:auto;padding:0px;background:none;">'+
+      '<div style="display:'+vdisp+';margin-top:5px;width:100%;height:auto;padding:0px;background:none;">'+
 
         '<div style="width:100%;height:17px;padding:0px;font-weight:bold;color:black;background:none;">Comments</div>'+  
         '<div id="dtl_comment" style="width:100%;height:auto;font-size:12px;overflow:auto;padding:0px;background:none;">'+
@@ -297,6 +299,7 @@ function post_comm(v,stockno){
   },JBE_HEADER)
   .then(function (response) {     
     console.log(response.data); 
+    //alert('ok postcomm');
     DB_COMMENT=response.data; 
     disp_comm(stockno);       
     document.getElementById('vkoment').value='';
@@ -356,7 +359,7 @@ function view_dtl_cat(catno){
 
     ctr++;
     dtl=dtl+
-      '<div onclick="view_dtl_stock(&quot;'+v_mcode+'&quot;,2)" class="class_items">'+      
+      '<div onclick="view_dtl_stock(true,&quot;'+v_mcode+'&quot;,2)" class="class_items">'+      
         '<div style="position:relative;height:70%;width:100%;border-radius:10px;border:1px solid lightgray;background:none;">'+
           '<div class="class_center_div">'+
             '<img id="photo_stock_'+v_mcode+'" class="asyncImage" src="'+v_mphoto+'" onerror="imgOnError(this)" alt="item image" style="height:auto;max-height:100%;width:auto;max-width:100%;background:none;"/>'+

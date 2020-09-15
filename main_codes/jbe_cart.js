@@ -372,7 +372,7 @@ function save_order(){
   },JBE_HEADER)
   .then(function (response) {     
     showProgress(false);
-    //alert('bantay: '+response.data);
+    alert('bantay: '+response.data.length);
     console.log(response.data);
     DB_ORDER=response.data;
     snackBar('Order is placed');
