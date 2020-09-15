@@ -6,20 +6,21 @@
 <meta name="theme-color" content="#000000"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-<link rel="shortcut icon" href="gfx/favicon.ico">
-<link rel="icon" href="gfx/favicon.ico">
+<link rel="shortcut icon" href="../../main_gfx/favicon.ico">
+<link rel="icon" href="../../main_gfx/favicon.ico">
 <link rel="apple-touch-icon" href="../../main_gfx/apple-touch-icon.png">
 
 <link rel="manifest" href="./manifest.webmanifest">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
 <!-- ********************* -->
-<title>Ruby's Garden</title>
+<title>EEE</title>
 <script>
-  //alert('me hree');
-  var CURR_CLIENT='RUBY';
-  var CURR_SITE='ruby';   
-  var CURR_IDX_DB;
+  var CURR_CLIENT='EE';
+  var CURR_SITE='ee';   
+
+  var JBE_API=window.location.origin+'/api/';  
+  JBE_API='https://aidfimonitoring.com/api/';  
 </script>
 <!-- ********************* -->
 
@@ -465,10 +466,10 @@
 <script type='text/javascript' src='../../main_jslib/je_msg.js'></script>
 <script type='text/javascript' src='../../main_jslib/qrcode.min.js'></script>
 
-<!--script type='text/javascript'  src='../../main_codes/main_lib.min.js'></script>
-<script type='text/javascript'  src='../../main_codes/jbelib.min.js'></script-->
 <script type='text/javascript'  src='../../main_codes/main_lib.min.js'></script>
 <script type='text/javascript'  src='../../main_codes/jbelib.min.js'></script>
+<!--script type='text/javascript'  src='../../main_codes/main_lib.js'></script>
+<script type='text/javascript'  src='../../main_codes/jbelib.js'></script-->
 
 <script type='text/javascript'  src='../../main_codes/jbe_db.js'></script>
 <script type='text/javascript'  src='../../main_codes/jbe_pages.js'></script>
@@ -500,8 +501,7 @@
 <script type='text/javascript'  src='../../main_codes/jbe_map.js'></script>
 
 <script>
-  var JBE_API=window.location.origin+'/api/';  
-  JBE_API='https://aidfimonitoring.com/api/';
+
   //alert('index: '+JBE_API+'\nOnline: '+navigator.onLine);  
   
   var thisFile;
@@ -634,7 +634,7 @@
   myResizeFunction();   
   document.getElementById('divUL').style.height=(H_BODY-H_HEADER)+'px';
     
-  CURR_IDX_DB='DB_'+CURR_CLIENT;      
+  var CURR_IDX_DB='DB_'+CURR_CLIENT;      
   initDb();      
   window.history.pushState({ noBackExitsApp: true }, '');
   f_MainPage=false;
