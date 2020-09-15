@@ -13,9 +13,13 @@
 <!--link rel="manifest" href="./ENADSTORE.webmanifest"-->
 
 <script>
-  var JBE_API='';  
-  JBE_API='http://localhost/api/';
-  JBE_API='https://aidfimonitoring.com/api/';
+  
+
+  var JBE_API=window.location.origin+'/api/';  
+  var JBE_HOST=window.location.href;  
+    
+  //JBE_API='https://aidfimonitoring.com/api/';
+  alert('index main: '+JBE_API);
 
   var CURR_LOCATION=window.location.href;
   
@@ -337,8 +341,8 @@
 <link rel="stylesheet" href="main_codes/mobile.css">
 <script type='text/javascript' src='main_jslib/axios.min.js'></script>
 
-<script type='text/javascript' src='main_codes/main_lib.js'></script>
-<script type='text/javascript' src='main_codes/jbelib.js'></script>
+<script type='text/javascript' src='main_codes/main_lib.min.js'></script>
+<script type='text/javascript' src='main_codes/jbelib.min.js'></script>
 <script type='text/javascript' src='main_jslib/je_msg.js'></script>
 <script type='text/javascript' src='main_jslib/coke.js'></script>
 <script type='text/javascript' src='main_codes/jbe_db.js'></script>
@@ -387,7 +391,9 @@
       //alert('dispclient: '+v_clientno);
       var v_appname=aryDB[i]['appname'];     
       var v_site=aryDB[i]['site'];     
-      var v_photo='app/'+v_site+'/gfx/'+aryDB[i]['logo']+'?'+n;  
+      //v_mphoto=JBE_API+'app/'+CURR_SITE+'/upload/users/'+CURR_USER+'.jpg?'+n;
+      //var v_photo='app/'+v_site+'/gfx/'+aryDB[i]['logo']+'?'+n;  
+      var v_photo=JBE_API+'app/'+v_site+'/gfx/'+aryDB[i]['logo']+'?'+n;  
       if(!JBE_ONLINE){        
         v_photo='data:image/png;base64,' + btoa(JBE_GETFLD('logo',DB_SYS,'clientno',v_clientno));
       }
@@ -433,7 +439,9 @@
     document.getElementById('div_footer').style.display='block';
     var n = new Date().toLocaleTimeString('it-IT');   
     var aryDB=JBE_GETARRY(DB_SYS,'clientno',clientno);     
-    var v_logo=JBE_DIR+aryDB['site']+'/gfx/'+aryDB['logo']+'?'+n;
+    //var v_logo=JBE_DIR+aryDB['site']+'/gfx/'+aryDB['logo']+'?'+n;
+    //var v_logo=JBE_API+'app/'+aryDB['site']+'/gfx/'+aryDB[i]['logo']+'?'+n;  
+    var v_logo=document.getElementById('photo_'+clientno).src;
     var dtl=      
       '<div id="div_site" data-clientno="'+clientno+'" data-appname="'+aryDB['appname']+'" data-site="'+aryDB['site']+'" style="width:100%;height:100%;padding:0px;background:none;">'+
         
@@ -507,13 +515,17 @@
       .catch(function (error) { console.log(error); showProgress(false); });   
   }
 
-  function gotoSite(){        
+  function gotoSite(){       
+
     var v_site=document.getElementById('div_site').getAttribute('data-site');
     var v_clientno=document.getElementById('div_site').getAttribute('data-clientno');
     eraseCookie('cok_user_'+v_clientno);
     eraseCookie('cok_axtype_'+v_clientno);
     eraseCookie('cok_name_'+v_clientno);
-    v_site='./app/'+v_site;
+    //alert('api '+JBE_API);
+    alert('JBE_HOST '+JBE_HOST);
+    v_site=JBE_HOST+'app/'+v_site;
+    //alert('v_site '+v_site);
     window.open(v_site);
     closeView();
   }
@@ -582,6 +594,7 @@
       j_logo=aryDB['logo'];
 
       showMenu('mnu_fm_site');
+      var v_logo=document.getElementById('photo_'+clientno).src;
     }else{
       showMenu('mnu_add_app');
     }
@@ -704,9 +717,13 @@
     if(vmode==1){
       clientno=clientno.toUpperCase();
     }
-    var dir='../../'+JBE_DIR+dvSite+'/gfx/';
-
-    alert(CURR_LOCATION);
+    //var dir='../../'+JBE_DIR+dvSite+'/gfx/';
+    var dir=JBE_API+'app/'+dvSite+'/gfx/';   
+    alert(
+      'save_site '+JBE_API+'\n'+
+      'CURR_LOCATION '+CURR_LOCATION+'\n'+
+      'dir '+dir
+    );
 
     var vDate=new Date();  
     var vTime = vDate.toLocaleTimeString('it-IT'); 
@@ -717,17 +734,16 @@
     var req=2;
     if(vmode==2){ req=3; }
     showProgress(true);     
-    alert(dvSite);
+    
     axios.post(JBE_API+'main.php', { clientno:clientno, request: req,    
       appname:dvAppname,
       shortname:dvShortname,
       descrp:dvDescrp,
-      site: dvSite,
+      site_url: dvSite,
       logoImg:dvLogo,
       f_icon:f_icon,      
       logo:'logo.jpg',      
-      dir:dir,
-      curr_loc:CURR_LOCATION,
+      api_dir:JBE_API,      
       sw_version:sw_version
     },JBE_HEADER)
     .then(function (response) {     
@@ -823,7 +839,7 @@
     }
   }
 
-  function start_app(){
+  function start_main_app(){
     JBE_ONLINE_NAVI=navigator.onLine;  
     JBE_ONLINE=false;   
     //****************
@@ -910,8 +926,7 @@
   if(!CURR_JBE_USER){ CURR_JBE_USER=''; }
   CURR_IDX_DB='DB_ENADSTORE';
   //initDbEnadStore();      
-  alert(CURR_LOCATION);
-  start_app();  
+  start_main_app();  
   
 </script>
 
