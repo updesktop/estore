@@ -21,13 +21,13 @@ var memberClusters = L.featureGroup();
 
 
 function showMap(vmode,usercode){   
-//alert(vmode); 
-	var p1=1;
-    var p2=1;
-	if(vmode==0){
-        p1=document.getElementById('div_sel_client').value;
-        p2=document.getElementById('div_sel_orders').value;
-    }
+  //alert(vmode); 
+  var p1=1;
+  var p2=1;
+  if(vmode==0){
+    p1=document.getElementById('div_sel_client').value;
+    p2=document.getElementById('div_sel_orders').value;
+  }
   
   if(!JBE_ONLINE){
     snackBar('OFFLINE');
@@ -197,7 +197,7 @@ function close_showmap(){
       var p2=document.getElementById('div_showmap').getAttribute('data-p2');
       document.getElementById('div_sel_client').value=p1;
       document.getElementById('div_sel_orders').value=p2;
-      dispOrders(document.getElementById('div_sel_client').value,document.getElementById('div_sel_orders').value);
+      dispOrders(vmode,document.getElementById('div_sel_client').value,document.getElementById('div_sel_orders').value);
   }else if(vmode==1){
       mnu_editStaff();
   }else if(vmode==2){

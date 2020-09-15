@@ -119,7 +119,10 @@
   #img_view_stock{
     height:50%;
   }
-  .jheader, .jfooter {
+  .jheader {
+    width:100%;
+  }
+  .jfooter {
     width:100%;
   }
   .myView {	 

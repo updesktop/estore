@@ -41,12 +41,12 @@ function mnu_showorder(vmode){
   '<div style="width:100%;height:100%;">'+
     '<div id="ds_client" style="display:'+vdisp+';float:left;width:49.5%;height:100%;">'+
       '<span style="width:100%;height:50%;">Client:</span>'+
-      '<select id="div_sel_client" '+vdisabled+' name="div_sel_client" onchange="dispOrders(vmode,this.value,div_sel_orders.value)" style="width:100%;height:50%;">'+
+      '<select id="div_sel_client" '+vdisabled+' name="div_sel_client" onchange="dispOrders('+vmode+',this.value,div_sel_orders.value)" style="width:100%;height:50%;">'+
       '</select>'+
     '</div>'+
     '<div style="'+vselstyle+';height:100%;">'+
       '<span style="width:100%;height:50%;">Select:</span>'+
-      '<select id="div_sel_orders" name="div_sel_orders" onchange="dispOrders(vmode,div_sel_client.value,this.value)" style="width:100%;height:50%;">'+
+      '<select id="div_sel_orders" name="div_sel_orders" onchange="dispOrders('+vmode+',div_sel_client.value,this.value)" style="width:100%;height:50%;">'+
       '</select>'+
     '</div>'+
   '</div>';
@@ -73,8 +73,10 @@ function mnu_showorder(vmode){
 }
 
 function close_showOrder(){ 
-  return;
-  //showMainPage();
+  var vmode=document.getElementById('div_main_order').getAttribute('data-vmode');
+  if(vmode==2){
+    showMainPage();
+  }
 }
 
 function dispOrders(vmode,c,v){
@@ -119,8 +121,11 @@ function dispOrders(vmode,c,v){
     if(v_mphoto != ''){    
       //v_img='upload/users/'+v_mphoto+'?'+n; 
       v_img=JBE_API+'app/'+CURR_SITE+'/upload/users/'+v_mphoto+'?'+n;   
+      //n=n+i;
+    } else {
+      v_img='../../main_gfx/landmark.png';   
     }
-
+    
     var stat_clor='black';
     if(v_mstat==4){ stat_clor='white'; }
     
@@ -130,7 +135,7 @@ function dispOrders(vmode,c,v){
       '<div style="height:50px;width:98%;margin-top:5px;margin:1%;padding:5px;font-size:14px;font-weight:bold;background:none;padding:1px;">'+
 
         '<div style="display:'+vdisp+';float:left;width:15%;height:100%;text-align:right;background:none;">'+
-            '<img src="'+v_img+'" style="border:1px solid black;width:40px;height:40px;border-radius:50%;background:pink;" onclick="JBE_ZOOM(&quot;'+v_img+'&quot;,&quot;&quot;)" />'+
+            '<img src="'+v_img+'" style="border:1px solid black;width:40px;height:40px;border-radius:50%;background:gray" onclick="JBE_ZOOM(&quot;'+v_img+'&quot;,&quot;&quot;)" />'+
         '</div>'+
 
         '<div style="float:left;width:58%;height:100%;padding:0 0 0 5px;background:none;">'+
@@ -279,6 +284,7 @@ function delCancel(t,u){
   
 function chgItemStat(u,t,s){
   //alert('u='+u+' t='+t+' s='+s);
+  var vmode=document.getElementById('div_main_order').getAttribute('data-vmode');
   if(s==4){
     delCancel(t,u);
     return;

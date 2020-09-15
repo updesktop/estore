@@ -425,7 +425,6 @@ function showSystem(){
   var v_banner=JBE_API+'app/'+CURR_SITE+'/gfx/banner.jpg?'+n;  
   //alert('showSystem JBE_ONLINE: '+JBE_ONLINE);
   if(!JBE_ONLINE){
-    alert('shawa');
     v_banner='data:image/png;base64,' + btoa(aryDB[0]['banner']);
   }   
 

@@ -273,11 +273,12 @@ async function putDataToIDX(i,aryDB,n){
     //document.getElementById('bar_avatar').src=jimg;
     //alert(jimg+' bar avatar : '+n);
 
-    //var jimg=JBE_API+'app/'+CURR_SITE+'/gfx/banner.jpg';
-    var jimg='gfx/banner.jpg';
+    var jimg=JBE_API+'app/'+CURR_SITE+'/gfx/banner.jpg';
+    //var jimg='gfx/banner.jpg';
     await JBE_BLOB(n,jimg).then(result => jimg=result);
     var slide1,slide2,slide3; 
-    var jimg2='gfx/'; 
+    //var jimg2='gfx/'; 
+    var jimg2=JBE_API+'app/'+CURR_SITE+'/gfx/';
     //var jimg2=JBE_API+'app/'+CURR_SITE+'/gfx/';
     await JBE_BLOB(n,jimg2+'slide1.jpg').then(result => slide1=result);
     await JBE_BLOB(n,jimg2+'slide2.jpg').then(result => slide2=result);
@@ -327,4 +328,3 @@ async function putDataToIDX(i,aryDB,n){
     //alert(xox);
   }
 }
- 
