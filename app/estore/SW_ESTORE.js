@@ -2,29 +2,29 @@ const cacheName = '5020122_081735';
 const staticAssets = [
   './',
   './index.html',
-  './gfx/icon-logo.png',  './gfx/icon-512x512.png',  './gfx/icon-192x192.png',  
-  './gfx/logo.jpg',       '../../main_gfx/jadmin.jpg',
-
-  '../../main_jslib/leaflet.js',              '../../main_jslib/leaflet.css',
+  './gfx/icon-512x512.png',  './gfx/icon-192x192.png',    
+/*
+  '../../main_jslib/leaflet.js',              '../../main_jslib/leaflet.css', 
   '../../main_jslib/images/jRedMarker.png',   '../../main_jslib/images/jblueMarker.png',
   '../../main_jslib/images/layers.png',       
 
   '../../main_jslib/axios.min.js',
   '../../main_jslib/coke.js',   
   '../../main_jslib/je_msg.js',
-  
+  '../../main_jslib/qrcode.min.js',  
+  */
   
   '../../main_codes/jbe_admin.js',  '../../main_codes/jbe_cart.js',   
   '../../main_codes/jbe_cat.js',    '../../main_codes/jbe_chat.js',
   '../../main_codes/jbe_db.js',     '../../main_codes/jbe_map.js',  
   '../../main_codes/jbe_notif.js',  '../../main_codes/jbe_order.js',  
   '../../main_codes/jbe_pages.js',  '../../main_codes/jbe_stock.js',  
-  '../../main_codes/jbe_sys.js',    '../../main_codes/jbelib.min.js',     
-  '../../main_codes/main_app.js',   '../../main_codes/main_lib.min.js', 
+  '../../main_codes/jbe_sys.js',    '../../main_codes/main_app.js',   
 
+  '../../main_codes/main_lib.min.js', '../../main_codes/jbelib.min.js',     
   '../../main_codes/main_styles.css',   '../../main_codes/mobile.css',
   
-  '../../main_gfx/proc_logo.gif',  
+  '../../main_gfx/proc_logo.gif',  '../../main_gfx/jadmin.jpg',
 
   '../../main_gfx/avatar.png',    '../../main_gfx/dots.png',    
   '../../main_gfx/jadd.png',      '../../main_gfx/jback.png',  
@@ -38,8 +38,7 @@ const staticAssets = [
   '../../main_gfx/jpromo.png',    '../../main_gfx/jpurchase.png',  
   '../../main_gfx/jrefresh.png',  '../../main_gfx/jsave.png',
   '../../main_gfx/jsearch.png',   '../../main_gfx/jsend.png',
-  '../../main_gfx/jsite.png',     '../../main_gfx/jsms.png', 
-  '../../main_gfx/dots.png',     '../../main_gfx/jsearch.png', 
+  '../../main_gfx/jsite.png',     '../../main_gfx/jsms.png',   
   '../../main_gfx/landmark.png',  
     
   './manifest.webmanifest'
