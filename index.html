@@ -19,7 +19,7 @@
   var JBE_HOST=window.location.href;  
     
   JBE_API='https://aidfimonitoring.com/api/';
-  alert('index main: '+JBE_API);
+  //alert('index main: '+JBE_API);
 
   var CURR_LOCATION=window.location.href;
   
@@ -523,7 +523,7 @@
     eraseCookie('cok_axtype_'+v_clientno);
     eraseCookie('cok_name_'+v_clientno);
     //alert('api '+JBE_API);
-    alert('JBE_HOST '+JBE_HOST);
+    //alert('JBE_HOST '+JBE_HOST);
     v_site=JBE_HOST+'app/'+v_site;
     //alert('v_site '+v_site);
     window.open(v_site);
@@ -719,12 +719,7 @@
     }
     //var dir='../../'+JBE_DIR+dvSite+'/gfx/';
     var dir=JBE_API+'app/'+dvSite+'/gfx/';   
-    alert(
-      'save_site '+JBE_API+'\n'+
-      'CURR_LOCATION '+CURR_LOCATION+'\n'+
-      'dir '+dir
-    );
-
+    
     var vDate=new Date();  
     var vTime = vDate.toLocaleTimeString('it-IT'); 
     vDate = new Date(vDate.getTime() - (vDate.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];  
@@ -749,7 +744,7 @@
     .then(function (response) {     
       showProgress(false);
       //alert('save site: '+response.data.length); 
-      alert('BANTAY: '+response.data);
+      //alert('BANTAY: '+response.data);
       DB_SYS=response.data;
       dispClients();      
       showMainPage0();      
@@ -851,10 +846,10 @@
     "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Origin": "*"
   }
-    alert(JBE_API+'main.php');
+    //alert(JBE_API+'main.php');
     axios.post(JBE_API+'main.php', { clientno:'', request: 404 },xhead)     
     .then(function (response) {   
-      alert(response.data);
+      //alert(response.data);
       //alert('online: '+response.data[0]+'  navi: '+JBE_ONLINE_NAVI);
       if(response.data[0] == 'ONLINE' && JBE_ONLINE_NAVI){
         //alert('yes');
@@ -880,7 +875,7 @@
       showMainPage0(); 
     })
     .catch(function (error) { 
-      alert('sala');
+      //alert('sala');
       if (!error.response) {
         // network error (server is down or no internet)
         console.log('JBE Found: network error (server is down or no internet)');
@@ -889,7 +884,7 @@
         const code = error.response.status;
         // data from server while error
         const response = error.response.data;
-        alert('sala gd');
+        //alert('sala gd');
         console.log(code+' vs '+response);
         MSG_SHOW(vbOk,"INTERNAL ERROR:","CODE:"+code+". Server Response: "+response+". <br>Please Refresh.",function(){},function(){}); 
       }      
