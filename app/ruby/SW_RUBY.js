@@ -39,6 +39,7 @@ const staticAssets = [
   '../../main_gfx/jrefresh.png',  '../../main_gfx/jsave.png',
   '../../main_gfx/jsearch.png',   '../../main_gfx/jsend.png',
   '../../main_gfx/jsite.png',     '../../main_gfx/jsms.png', 
+  '../../main_gfx/dots.png',     '../../main_gfx/jsearch.png', 
   '../../main_gfx/landmark.png',  
     
   './manifest.webmanifest'
