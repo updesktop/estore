@@ -3,7 +3,7 @@ const staticAssets = [
   './',
   './index.html',
   './gfx/icon-512x512.png',  './gfx/icon-192x192.png',    
-/*
+
   '../../main_jslib/leaflet.js',              '../../main_jslib/leaflet.css', 
   '../../main_jslib/images/jRedMarker.png',   '../../main_jslib/images/jblueMarker.png',
   '../../main_jslib/images/layers.png',       
@@ -12,8 +12,7 @@ const staticAssets = [
   '../../main_jslib/coke.js',   
   '../../main_jslib/je_msg.js',
   '../../main_jslib/qrcode.min.js',  
-  */
-  
+   
   '../../main_codes/jbe_admin.js',  '../../main_codes/jbe_cart.js',   
   '../../main_codes/jbe_cat.js',    '../../main_codes/jbe_chat.js',
   '../../main_codes/jbe_db.js',     '../../main_codes/jbe_map.js',  
