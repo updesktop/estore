@@ -527,15 +527,6 @@ function showItems(){
       v_mphoto=JBE_API+'app/'+CURR_SITE+'/upload/'+v_mphoto+'?'+n;
     }else{
       v_mphoto='data:image/png;base64,' + btoa(v_mphoto);
-      //jdebug(v_mcode,v_mname,v_mphoto);
-      /*
-      debug_dtl+=
-        '<div id="dd_code'+v_mcode+'" style="margin:1%;width:98%;height:110px;border:1px solid black;background:white;">'+
-          '<div id="dd_code'+v_mcode+'" style="width:100%;height:20px;">'+v_mcode+'</div>'+
-          '<div id="dd_name'+v_mcode+'" style="width:100%;height:20px;">'+v_mname+'</div>'+
-          '<img id="dd_img'+v_mcode+'" src="'+v_mphoto+'" style="width:100%;height:60px;"/>'+
-        '</div>';
-      */
     }
 
     dtl=dtl+
@@ -557,16 +548,6 @@ function showItems(){
   
   var vheight=(117+4)*3;
   document.getElementById('scroll_items').style.height=vheight+'px';
-  
-  //document.getElementById('jdebug_dtl').innerHTML=debug_dtl;
-}
-
-function jdebug(t){
-  if(t){
-    document.getElementById('jdebug').style.display='block';
-  }else{
-    document.getElementById('jdebug').style.display='none';
-  }
 }
 
 function showPromos(){
