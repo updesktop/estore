@@ -106,7 +106,7 @@ function getAllDataFromIDX(vmode) {
 }  
 
 function getDataFromIDX(i,db2) {  
-    var idx=0;
+  var idx=0;
   var aryIDB=[]; 
   var flename=JBE_STORE_IDX[i]['flename'];
       
@@ -203,7 +203,7 @@ function getDataFromIDX(i,db2) {
 }  
 
 function refreshIDX(){    
-  //alert('refreshIDX '+DB_SYS.length+' = '+DB_SYS[0]['clientname']);
+  alert('refreshIDX '+DB_SYS.length+' = '+DB_SYS[0]['clientname']);
   if(JBE_STORE_IDX[0]['numrec'] != DB_CAT.length){ clearStore(JBE_STORE_IDX[0]['flename']); saveDataToIDX(DB_CAT,0); }
   if(JBE_STORE_IDX[1]['numrec'] != DB_STOCK.length){ clearStore(JBE_STORE_IDX[1]['flename']); saveDataToIDX(DB_STOCK,1); }  
   if(JBE_STORE_IDX[2]['numrec'] != DB_SYS.length){ clearStore(JBE_STORE_IDX[2]['flename']); saveDataToIDX(DB_SYS,2); }
@@ -212,7 +212,7 @@ function refreshIDX(){
 }
 
 function jdata(){
-  if(CURR_AXTYPE < 9){ return; }
+  //if(CURR_AXTYPE < 9){ return; }
   var jd=
     'From IDX '+JBE_STORE_IDX[0]['flename']+' : '+JBE_STORE_IDX[0]['numrec']+' vs '+DB_CAT.length+' Array<br>'+
     'From IDX '+JBE_STORE_IDX[1]['flename']+' : '+JBE_STORE_IDX[1]['numrec']+' vs '+DB_STOCK.length+' Array<br>'+
@@ -225,22 +225,16 @@ function jdata(){
 }
 
 function saveDataToIDX(aryDB,n) {    
-  //alert(n);
-  //alert('saveDataToIDX File '+JBE_STORE_IDX[n]['flename']+' == db array '+aryDB.length);
+  //alert('saveDataToIDX '+n);
   JBE_STORE_IDX[n]['numrec']=aryDB.length;
-  //alert('una : '+JBE_STORE_IDX[n]['numrec']);
-  for(var i=0;i<aryDB.length;i++){
-     // alert(aryDB[i]['clientno']+' -- '+CURR_CLIENT);
+  for(var i=0;i<aryDB.length;i++){     
     if(aryDB[i]['clientno']!=CURR_CLIENT){ continue; }
     putDataToIDX(i,aryDB,n);
   }
 }
-async function putDataToIDX(i,aryDB,n){        
-	//alert('async : '+aryDB.length);
-	var xox=aryDB.length;
+async function putDataToIDX(i,aryDB,n){   
+  //alert('i: '+i+' file#:'+n);
   if(n==0){    
-    //var jimg='upload/'+aryDB[i]['photo'];
-    //var jimg=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB[i]['photo'];      
     var jimg=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB[i]['photo'];   
     await JBE_BLOB(n,jimg).then(result => jimg=result);
     ob = { //categorgy
@@ -252,9 +246,9 @@ async function putDataToIDX(i,aryDB,n){
       bal:aryDB[i]['bal'],            
     };
   }else if(n==1){ //stock
-    //var jimg='upload/'+aryDB[i]['photo'];
     var jimg=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB[i]['photo'];   
     await JBE_BLOB(n,jimg).then(result => jimg=result);
+    //alert('stock: '+jimg);
     ob = {
       id:i,
       stockno:aryDB[i]['stockno'],
@@ -268,11 +262,21 @@ async function putDataToIDX(i,aryDB,n){
       bal:aryDB[i]['bal'],
       promo:aryDB[i]['promo']
     };        
-  }else if(n==2){ //sysfile
-    //var jimg='gfx/banner.jpg'; //'+aryDB[i]['banner'];
-    //document.getElementById('bar_avatar').src=jimg;
-    //alert(jimg+' bar avatar : '+n);
+    var v_mcode=aryDB[i]['stockno'];    
+    var v_mname=aryDB[i]['stockname']; 
+    var v_mprice=aryDB[i]['price']; 
+    var v_mphoto=jimg;
 
+    v_mphoto='data:image/png;base64,' + btoa(v_mphoto);
+    var debug_dtl=
+        '<div id="dd_code'+v_mcode+'" style="margin:1%;width:98%;height:110px;border:1px solid black;background:white;">'+
+          '<div id="dd_code'+v_mcode+'" style="width:100%;height:20px;">'+v_mcode+'</div>'+
+          '<div id="dd_name'+v_mcode+'" style="width:100%;height:20px;">'+v_mname+'</div>'+
+          '<img id="dd_img'+v_mcode+'" src="'+v_mphoto+'" style="width:auto;height:60px;"/>'+
+        '</div>';
+    document.getElementById('jdebug_dtl').innerHTML+=debug_dtl;
+
+  }else if(n==2){ //sysfile
     var jimg=JBE_API+'app/'+CURR_SITE+'/gfx/banner.jpg';
     //var jimg='gfx/banner.jpg';
     await JBE_BLOB(n,jimg).then(result => jimg=result);

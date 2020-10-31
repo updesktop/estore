@@ -283,13 +283,14 @@ function delCat(){
   }
   
   //var v_banner=JBE_API+'app/'+CURR_SITE+'/gfx/banner.jpg?'+n;  
-  var dir=JBE_API+'app/'+CURR_SITE+'/upload/';
+  var ddir='app/'+CURR_SITE+'/upload/';
+  
   MSG_SHOW(vbYesNo,"CONFIRM: ",vdel+"Are you sure to Delete this Record?",function(){
-    showProgress(true);  
+    showProgress(true);      
     axios.post(JBE_API+'z_cat.php', { clientno:CURR_CLIENT, request: 4,    
       photo:photo,    
       catno:catno,
-      dir:dir
+      ddir:ddir
     },JBE_HEADER)
     .then(function (response) {     
       console.log(response.data); 

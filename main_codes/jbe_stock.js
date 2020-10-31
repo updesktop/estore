@@ -88,8 +88,7 @@ function mnu_stock2(){
 }
 
 function dispAllStocks(c){    
-  var n = new Date().toLocaleTimeString('it-IT'); 
-  var m=0;
+  var n = new Date().toLocaleTimeString('it-IT');  
   CURR_BACKER=0;
   var stock = DB_STOCK;    
   stock.sort(sortByMultipleKey(['descrp']));   
@@ -101,13 +100,11 @@ function dispAllStocks(c){
     var v_mdescrp=stock[i]['descrp']; 
     var v_mprice=stock[i]['price']; 
     //var v_mphoto='upload/'+stock[i]['photo']+'?'+n;       
-    if(m==0){
-      //var v_mphoto='../../app/'+CURR_SITE+'/upload/'+stock[i]['photo']+'?'+n;   
+    if(JBE_ONLINE){
       var v_mphoto=JBE_API+'app/'+CURR_SITE+'/upload/'+stock[i]['photo']+'?'+n;   
     }else{
       var v_mphoto='data:image/png;base64,' + btoa(cat[i]['photo']);
     }
-
     
     dtl=dtl+      
       '<div id="das_stock_'+v_mcode+'" onclick="selectRow(&quot;das_stock_'+v_mcode+'&quot;,&quot;class_items&quot;);add_edit_stock(2,&quot;'+v_mcode+'&quot;)" class="class_items">'+      
@@ -334,13 +331,15 @@ function delStock(){
   var stockno=document.getElementById('div_main_stock').getAttribute('data-stockno');
   var catno_first=document.getElementById('div_sel_cat').value;  
   var photo=JBE_GETFLD('photo',DB_STOCK,'stockno',stockno);  
-  var dir='../../app/'+CURR_SITE+'/upload/';
+  //var dir=JBE_API+'app/'+CURR_SITE+'/upload/';
+  var ddir='app/'+CURR_SITE+'/upload/';
+  
   MSG_SHOW(vbYesNo,"CONFIRM: ","Are you sure to Delete this Stock?",function(){
     showProgress(true);  
     axios.post(JBE_API+'z_stock.php', { clientno:CURR_CLIENT, request: 4,    
       photo:photo,    
       stockno: stockno,
-      dir:dir
+      ddir:ddir
     },JBE_HEADER)
     .then(function (response) {     
       console.log(response.data); 
