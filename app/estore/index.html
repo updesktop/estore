@@ -20,7 +20,7 @@
   var CURR_SITE='estore';   
 
   var JBE_API=window.location.origin+'/api/';  
-  JBE_API='https://aidfimonitoring.com/api/';  
+  //JBE_API='https://aidfimonitoring.com/api/';  
 </script>
 <!-- ********************* -->
 
@@ -74,6 +74,19 @@
           -webkit-transform: translate(-50%, -50%);  transform: translate(-50%, -50%);">      
     <img src="../../main_gfx/proc_logo.gif" alt="proc image" style="float:right;height:100%;width:100%;background:none;" />
   </div>
+</div>
+
+<div id="jdebug" class="modal" style="display:none;z-index:1450;">      
+  <div style="width:100%;height:90%;background:none;
+          position: absolute;  z-index: 1000;  top: 50%;  left: 50%;  
+          -webkit-transform: translate(-50%, -50%);  transform: translate(-50%, -50%);">      
+            
+    <div id="jdebug_dtl" style="width:100%;height:90%;background:none;padding:5px;overflow:auto;">
+    </div>
+    <input type="button" onclick="jdebug(false)" style="width:100%;height:10%;color:white;background:#039be5;border:1px solid gray;border-radius:5px;cursor:pointer;" value="Exit"/>        
+    
+  </div>
+  
 </div>
 
 <!-- *************************PAGES***************************************************
@@ -140,7 +153,7 @@
     <!--  ************************* PERMANENT *************************************************** -->
     <div id="page_main" class="page_class" style="display:block;width:100%;height:auto;background-color:none;">
     
-    <div id="div_header" class="jheader" onclick="jeff();" style="width:100%;height:70px;opacity:0;position:absolute;z-index:5;text-align:center;padding:0px;border:0px solid gray;">              
+    <div id="div_header" class="jheader" style="width:100%;height:70px;opacity:0;position:absolute;z-index:5;text-align:center;padding:0px;border:0px solid gray;">              
     </div>
     
     <div id="divUL" style="display:none;position:absolute;width:100%;height:200px;padding:2px;top:70px;overflow:auto;background:none;">
@@ -208,7 +221,7 @@
 
   <div id="div_bar" style="display:none;position:absolute;left:0px;top:0px;height:30px;width:100%;padding:2px;background-color: rgba(255,255,255,0.1);z-index:6;background:none;">
         
-    <div id="menu_open" onclick="openNav()" class="class_notif" style="display:none;right:0px;width:auto;background:red;">
+    <div id="menu_open" onclick="openNav()" class="class_notif" style="display:none;right:0px;width:auto;background:black;">
       <img id="hd_img" src="../../main_gfx/jham.png" style="height:100%;border:2px solid black;background:none;" alt="notif new hd image" >      
     </div> 
 
@@ -452,6 +465,8 @@
         </div> 
       </div>
 
+      
+
     </div> <!--menu-->
 
   </div> <!--footer-->
@@ -468,8 +483,8 @@
 
 <script type='text/javascript'  src='../../main_codes/main_lib.min.js'></script>
 <script type='text/javascript'  src='../../main_codes/jbelib.min.js'></script>
-<!--script type='text/javascript'  src='../../main_codes/main_lib.js'></script>
-<script type='text/javascript'  src='../../main_codes/jbelib.js'></script-->
+<!--script type='text/javascript'  src='../../main_codes/src_lib/main_lib.js'></script>
+<script type='text/javascript'  src='../../main_codes/src_lib/jbelib.js'></script-->
 
 <script type='text/javascript'  src='../../main_codes/jbe_db.js'></script>
 <script type='text/javascript'  src='../../main_codes/jbe_pages.js'></script>
