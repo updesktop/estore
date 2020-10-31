@@ -20,7 +20,7 @@
   var CURR_SITE='estore';   
 
   var JBE_API=window.location.origin+'/api/';  
-  JBE_API='https://aidfimonitoring.com/api/';  
+  //JBE_API='https://aidfimonitoring.com/api/';  
 </script>
 <!-- ********************* -->
 
@@ -74,19 +74,6 @@
           -webkit-transform: translate(-50%, -50%);  transform: translate(-50%, -50%);">      
     <img src="../../main_gfx/proc_logo.gif" alt="proc image" style="float:right;height:100%;width:100%;background:none;" />
   </div>
-</div>
-
-<div id="jdebug" class="modal" style="display:none;z-index:1450;">      
-  <div style="width:100%;height:90%;background:none;
-          position: absolute;  z-index: 1000;  top: 50%;  left: 50%;  
-          -webkit-transform: translate(-50%, -50%);  transform: translate(-50%, -50%);">      
-            
-    <div id="jdebug_dtl" style="width:100%;height:90%;background:none;padding:5px;overflow:auto;">
-    </div>
-    <input type="button" onclick="jdebug(false)" style="width:100%;height:10%;color:white;background:#039be5;border:1px solid gray;border-radius:5px;cursor:pointer;" value="Exit"/>        
-    
-  </div>
-  
 </div>
 
 <!-- *************************PAGES***************************************************
@@ -227,7 +214,7 @@
 
     <div class="class_notif" style="display:block;right:10px;width:auto;height:65px;background:none;">      
       <div style="float:right;height:50px;width:50px;border-radius:50%;border:2px solid white;background:green;" alt="ai" >
-        <img id="bar_avatar" onclick="jdata()" src="../../main_gfx/avatar.png" onerror="imgOnError(this)" 
+        <img id="bar_avatar" src="../../main_gfx/avatar.png" onerror="imgOnError(this)" 
             style="float:right;height:100%;width:100%;border-radius:50%;border:1px solid black;background:none;" alt="ai" >
       </div>
       <div id="logger" style="float:right;width:100%;height:auto;text-align:right;padding:2px 0 0 0;font-size:11px;color:black;background:none;
