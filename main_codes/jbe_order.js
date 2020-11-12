@@ -74,9 +74,11 @@ function mnu_showorder(vmode){
 
 function close_showOrder(){ 
   var vmode=document.getElementById('div_main_order').getAttribute('data-vmode');
-  if(vmode==2){
-    showMainPage();
-  }
+  //alert(vmode);
+  showMainPage();
+  //if(vmode==2){    
+   // showMainPage();
+  //}
 }
 
 function dispOrders(vmode,c,v){
