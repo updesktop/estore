@@ -1,7 +1,7 @@
 {
       "name": "BA Oriental Tire Supply",
       "short_name": "BA Oriental",
-      "start_url": ".",
+      "start_url": "https://updesktop.github.io/estore/app/ba/",
       "display": "standalone",
       "orientation": "portrait",
       "background_color": "#a9a9a9",
