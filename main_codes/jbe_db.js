@@ -261,7 +261,21 @@ async function putDataToIDX(i,aryDB,n){
       price:aryDB[i]['price'],
       bal:aryDB[i]['bal'],
       promo:aryDB[i]['promo']
-    };
+    };        
+    var v_mcode=aryDB[i]['stockno'];    
+    var v_mname=aryDB[i]['stockname']; 
+    var v_mprice=aryDB[i]['price']; 
+    var v_mphoto=jimg;
+
+    v_mphoto='data:image/png;base64,' + btoa(v_mphoto);
+    var debug_dtl=
+        '<div id="dd_code'+v_mcode+'" style="margin:1%;width:98%;height:110px;border:1px solid black;background:white;">'+
+          '<div id="dd_code'+v_mcode+'" style="width:100%;height:20px;">'+v_mcode+'</div>'+
+          '<div id="dd_name'+v_mcode+'" style="width:100%;height:20px;">'+v_mname+'</div>'+
+          '<img id="dd_img'+v_mcode+'" src="'+v_mphoto+'" style="width:auto;height:60px;"/>'+
+        '</div>';
+    document.getElementById('jdebug_dtl').innerHTML+=debug_dtl;
+
   }else if(n==2){ //sysfile
     var jimg=JBE_API+'app/'+CURR_SITE+'/gfx/banner.jpg';
     //var jimg='gfx/banner.jpg';

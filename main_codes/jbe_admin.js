@@ -344,7 +344,7 @@ function fm_profile(vmode){
 
           '<div id="dv_uid2" style="margin-top:10px; height:auto; width:100%;background:none;">'+
             '<span style="height:15px; width:100%; background:none;">User ID</span>'+
-            '<input id="fuser2" class="class_profile" onchange="chk_fld(this.value,fpass2.value,'+vmode+')" type="text"  placeholder="User ID"  maxlength=20 onkeydown="javascript:if(event.keyCode==13) document.getElementById(&quot;fpass2&quot;).focus();"'+
+            '<input id="fuser2" class="class_profile" onchange="chk_fld(this.value,fpass2.value,'+vmode+')" type="text"  placeholder="Email or Phone Number" maxlength=20 onkeydown="javascript:if(event.keyCode==13) document.getElementById(&quot;fpass2&quot;).focus();"'+
                 'value="'+userid+'"/>'+            
           '</div>'+
   

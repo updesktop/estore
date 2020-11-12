@@ -100,7 +100,7 @@ function sendMsg(){
     .then(function (response) {   
       showProgress(false);      
       console.log(response.data);
-     // alert('send Msg: '+response.data);
+      //alert('send Msg: '+response.data);
       DB_CHAT=response.data;
       dispChatDtl();
       document.getElementById('txtMsg').value='';
@@ -270,8 +270,8 @@ function delChat(v_trano){
   var usercode=document.getElementById('div_main_chat').getAttribute('data-usercode');
   var f_owner=false;
   var ddir='app/'+CURR_SITE+'/upload/chat/';
-  alert(v_trano);
-  alert(ddir);
+  //alert(v_trano);
+  //alert(ddir);
   if(CURR_AXTYPE > 0){ f_owner=true; }
   
   MSG_SHOW(vbYesNo,"CONFIRM:","Are you sure to Delete this Item?",
@@ -287,7 +287,7 @@ function delChat(v_trano){
         showProgress(false);
         console.log(response.data);
         DB_CHAT=response.data;
-        alert(DB_CHAT);
+        //alert(DB_CHAT);
         getChats();
       })
       .catch(function (error) {
