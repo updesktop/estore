@@ -1,7 +1,7 @@
 {
       "name": "AAV Treads and Services",
       "short_name": "AAV Treads",
-      "start_url": "https://updesktop.github.io/estore/app/aav/",
+      "start_url": ".",
       "display": "standalone",
       "orientation": "portrait",
       "background_color": "#a9a9a9",
