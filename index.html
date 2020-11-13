@@ -18,7 +18,7 @@
   var JBE_API=window.location.origin+'/api/';  
   var JBE_HOST=window.location.href;  
     
-  JBE_API='https://aidfimonitoring.com/api/';
+  //JBE_API='https://aidfimonitoring.com/api/';
   //alert('index main: '+JBE_API);
 
   var CURR_LOCATION=window.location.href;
@@ -717,8 +717,8 @@
     if(vmode==1){
       clientno=clientno.toUpperCase();
     }
-    //var dir='../../'+JBE_DIR+dvSite+'/gfx/';
-    var dir=JBE_API+'app/'+dvSite+'/gfx/';   
+    var jdir='app/'+dvSite+'/gfx/';   
+    //var dir=JBE_API+'app/'+dvSite+'/gfx/';   
     
     var vDate=new Date();  
     var vTime = vDate.toLocaleTimeString('it-IT'); 
@@ -738,7 +738,7 @@
       logoImg:dvLogo,
       f_icon:f_icon,      
       logo:'logo.jpg',      
-      api_dir:JBE_API,      
+      api_dir:jdir,      
       sw_version:sw_version
     },JBE_HEADER)
     .then(function (response) {     
