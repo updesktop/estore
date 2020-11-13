@@ -186,11 +186,9 @@ function getDataFromIDX(i,db2) {
     }else{
       if(i==0){
         DB_CAT=[]; DB_CAT=aryIDB;              
-alert('db DB_CAT '+ DB_CAT.length);    
         showCategories();           
       }else if(i==1){
         DB_STOCK=[]; DB_STOCK=aryIDB;        
-alert('db DB_STOCK '+ DB_STOCK.length);
         showItems();        
         showPromos();           
       }else if(i==2){          
