@@ -214,7 +214,6 @@ function get_db_clients(){
 
 function get_db_cat(){
   DB_CAT=[];
-  //axios.post('http://localhost/api_rphs/z_rphs.php', { request: 0 }, xhead)
   axios.post(JBE_API+'z_cat.php', { clientno:CURR_CLIENT, request: 0 },JBE_HEADER) 
   .then(function (response) { 
     //alert('alert xxxx '+response.data); 
@@ -230,6 +229,7 @@ function get_db_cat(){
   .catch(function (error) { console.log(error); }); 
 }
 function get_db_stock(){
+  //alert('get_db_stock');
   DB_STOCK=[];
   axios.post(JBE_API+'z_stock.php', { clientno:CURR_CLIENT,request: 0 },JBE_HEADER) 
   .then(function (response) { 
@@ -241,14 +241,15 @@ function get_db_stock(){
         //saveDataToIDX(DB_STOCK,1); 
     //}  
     
-    showPromos(); 
     showItems(); 
+    showPromos();     
     initSearch();
     //add_debug();
     clearStore(JBE_STORE_IDX[1]['flename']); saveDataToIDX(DB_STOCK,1); 
   })    
   .catch(function (error) { console.log(error); }); 
 }
+
 function get_db_cart(u){        
   DB_CART=[];
   var req=1;
@@ -527,6 +528,15 @@ function showItems(){
       v_mphoto=JBE_API+'app/'+CURR_SITE+'/upload/'+v_mphoto+'?'+n;
     }else{
       v_mphoto='data:image/png;base64,' + btoa(v_mphoto);
+      //jdebug(v_mcode,v_mname,v_mphoto);
+      /*
+      debug_dtl+=
+        '<div id="dd_code'+v_mcode+'" style="margin:1%;width:98%;height:110px;border:1px solid black;background:white;">'+
+          '<div id="dd_code'+v_mcode+'" style="width:100%;height:20px;">'+v_mcode+'</div>'+
+          '<div id="dd_name'+v_mcode+'" style="width:100%;height:20px;">'+v_mname+'</div>'+
+          '<img id="dd_img'+v_mcode+'" src="'+v_mphoto+'" style="width:100%;height:60px;"/>'+
+        '</div>';
+      */
     }
 
     dtl=dtl+
@@ -548,6 +558,16 @@ function showItems(){
   
   var vheight=(117+4)*3;
   document.getElementById('scroll_items').style.height=vheight+'px';
+  
+  //document.getElementById('jdebug_dtl').innerHTML=debug_dtl;
+}
+
+function jdebug(t){
+  if(t){
+    document.getElementById('jdebug').style.display='block';
+  }else{
+    document.getElementById('jdebug').style.display='none';
+  }
 }
 
 function showPromos(){

@@ -86,6 +86,7 @@ function countRecordIDX(n){
 
 /****************************************/
 function getAllDataFromIDX(vmode) {   
+  //alert('getAllDataFromIDX: '+JBE_STORE_IDX.length);
   var request = indexedDB.open(CURR_IDX_DB, dbVersion);  
   request.onerror = function(e) {    
     console.error('Unable to open database.');
@@ -94,10 +95,11 @@ function getAllDataFromIDX(vmode) {
   var ctr=0;
   request.onsuccess = function(e) {
     var db2 = e.target.result;
-    for(var i=0;i<JBE_STORE_IDX.length;i++){
+    for(var i=0;i < JBE_STORE_IDX.length;i++){
       //if(!vmode && JBE_STORE_IDX[i]['init'] == 0) { continue; }
       //if(parseInt(JBE_STORE_IDX[i]['init']) != vmode) { continue; }
       //alert(JBE_STORE_IDX[i]['flename']+' = '+JBE_STORE_IDX[i]['numrec']);
+      //alert('i = '+i);
       getDataFromIDX(i,db2);  
       ctr++;
     }
@@ -183,10 +185,12 @@ function getDataFromIDX(i,db2) {
       cursor.continue();
     }else{
       if(i==0){
-        DB_CAT=[]; DB_CAT=aryIDB;                  
+        DB_CAT=[]; DB_CAT=aryIDB;              
+alert('db DB_CAT '+ DB_CAT.length);    
         showCategories();           
       }else if(i==1){
-        DB_STOCK=[]; DB_STOCK=aryIDB;         
+        DB_STOCK=[]; DB_STOCK=aryIDB;        
+alert('db DB_STOCK '+ DB_STOCK.length);
         showItems();        
         showPromos();           
       }else if(i==2){          
@@ -203,6 +207,7 @@ function getDataFromIDX(i,db2) {
 }  
 
 function refreshIDX(){    
+  return;
   //alert('refreshIDX '+DB_SYS.length+' = '+DB_SYS[0]['clientname']);
   if(JBE_STORE_IDX[0]['numrec'] != DB_CAT.length){ clearStore(JBE_STORE_IDX[0]['flename']); saveDataToIDX(DB_CAT,0); }
   if(JBE_STORE_IDX[1]['numrec'] != DB_STOCK.length){ clearStore(JBE_STORE_IDX[1]['flename']); saveDataToIDX(DB_STOCK,1); }  
@@ -268,6 +273,7 @@ async function putDataToIDX(i,aryDB,n){
     var v_mphoto=jimg;
 
     v_mphoto='data:image/png;base64,' + btoa(v_mphoto);
+    /*
     var debug_dtl=
         '<div id="dd_code'+v_mcode+'" style="margin:1%;width:98%;height:110px;border:1px solid black;background:white;">'+
           '<div id="dd_code'+v_mcode+'" style="width:100%;height:20px;">'+v_mcode+'</div>'+
@@ -275,6 +281,7 @@ async function putDataToIDX(i,aryDB,n){
           '<img id="dd_img'+v_mcode+'" src="'+v_mphoto+'" style="width:auto;height:60px;"/>'+
         '</div>';
     document.getElementById('jdebug_dtl').innerHTML+=debug_dtl;
+    */
 
   }else if(n==2){ //sysfile
     var jimg=JBE_API+'app/'+CURR_SITE+'/gfx/banner.jpg';
