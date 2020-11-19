@@ -26,7 +26,7 @@ function fm_system(){
                             
               '<div style="position:absolute;top:5%;left:75%;border-radius:50%;border:1px solid black;height:40px;width:40px;padding:3px;background:darkgray;">'+          
                   '<input type="file" id="id_file_banner" data-sel=0 name="id_file_banner" hidden="hidden" />'+                    
-                  '<img src="../../main_gfx/jcam.png" onclick="JBE_PICK_IMAGE(id_file_banner.id,sys_banner.id,&quot;&quot;)" style="width:95%;"/>'+
+                  '<img src="../../main_gfx/jcam.png" onclick="JBE_PICK_IMAGE(0,id_file_banner.id,sys_banner.id,&quot;&quot;)" style="width:95%;"/>'+
               '</div>'+
 	          '</div>'+        
 	       '<div style="width:100%;height:auto;font-size:12px;font-weight:bold;text-align:center;color:navy;">Dimension: (800 x 72) pixel, Res: 72 pixel/inch </div>'+
@@ -40,6 +40,13 @@ function fm_system(){
         '<div style="height:20px;width:100%;padding:2px;background:none;">'+
           '<div style="float:left;width:100px;height:100%;background:none;">Site / Domain</div><input class="class_input" id="isite" disabled type="text" style="float:left;height:100%;width:60%;padding:2px;" value="'+aryDB['site']+'" />'+
         '</div>'+
+        '<div style="height:20px;width:100%;padding:2px;background:none;">'+
+          '<div style="float:left;width:100px;height:100%;background:none;">Telephone No.</div><input class="class_input" id="telno" placeholder="One telephone number only"  type="number" style="float:left;height:100%;width:60%;padding:2px;" value="'+aryDB['telno']+'" />'+
+        '</div>'+
+        '<div style="height:20px;width:100%;padding:2px;background:none;">'+
+          '<div style="float:left;width:100px;height:100%;background:none;">Mobile No.</div><input class="class_input" id="celno" placeholder="One mobile number only"  type="number" style="float:left;height:100%;width:60%;padding:2px;" value="'+aryDB['celno']+'" />'+
+        '</div>'+
+        
       '</div>'+
             
       '<div style="width:100%;height:auto;overflow-x:hidden;overflow-y:auto;margin-top:2%;border-radius:8px;border:1px solid gray;padding:5px;background:none;">'+
@@ -60,7 +67,7 @@ function fm_system(){
              
           '<div style="position:absolute;top:5%;left:75%;border-radius:50%;border:1px solid black;height:40px;width:40px;padding:3px;background:darkgray;">'+          
             '<input type="file" id="id_file_slider" data-sel=0 name="id_file_slider" hidden="hidden" />'+                    
-            '<img src="../../main_gfx/jcam.png" onclick="JBE_PICK_IMAGE(id_file_slider.id,sys_slider.id,&quot;cb_save&quot;)" style="width:95%;"/>'+
+            '<img src="../../main_gfx/jcam.png" onclick="JBE_PICK_IMAGE(0,id_file_slider.id,sys_slider.id,&quot;cb_save&quot;)" style="width:95%;"/>'+
           '</div>'+
         '</div>'+
         
@@ -255,6 +262,8 @@ function save_system(){
   JBE_TXCLOR2=document.getElementById('sys_txclor2').value;
   JBE_TXCLOR3=document.getElementById('sys_txclor3').value;
   JBE_TXCLOR4=document.getElementById('sys_txclor4').value;
+  telno=document.getElementById('telno').value;
+  celno=document.getElementById('celno').value;
   showProgress(true);
   axios.post(JBE_API+'z_sysfile.php', { clientno:CURR_CLIENT, request: 3,  
     keepRatio:true,  
@@ -275,6 +284,8 @@ function save_system(){
     txclor2:JBE_TXCLOR2,
     txclor3:JBE_TXCLOR3,
     txclor4:JBE_TXCLOR4,
+    telno:telno,
+    celno:celno,
     sw_version:sw_version
   },JBE_HEADER)
   .then(function (response) {       

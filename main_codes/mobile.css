@@ -116,9 +116,19 @@
   #wrapper{
     width:100%;
   }
-  #img_view_stock{
-    height:50%;
+  #view_stock_box1{
+    height:150px;
   }
+  #view_stock_box2{
+    height:20px;
+  }
+  #view_stock_box3{
+    height:140px;
+  }
+  #view_stock_box4{
+    height:39%;
+  }
+
   .jheader {
     width:100%;
   }

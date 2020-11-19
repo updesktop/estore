@@ -142,6 +142,10 @@ function getDataFromIDX(i,db2) {
           stockname:cursor.value.stockname,
           descrp:cursor.value.descrp,
           photo:cursor.value.photo, 
+          photo2:cursor.value.photo2, 
+          photo3:cursor.value.photo3,
+          photo4:cursor.value.photo4,
+          photo5:cursor.value.photo5,
           orient:cursor.value.orient,
           catno:cursor.value.catno,
           cost:cursor.value.cost,
@@ -252,12 +256,45 @@ async function putDataToIDX(i,aryDB,n){
     var jimg=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB[i]['photo'];   
     await JBE_BLOB(n,jimg).then(result => jimg=result);
     //alert('stock: '+jimg);
+    
+    var photo2=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB[i]['photo2'];  
+    if(aryDB[i]['photo2']!=''){      
+      await JBE_BLOB(n,photo2).then(result => photo2=result);
+    }else{
+      photo2='';
+    }
+
+    var photo3=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB[i]['photo3'];   
+    if(aryDB[i]['photo3']!=''){    
+      await JBE_BLOB(n,photo3).then(result => photo3=result);
+    }else{
+      photo3='';
+    }
+
+    var photo4=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB[i]['photo4'];   
+    if(aryDB[i]['photo4']!=''){    
+      await JBE_BLOB(n,photo4).then(result => photo4=result);
+    }else{
+      photo4='';
+    }
+
+    var photo5=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB[i]['photo5'];   
+    if(aryDB[i]['photo5']!=''){  
+      await JBE_BLOB(n,photo5).then(result => photo5=result);
+    }else{
+      photo5='';
+    }
+    
     ob = {
       id:i,
       stockno:aryDB[i]['stockno'],
       stockname:aryDB[i]['stockname'],
       descrp:aryDB[i]['descrp'],
       photo:jimg,
+      photo2:photo2,
+      photo3:photo3,
+      photo4:photo4,
+      photo5:photo5,
       orient:aryDB[i]['orient'],
       catno:aryDB[i]['catno'],
       cost:aryDB[i]['cost'],
@@ -265,12 +302,15 @@ async function putDataToIDX(i,aryDB,n){
       bal:aryDB[i]['bal'],
       promo:aryDB[i]['promo']
     };        
+    /*
     var v_mcode=aryDB[i]['stockno'];    
     var v_mname=aryDB[i]['stockname']; 
     var v_mprice=aryDB[i]['price']; 
     var v_mphoto=jimg;
 
     v_mphoto='data:image/png;base64,' + btoa(v_mphoto);
+    */
+
     /*
     var debug_dtl=
         '<div id="dd_code'+v_mcode+'" style="margin:1%;width:98%;height:110px;border:1px solid black;background:white;">'+

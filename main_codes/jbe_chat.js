@@ -67,7 +67,7 @@ function sendMsg(){
   if(CURR_AXTYPE>0){ v_sender=1; v_admin=CURR_USER; }
   
   var msg=document.getElementById('txtMsg').value;
-  //alert(thisFile);  
+  
   var newName='';
   var vDate=new Date();  
   var vTime = vDate.toLocaleTimeString('it-IT');  
@@ -79,8 +79,8 @@ function sendMsg(){
 
   var targetDIR=JBE_API+'app/'+CURR_SITE+'/upload/chat/';
   
-  if(thisFile){      
-    newName = trano + '.jpg';//+getExt(thisFile.name);    
+  if(THISFILE[0]){      
+    newName = trano + '.jpg';
     document.getElementById('pre_img').src='gfx/jimage.png';   
   }  
   
@@ -106,15 +106,15 @@ function sendMsg(){
       document.getElementById('txtMsg').value='';
       document.getElementById('pre_img').src='../../main_gfx/jimage.png';
 
-      if(thisFile){ 
+      if(THISFILE[0]){ 
         let ob = [
           { "div":trano }
         ];
-        uploadNOW(thisFile,newName,targetDIR,ob); 
+        uploadNOW(THISFILE[0],newName,targetDIR,ob); 
       }  
       
       newName='';
-      thisFile='';
+      THISFILE[0]='';
     })
     .catch(function (error) {
       console.log(error);
@@ -322,7 +322,7 @@ function mnu_chat(){
         '<input id="txtMsg" type="text" value="" style="display:block;float:right;height:100%;width:75%;margin-left:1%;" />'+
         '<input type="file" id="up_img" name="up_img" hidden="hidden" />'+
         '<div id="custom-img" style="display:block;float:right;cursor:pointer;height:100%;width:auto;background:white;">'+
-          '<img id="pre_img" name="pre_img" data-img="" onclick="JBE_PICK_IMAGE(up_img.id,pre_img.id)" src="../../main_gfx/jimage.png" style="height:100%;width:40px;" />'+
+          '<img id="pre_img" name="pre_img" data-img="" onclick="JBE_PICK_IMAGE(0,up_img.id,pre_img.id)" src="../../main_gfx/jimage.png" style="height:100%;width:40px;" />'+
         '</div>'+
       '</div>'+
   

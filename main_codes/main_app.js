@@ -1,3 +1,11 @@
+var THISFILE=[];
+THISFILE[0]=null;
+THISFILE[1]=null;
+THISFILE[2]=null;
+THISFILE[3]=null;
+THISFILE[4]=null;
+var JBE_EMPTY_IMG='../../main_gfx/jimg_error.png';
+
 function start_app(){
 	//return;
   allow_start(false);
@@ -75,17 +83,9 @@ function showOnline(){
 
 function showOffline(){    
   JBE_ONLINE=false;
-  dispMenu(true,'mnu_main');    
-  /*
-     for(var i=0;i<JBE_STORE_IDX.length;i++){
-      //if(!vmode && JBE_STORE_IDX[i]['init'] == 0) { continue; }
-      //if(parseInt(JBE_STORE_IDX[i]['init']) != vmode) { continue; }
-      alert(JBE_STORE_IDX[i]['flename']+' = '+JBE_STORE_IDX[i]['numrec']);    
-    }
-    */
+  dispMenu(true,'mnu_main'); 
   getAllDataFromIDX(0);
-  //showSystem();
-  
+    
   document.getElementById('jtime').innerHTML='OFFLINE';
   document.getElementById('div_bar').style.display='block';  
 
@@ -460,7 +460,7 @@ function showSystem(){
 
 function imgOnError(dv){	  
   dv.onerror=null;
-  dv.src="../../main_gfx/jcancel.png";
+  dv.src="../../main_gfx/jimg_error.png";
 }
 
 function showCategories(){  
@@ -487,13 +487,13 @@ function showCategories(){
     //alert('catno code: '+v_mcode+' vs '+cat[i]['catno']);
     dtl=dtl+      
       '<div onclick="view_dtl_cat(&quot;'+v_mcode+'&quot;)" class="class_items" style="float:left;text-align:center;width:94px;height:46%;margin-top:1%;margin-left:1%;padding:5px;background:none;">'+      
-        '<div style="position:relative;height:75%;width:100%;border-radius:10px;border:1px solid lightgray;background:none;">'+
+        '<div style="position:relative;height:70%;width:100%;border-radius:10px;border:1px solid lightgray;background:none;">'+
           '<div class="class_center_div">'+          
             '<img id="ci_img'+v_mcode+'" src="'+v_mphoto+'" title="'+v_mcode+'" class="asyncImage" onerror="imgOnError(this)" alt="category image" style="height:auto;max-height:100%;width:auto;max-width:100%;border-radius:8px;background:none;"/>'+
           '</div>'+
         '</div>'+
-        '<div style="height:25%;width:100%;">'+
-          '<div style="width:100%;height:auto;max-height:70%;font-size:11px;overflow-x:hidden;overflow-y:auto;color:black;background:none;">'+v_mname+'</div>'+
+        '<div style="height:30%;width:100%;">'+
+          '<div style="width:100%;height:auto;max-height:100%;font-size:11px;overflow-x:hidden;overflow-y:auto;color:black;background:none;">'+v_mname+'</div>'+
         '</div>'+
       '</div>';
       
@@ -513,7 +513,7 @@ function showItems(){
   var n = new Date().toLocaleTimeString('it-IT');  
   CURR_BACKER=0;
   var aryDB = DB_STOCK;   
-  aryDB.sort(sortByMultipleKey(['catno','stockname']));    
+  aryDB.sort(sortByMultipleKey(['catno'],['stockname']));    
   //aryDB.sort(sortByMultipleKey(['stockname']));    
   var dtl='<div id="scroll_items" style="width:100%;height:auto;overflow-x:hidden;overflow-y:auto;background:none;">';  
   var debug_dtl='';  

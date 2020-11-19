@@ -201,12 +201,20 @@ function getCharges(trano,i){
 }
 
 function saveCharges(trano,i){
-	//alert(trano);
+	//alert(document.getElementById('txAmount'+i).innerHTML);
 	var v_charge=parseFloat(document.getElementById('inpCharge').value);     
-	var v_amount=parseFloat(document.getElementById('txAmount'+i).innerHTML);     
+	var v_amount=parseFloat(jnumber(document.getElementById('txAmount'+i).innerHTML));     
 	if(!v_charge){ v_charge=0; }
-    //alert(v_charge);
-	var tot=v_charge+v_amount;
+	var tot=(v_charge+v_amount);
+	/*
+	alert(
+      'v_amount: '+v_amount+'\n'+
+      'v_charge: '+v_charge+'\n'+
+      'tot: '+tot
+    );
+    return;
+    */ 
+	
 	showProgress(true);  
     axios.post(JBE_API+'z_order.php', { clientno:CURR_CLIENT, request: 32,    
       charge:v_charge,    
@@ -228,10 +236,11 @@ function saveCharges(trano,i){
 }
 
 function ret_items_order(trano){
-  //  alert('ret_items '+trano);
+  //alert('ret_items '+trano);
   var dtl='';
   var n = new Date().toLocaleTimeString('it-IT'); 
   var aryORDER=DB_ORDER2;
+  //alert('aryORDER: '+aryORDER.length);
   for(var i=0;i<aryORDER.length;i++){          
     if(aryORDER[i]['trano'] != trano) { continue; }    
 
@@ -242,6 +251,7 @@ function ret_items_order(trano){
     var v_qty=aryORDER[i]['qty'];  
     //var v_photo='upload/'+JBE_GETFLD('photo',DB_STOCK,'stockno',v_code)+'?'+n;   
     var v_photo=JBE_API+'app/'+CURR_SITE+'/upload/'+JBE_GETFLD('photo',DB_STOCK,'stockno',v_code)+'?'+n;   
+    //alert(v_photo);
     dtl+=
       
       '<div style="height:60px;width:98%;border:1px solid lightgray;margin:1%;margin-bottom:0px;padding:5px;background:whitesmoke;">'+                  

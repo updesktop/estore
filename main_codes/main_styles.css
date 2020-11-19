@@ -97,6 +97,20 @@ body {
   width:800px;height:100%;
   margin:0 auto;
 }
+
+#view_stock_box1{
+  height:40%;
+}
+#view_stock_box2{
+  height:3%;
+}
+#view_stock_box3{
+  height:17%;
+}
+#view_stock_box4{
+  height:32%;
+}
+
 .class_notif{    
   display: none; 
   float:right;height:100%;width:40px;margin-left:0px;

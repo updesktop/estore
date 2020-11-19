@@ -1,3 +1,5 @@
+var aryPix=[];
+
 function mnu_promo(){
   var jmenu=
     '<div style="width:100%;height:100%;background:none;">'+
@@ -156,35 +158,58 @@ function view_dtl_stock(f_showComm,stockno,pg){
 
   if(CURR_AXTYPE > 0){ mnu_view_dtl_owner(); }; 
   var n = new Date().toLocaleTimeString('it-IT');
+  var aryDB=JBE_GETARRY(DB_STOCK,'stockno',stockno);
   
-  var catno=JBE_GETFLD('catno',DB_STOCK,'stockno',stockno); 
-  var stockname=JBE_GETFLD('stockname',DB_STOCK,'stockno',stockno);  
-  var descrp=JBE_GETFLD('descrp',DB_STOCK,'stockno',stockno);  
-  var price=formatNumber2(JBE_GETFLD('price',DB_STOCK,'stockno',stockno));      
-  //var photo=JBE_GETFLD('photo',DB_STOCK,'stockno',stockno);  
+  var stockname=aryDB['stockname'];
+  var descrp=aryDB['descrp'];
+  var price=formatNumber2(aryDB['price']);      
+  /*  
   if(JBE_ONLINE){
-    var photo='upload/'+JBE_GETFLD('photo',DB_STOCK,'stockno',stockno)+'?'+n;   
+    var photo=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB['photo']+'?'+n;
   }else{
-    var photo='data:image/png;base64,' + btoa(JBE_GETFLD('photo',DB_STOCK,'stockno',stockno));
-  }      
-  photo=document.getElementById('si_img'+stockno).src;
-  
+    var photo='data:image/png;base64,' + btoa(aryDB['photo']);  
+  }
+  */   
+  aryPix=[];
+  //aryPix[0]=photo;
+  if(JBE_ONLINE){
+    aryPix[0]=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB['photo']+'?'+n;
+  }else{
+    aryPix[0]='data:image/png;base64,' + btoa(aryDB['photo']);  
+  }
+
+
+
   var jjstyle='height:auto;max-height:100%;width:auto;max-width:100%;';  
   
   var dtl=    
     '<div id="div_view_stock" class="xclass_items" data-stockno="'+stockno+'" style="height:100%;font-size:14px;padding:10px;color:gray;overflow:auto;background:whitesmoke;">'+
 
-      '<div id="img_view_stock" style="position:relative;height:600px;width:100%;text-align:center;border:0px solid lightgray;background:white;">'+
-        '<div class="class_center_div">'+
-          '<img id="view_photo_stock" class="asyncImage" data-page='+pg+' style="'+jjstyle+'" src="'+photo+'" onclick="JBE_ZOOM(&quot;'+photo+'&quot;,&quot;&quot;)" alt="" />'+        
+      '<div id="view_stock_box1" data-pos=1 data-max=0 style="position:relative;width:100%;text-align:center;border:0px solid lightgray;background:white;">'+
+  
+        '<div style="float:left;width:10%;height:100%;padding:12% 0 0 0;background:none;">'+
+          '<img id="jPrev" onclick="slyder(-1)" style="width:100%;border-radius:50%;padding:2px;background:lightgray;" src="../../main_gfx/jPrev.png" alt="" />'+        
         '</div>'+
-      '</div>'+ 
 
-      '<div style="margin-top:0px;width:100%;height:auto;padding:0px;font-size:20px;font-weight:normal;color:black;background:white;">'+
+        '<div style="float:left;position:relative;height:100%;width:80%;text-align:center;border:0px solid lightgray;background:white;">'+
+          '<div class="class_center_div">'+
+            '<img id="view_photo_stock" class="asyncImage" data-page='+pg+' style="'+jjstyle+'" src="'+aryPix[0]+'" onclick="JBE_ZOOM(this.src,&quot;&quot;)" alt="" />'+        
+          '</div>'+
+        '</div>'+ 
+
+        '<div style="float:left;width:10%;height:100%;padding:12% 0 0 0;background:none;">'+
+          '<img id="jNext" onclick="slyder(1)" style="width:100%;border-radius:50%;padding:2px;background:lightgray;" src="../../main_gfx/jNext.png" alt="" />'+      
+        '</div>'+
+        
+        '<div id="jTextSlyder" style="position:absolute;bottom:0px;right:0px;width:auto;height:20px;text-align:right;background:none;"></div>'+  
+
+      '</div>'+
+
+      '<div id="view_stock_box2" style="margin-top:0px;width:100%;text-align:left;padding:0px;font-size:14px;font-weight:normal;color:black;background:whitesmoke;">'+
           stockname+
       '</div>'+ 
       
-      '<div style="margin-top:15px;width:100%;height:auto;padding:0px;background:none;">'+
+      '<div id="view_stock_box3" style="margin-top:5px;width:100%;padding:0px;background:none;border:0px solid red;">'+
         '<div style="width:100%;height:17px;padding:0px;background:none;">'+
           '<div style="float:left;width:50%;height:100%;font-weight:bold;color:black;">Product Details</div>'+
           '<div style="float:right;width:50%;height:100%;text-align:right;color:red;">&#8369; '+price+'</div>'+        
@@ -198,43 +223,74 @@ function view_dtl_stock(f_showComm,stockno,pg){
         '</div>'+
       '</div>'+
       
-      '<div style="display:'+vdisp+';margin-top:5px;width:100%;height:auto;padding:0px;background:none;">'+
+      '<div id="view_stock_box4" style="display:'+vdisp+';margin-top:5px;width:100%;padding:0px;background:white;border:0px solid red;">'+
 
-        '<div style="width:100%;height:17px;padding:0px;font-weight:bold;color:black;background:none;">Comments</div>'+  
-        '<div id="dtl_comment" style="width:100%;height:auto;font-size:12px;overflow:auto;padding:0px;background:none;">'+
-        '</div>'+ 
-  
-        '<div id="dv_stock" style="width:100%;height:30px;margin-top:5px;padding:3px;background:'+JBE_CLOR+';">'+
-          '<input id="vkoment" type="text" style="float:left;width:78%;height:100%;" value="" />'+
-          '<input type="button" onclick="post_comm(vkoment.value,&quot;'+stockno+'&quot;)" style="float:right;width:20%;height:100%;" value="Post" />'+
+        '<div style="width:100%;height:18%;padding:0px;font-weight:bold;color:black;background:none;">Comments</div>'+  
+        '<div id="dtl_comment" style="width:100%;height:82%;font-size:12px;overflow:auto;padding:0px;overflow:auto;background:none;">'+
         '</div>'+ 
 
       '</div>'+ 
-      
+  
     '</div>';  
     
+  //alert('WATCH: '+dtl);
   openView(dtl,'Item View','close_view_dtl_stock|'+pg);
-  var vw_stock=H_BODY/3;
-  //var vw_descrp=vw_stock-130; vw_descrp=0;
-  //var vw_comment=H_BODY-(vw_stock+vw_descrp+175);
-
-  //alert(document.getElementById('puta').style.innerWidth);
   
-  document.getElementById('img_view_stock').style.height=vw_stock+'px';
-  //document.getElementById('dtl_descrp').style.height=vw_descrp+'px';
-  //document.getElementById('dtl_comment').style.height=vw_comment+'px';
+  var bx1=H_BODY/4;
+  if(!JBE_MOBILE){ bx1=300; }
+  var bx2=20;
+  var bx3=140;
+  var bx4=H_BODY-(bx1+bx2+bx3+60);
+  
+  document.getElementById('view_stock_box1').style.height=bx1+'px';
+  document.getElementById('view_stock_box2').style.height=bx2+'px';
+  document.getElementById('view_stock_box3').style.height=bx3+'px';
+  document.getElementById('view_stock_box4').style.height=bx4+'px';
 
   var dtl2='<div style="display:none;height:100%;background:orange;">XXX</div>';
   document.getElementById('cap_viewMid'+pg).innerHTML=dtl2;  
   
-  if(JBE_ONLINE && (CURR_USER != '' && CURR_USER != null)){
-    document.getElementById('dv_stock').style.pointerEvents='auto';
-  }else{
-    document.getElementById('dv_stock').style.pointerEvents='none';
-    //showMenu('mnu_offline');
-  }
-  
   disp_comm(stockno);
+  
+  var maxctr=1;
+  for(var i=2;i<=5;i++){
+    //alert('kami '+i+' = '+aryDB['photo'+i]);
+    if(aryDB['photo'+i]==''){ continue; }
+    //alert('sss '+maxctr);
+    if(JBE_ONLINE){
+      aryPix[maxctr]=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB['photo'+i]+'?'+n;
+    }else{
+      aryPix[maxctr]='data:image/png;base64,' + btoa(aryDB['photo'+i]);  
+    }    
+    maxctr++;    
+  }
+  //alert('maxctr: '+maxctr);
+  
+  document.getElementById('view_stock_box1').setAttribute('data-max',maxctr);
+  document.getElementById('jTextSlyder').innerHTML='1/'+maxctr;
+  /*
+  for(var i=0;i<aryPix.length;i++){
+    alert('ako '+i+' = '+aryPix[i]);
+  }
+  */
+}
+
+function slyder(v){  
+  var curMax=parseInt(document.getElementById('view_stock_box1').getAttribute('data-max'));
+  var curPos=parseInt(document.getElementById('view_stock_box1').getAttribute('data-pos'));
+  //alert('old pos '+curPos);
+  if(v > 0){
+    curPos++;
+    if(curPos>curMax){ curPos=1; }
+  }
+  if(v < 0){
+    curPos--;
+    if(curPos <= 0){ curPos=curMax; }
+  }
+  //alert('xcurPos '+curPos+' = '+aryPix[curPos-1]);
+  document.getElementById('jTextSlyder').innerHTML=curPos+'/'+curMax;  
+  document.getElementById('view_stock_box1').setAttribute('data-pos',curPos);  
+  document.getElementById('view_photo_stock').src=aryPix[(curPos-1)];
 }
 
 function close_view_dtl_stock(m){
@@ -250,7 +306,7 @@ function close_view_dtl_stock(m){
 
 function disp_comm(stockno){
   var aryDB = DB_COMMENT;
-  var dtlComm='';
+  var dtlComm='' //'<div style="width:100%;height:80%;padding:5px;border:1px solid blue;">';
   for(i=0;i<aryDB.length;i++){       
 
     if(aryDB[i]['stockno'] != stockno) { continue; }
@@ -260,32 +316,43 @@ function disp_comm(stockno){
       v_dele='block';
     }
     var v_mphoto=JBE_API+'app/'+CURR_SITE+'/upload/users/'+aryDB[i]['usercode']+'.jpg?'+n;  
-    dtlComm=dtlComm+   
+    dtlComm+=
       
-      '<div style="width:98%;height:auto;margin-left:2%;text-align:left;font-size:14px;margin-top:10px;background-color:none;padding:0px;">'+ 
-        '<div style="float:left;width:100%;height:30px;margin-top:10px;background:none;">'+
-          '<img src="'+v_mphoto+'" style="float:left;height:30px;width:30px;border-radius:50%;border:1px solid gray;background:none;"/>'+
-          '<div style="float:left;margin-left:5px;height:30px;width:auto;padding:3px 0 0 0;color:black;background:none;"/>'+aryDB[i]['username']+'</div>'+
+      '<div style="width:100%;height:auto;min-height:70px;text-align:left;font-size:14px;margin-bottom:5px;background-color:none;border:0px solid green;">'+ 
+      
+        '<div style="float:left;width:100%;height:30px;margin-top:0px;background:none;">'+
+          '<img src="'+v_mphoto+'" style="float:left;height:100%;width:30px;border-radius:50%;border:1px solid gray;background:none;"/>'+
+          '<div style="float:left;margin-left:5px;height:100%;width:auto;padding:3px 0 0 0;color:black;background:none;"/>'+aryDB[i]['username']+'</div>'+
         '</div>'+     
 
-        '<div style="float:left;margin-top:0px;width:100%;height:auto;padding:0.5%;background-color:none;">'+          
-          '<div style="float:left;width:80%;margin-left:10px;border-radius:5px;padding:1%;background-color:lightgray;">'+              
-             '<div>'+aryDB[i]['comment']+'</div>'+
+        '<div style="float:left;margin-top:0px;width:100%;height:40px;max-height:100%;padding:1px;background-color:none;">'+          
+          '<div style="float:left;width:80%;height:100%;overflow:auto;margin-left:10px;border-radius:5px;padding:1px;background-color:lightgray;">'+              
+             aryDB[i]['comment']+
           '</div>'+ 
-          '<div onclick="del_comm('+aryDB[i]['id']+',&quot;'+stockno+'&quot;)" style="display:'+v_dele+';float:left;width:20px;height:20px;margin-left:5px;font-size:16px;text-align:center;border-radius:5px;padding:1px;color:white;background-color:red;">'+              
-             '<div>x</div>'+
-          '</div>'+                        
+          '<button onclick="del_comm('+aryDB[i]['id']+',&quot;'+stockno+'&quot;)" style="display:'+v_dele+';float:right;width:25px;height:25px;text-align:center;border-radius:5px;border:1px solid white;color:white;background-color:red;">X</button>'+                        
         '</div>'+
-      '</div>';
-
-
-      
+        
+      '</div>';    
   }
+  dtlComm+=
+     // '</div>'+
+      '<div id="dv_stock" style="width:100%;height:30px;margin-top:10px;padding:3px;background:'+JBE_CLOR+';">'+
+        '<input id="vkoment" type="text" style="float:left;width:78%;height:100%;" value="" />'+
+        '<input type="button" onclick="post_comm(vkoment.value,&quot;'+stockno+'&quot;)" style="float:right;width:20%;height:100%;" value="Post" />'+
+      '</div>';
+      
   document.getElementById('dtl_comment').innerHTML=dtlComm;
 
   var eldiv = document.getElementById("dtl_comment");  
   eldiv.innerHTML=dtlComm;  
   eldiv.scrollTop = eldiv.scrollHeight;
+  
+  if(JBE_ONLINE && (CURR_USER != '' && CURR_USER != null)){
+    //document.getElementById('dv_stock').style.pointerEvents='auto';
+    document.getElementById('dv_stock').style.display='block';
+  }else{
+    document.getElementById('dv_stock').style.display='none';
+  }
 }
 
 function post_comm(v,stockno){

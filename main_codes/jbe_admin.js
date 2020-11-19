@@ -331,7 +331,7 @@ function fm_profile(vmode){
                 'height:30px;width:30px;padding:3px;background:#434343;">'+
             
             '<input type="file" id="id_efile'+vmode+'" data-sel=0 name="id_efile'+vmode+'" hidden="hidden" />'+
-            '<img src="../../main_gfx/jcam.png" onclick="JBE_PICK_IMAGE(id_efile'+vmode+'.id,img_eavatar'+vmode+'.id)" style="width:95%;"/>'+
+            '<img src="../../main_gfx/jcam.png" onclick="JBE_PICK_IMAGE(0,id_efile'+vmode+'.id,img_eavatar'+vmode+'.id)" style="width:95%;"/>'+
           '</div>'+
         '</div>'+
 
@@ -491,14 +491,14 @@ function save_profile(){
       }else{
         DB_USER=response.data;
         snackBar('Signing Up is successful...');
-        if(thisFile){
-          uploadNOW(thisFile,photo,targetDIR,'');               
+        if(THISFILE[0]){
+          uploadNOW(THISFILE[0],photo,targetDIR,'');               
         }
       }
     }else{
       DB_USER=response.data;
-      if(thisFile){
-        uploadNOW(thisFile,photo,targetDIR,ob);
+      if(THISFILE[0]){
+        uploadNOW(THISFILE[0],photo,targetDIR,ob);
       }
       snackBar('User Updated...');
       update_curr_user(usercode,n);

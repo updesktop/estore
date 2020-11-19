@@ -135,7 +135,7 @@ function add_edit_cat(m,c){
           '</div>'+
           '<div style="width:100%;height:15%;text-align:center;padding:2px;background:none;">'+
             '<input type="file" id="id_file_cat" data-sel=0 name="id_file_cat" hidden="hidden" />'+                    
-            '<button type="button" onclick="JBE_PICK_IMAGE(id_file_cat.id,prev_photo_cat.id)" id="custom_button_c2" style="width:100px;height:100%;text-align:center;border-radius:10px;border:1px solid black;color:'+JBE_TXCLOR2+';background:'+JBE_CLOR2+';">'+
+            '<button type="button" onclick="JBE_PICK_IMAGE(0,id_file_cat.id,prev_photo_cat.id)" id="custom_button_c2" style="width:100px;height:100%;text-align:center;border-radius:10px;border:1px solid black;color:'+JBE_TXCLOR2+';background:'+JBE_CLOR2+';">'+
               'Browse'+
             '</button>'+          
           '</div>'+
@@ -217,6 +217,10 @@ function saveCatRec(){
   if(thisFile){      
     newName = catno+'.jpg';      
   }  
+
+  if(THISFILE[0]){      
+    newName = catno+'.jpg';      
+  }
     
   var orient=getImgOrient('prev_photo_cat');  
   var targetDIR=JBE_API+'app/'+CURR_SITE+'/upload/';
@@ -239,12 +243,12 @@ function saveCatRec(){
       //document.getElementById('photo_cat_'+catno).src=photo;
       //document.getElementById('descrp_cat_'+catno).innerHTML=descrp;      
     }     
-    if(thisFile){
+    if(THISFILE[0]){
       let ob = [
         { "div":"photo_cat_"+catno }
       ];
       //var v_mphoto='../../app/'+CURR_SITE+'/upload/'+cat[i]['photo']+'?'+n;   
-      uploadNOW(thisFile,newName,targetDIR,ob); 
+      uploadNOW(THISFILE[0],newName,targetDIR,ob); 
       showCategories();
     }      
     if(req==2){ //add      
@@ -283,17 +287,21 @@ function delCat(){
   }
   
   //var v_banner=JBE_API+'app/'+CURR_SITE+'/gfx/banner.jpg?'+n;  
-  var ddir='app/'+CURR_SITE+'/upload/';
-  
+  //var ddir='app/'+CURR_SITE+'/upload/';
+  var ddir=JBE_API+'app/'+CURR_SITE+'/upload/';
+  var delfle=JBE_API+'app/'+CURR_SITE+'/upload/'+photo;
+  alert(delfle);
   MSG_SHOW(vbYesNo,"CONFIRM: ",vdel+"Are you sure to Delete this Record?",function(){
     showProgress(true);      
     axios.post(JBE_API+'z_cat.php', { clientno:CURR_CLIENT, request: 4,    
       photo:photo,    
       catno:catno,
-      ddir:ddir
+      ddir:ddir,
+      delfle:delfle
     },JBE_HEADER)
     .then(function (response) {     
       console.log(response.data); 
+      alert(response.data); 
       DB_CAT=response.data;    
       JBE_CLOSEBOX();
       //fm_stock('ALL');

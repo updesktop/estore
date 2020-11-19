@@ -372,9 +372,10 @@ function save_order(){
   },JBE_HEADER)
   .then(function (response) {     
     showProgress(false);
-    alert('bantay: '+response.data.length);
+    //alert('bantay: '+response.data.length);
     console.log(response.data);
-    DB_ORDER=response.data;
+    DB_ORDER=response.data[0];
+    DB_ORDER2=response.data[1];
     snackBar('Order is placed');
     showMainPage();
   })    
