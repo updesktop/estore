@@ -1,4 +1,4 @@
-const cacheName = 'ba_081732';
+const cacheName = 'aav_001732';
 const staticAssets = [
   './',
   './index.html',
@@ -19,8 +19,8 @@ const staticAssets = [
   '../../main_codes/jbe_db.js',     '../../main_codes/jbe_map.js',  
   '../../main_codes/jbe_notif.js',  '../../main_codes/jbe_order.js',  
   '../../main_codes/jbe_pages.js',  '../../main_codes/jbe_stock.js',  
-  '../../main_codes/jbe_sys.js',    '../../main_codes/jbelib.min.js',     
-  '../../main_codes/main_app.js',   '../../main_codes/main_lib.min.js', 
+  '../../main_codes/jbe_sys.js',    '../../main_codes/jlib_lib.js',     
+  '../../main_codes/main_app.js',   '../../main_codes/jlib_main.js', 
 
   '../../main_codes/main_styles.css',   '../../main_codes/mobile.css',
   
@@ -34,7 +34,10 @@ const staticAssets = [
   '../../main_gfx/jchat.png',     '../../main_gfx/jdele.png',  
   '../../main_gfx/jedit.png',     '../../main_gfx/jham.png',   
   '../../main_gfx/jhome.png',     '../../main_gfx/jimage.png', 
-  '../../main_gfx/jnotif.png',    '../../main_gfx/jproduct.png', 
+  '../../main_gfx/jimg_error.png',     '../../main_gfx/jNext.png', 
+  
+  '../../main_gfx/jnotif.png',    '../../main_gfx/jPrev.png', 
+  '../../main_gfx/jproduct.png', 
   '../../main_gfx/jpromo.png',    '../../main_gfx/jpurchase.png',  
   '../../main_gfx/jrefresh.png',  '../../main_gfx/jsave.png',
   '../../main_gfx/jsearch.png',   '../../main_gfx/jsend.png',
