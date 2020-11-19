@@ -430,19 +430,31 @@ function saveStock(){
 function delStock(){  
   var stockno=document.getElementById('div_main_stock').getAttribute('data-stockno');
   var catno_first=document.getElementById('div_sel_cat').value;  
-  var photo=JBE_GETFLD('photo',DB_STOCK,'stockno',stockno);  
-  var ddir=JBE_API+'app/'+CURR_SITE+'/upload/';
+  var aryDB=JBE_GETARRY(DB_STOCK,'stockno',stockno);
+  
+  var photo=aryDB ['photo'];
+  var photo2=aryDB ['photo2'];
+  var photo3=aryDB ['photo3'];
+  var photo4=aryDB ['photo4'];
+  var photo5=aryDB ['photo5'];
+  
+  var ddir='app/'+CURR_SITE+'/upload/';
   
   MSG_SHOW(vbYesNo,"CONFIRM: ","Are you sure to Delete this Stock?",function(){
     showProgress(true);  
     axios.post(JBE_API+'z_stock.php', { clientno:CURR_CLIENT, request: 4,    
-      photo:photo,    
+      photo:photo,
+      photo2:photo2,
+      photo3:photo3,
+      photo4:photo4,
+      photo5:photo5,
       stockno: stockno,
       ddir:ddir
     },JBE_HEADER)
     .then(function (response) {     
       console.log(response.data); 
       DB_STOCK=response.data;  
+      alert(response.data);
       JBE_CLOSEBOX();
       showProgress(false);      
       dispAllStocks(catno_first);    

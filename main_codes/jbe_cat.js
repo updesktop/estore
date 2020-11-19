@@ -96,16 +96,7 @@ function add_edit_cat(m,c){
   thisFile=null;
   
   var catno=(new Date()).toISOString().slice(0, 19);      
-    catno = 'C_'+catno.replace(/-/g, "").replace(/:/g, "").replace("T", "-");    
-    //alert(catno);
-/*
-  var vDate=new Date();  
-  var vTime = vDate.toLocaleTimeString('it-IT'); 
-  vDate = new Date(vDate.getTime() - (vDate.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];  
-  catno='C_'+vDate+'_'+vTime;  
-  catno = catno.replace(/-/g, "").replace(/:/g, "").replace("T", "-");    
-  alert(catno);
-*/
+  catno = 'C_'+catno.replace(/-/g, "").replace(/:/g, "").replace("T", "-");    
 
   var descrp='';  
   var photo=JBE_DEF_IMG;
@@ -165,7 +156,7 @@ function add_edit_cat(m,c){
         '<span class="footer_fonts">Save</span>'+
       '</div>'+
       
-      '<div id="btn_cat2_dele" onclick="delCat()" style="float:left;width:25%;height:100%;color:'+JBE_TXCLOR1+';background:none;">'+        
+      '<div id="btn_cat2_dele" onclick="delCat()" style="float:left;width:50%;height:100%;color:'+JBE_TXCLOR1+';background:none;">'+        
         '<div class="footer_gfxs">'+
           '<img src="../../main_gfx/jdele.png"  style="height:100%;" alt="del image" />'+
         '</div>'+
@@ -287,21 +278,19 @@ function delCat(){
   }
   
   //var v_banner=JBE_API+'app/'+CURR_SITE+'/gfx/banner.jpg?'+n;  
-  //var ddir='app/'+CURR_SITE+'/upload/';
-  var ddir=JBE_API+'app/'+CURR_SITE+'/upload/';
-  var delfle=JBE_API+'app/'+CURR_SITE+'/upload/'+photo;
-  alert(delfle);
+  var ddir='app/'+CURR_SITE+'/upload/';
+  //var ddir=JBE_API+'app/'+CURR_SITE+'/upload/';
+
   MSG_SHOW(vbYesNo,"CONFIRM: ",vdel+"Are you sure to Delete this Record?",function(){
     showProgress(true);      
     axios.post(JBE_API+'z_cat.php', { clientno:CURR_CLIENT, request: 4,    
       photo:photo,    
       catno:catno,
-      ddir:ddir,
-      delfle:delfle
+      ddir:ddir
     },JBE_HEADER)
     .then(function (response) {     
       console.log(response.data); 
-      alert(response.data); 
+      //alert(response.data); 
       DB_CAT=response.data;    
       JBE_CLOSEBOX();
       //fm_stock('ALL');
