@@ -13,16 +13,17 @@
 <link rel="manifest" href="./manifest.webmanifest">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
-<!-- ********************* -->
+<!-- ****************************************************************** -->
+<!-- ****************************************************************** -->
 <title>E-STORE</title>
 <script>
   var CURR_CLIENT='ESTORE';
   var CURR_SITE='estore';   
-
   var JBE_API=window.location.origin+'/api/';  
-  JBE_API='https://aidfimonitoring.com/api/';  
+  //JBE_API='https://aidfimonitoring.com/api/';  
 </script>
-<!-- ********************* -->
+<!-- ****************************************************************** -->
+<!-- ****************************************************************** -->
 
 </head>
 
@@ -63,7 +64,7 @@
       </div>				
     </div>
     <div id="modal-footer" class="modal-footer" style="color:white;text-align:right;height:auto;">
-      EnadSys Dialog Ver 1.01 Copyright (c) 2018
+      HAT Software Dialog Ver 1.01 Copyright (c) 2018
     </div>
   </div>	
 </div>  
@@ -95,7 +96,7 @@
               height:30px;width:30px;padding:3px;background:#434343;">              
           
           <input type="file" id="id_file" data-sel=0 name="id_file" hidden="hidden" />
-          <img src="../../main_gfx/jcam.png" onclick="JBE_PICK_IMAGE(id_file.id,img_avatar.id)" style="width:95%;"/>
+          <img src="../../main_gfx/jcam.png" onclick="JBE_PICK_IMAGE(0,id_file.id,img_avatar.id)" style="width:95%;"/>
         </div>
       </div>
       
@@ -199,7 +200,7 @@
 	      </div>
 	
 	      <div style="width:100%;height:auto;text-align:center;margin-top:5px;margin-bottom:5px;border-radius:2px;padding:2px;color:white;background:#404040;">        
-	        <div style="font-size:10px;">Jeffrey B. Enad  &copy; Copyright 2020 Bacolod City. All rights reserved.</div>
+	        <div style="font-size:10px;">HAT Software &copy; Copyright 2020 Bacolod City. All rights reserved.</div>
 	      </div>
       
     </div>
@@ -214,7 +215,7 @@
 
     <div class="class_notif" style="display:block;right:10px;width:auto;height:65px;background:none;">      
       <div style="float:right;height:50px;width:50px;border-radius:50%;border:2px solid white;background:green;" alt="ai" >
-        <img id="bar_avatar" src="../../main_gfx/avatar.png" onerror="imgOnError(this)" 
+        <img id="bar_avatar" src="../../main_gfx/avatar.png" onclick="jeff()" onerror="imgOnError(this)" 
             style="float:right;height:100%;width:100%;border-radius:50%;border:1px solid black;background:none;" alt="ai" >
       </div>
       <div id="logger" style="float:right;width:100%;height:auto;text-align:right;padding:2px 0 0 0;font-size:11px;color:black;background:none;
@@ -468,10 +469,10 @@
 <script type='text/javascript' src='../../main_jslib/je_msg.js'></script>
 <script type='text/javascript' src='../../main_jslib/qrcode.min.js'></script>
 
-<script type='text/javascript'  src='../../main_codes/main_lib.min.js'></script>
-<script type='text/javascript'  src='../../main_codes/jbelib.min.js'></script>
-<!--script type='text/javascript'  src='../../main_codes/src_lib/main_lib.js'></script>
-<script type='text/javascript'  src='../../main_codes/src_lib/jbelib.js'></script-->
+<!--script type='text/javascript'  src='../../main_codes/main_lib.min.js'></script>
+<script type='text/javascript'  src='../../main_codes/jbelib.min.js'></script-->
+<script type='text/javascript'  src='../../main_codes/jlib_main.js'></script>
+<script type='text/javascript'  src='../../main_codes/jlib_lib.js'></script>
 
 <script type='text/javascript'  src='../../main_codes/jbe_db.js'></script>
 <script type='text/javascript'  src='../../main_codes/jbe_pages.js'></script>
@@ -506,7 +507,6 @@
 
   //alert('index: '+JBE_API+'\nOnline: '+navigator.onLine);  
   
-  var thisFile;
   var jbe_screen_mode=0;
   
   var JBE_CLOR='#0080ff'; 
@@ -611,7 +611,7 @@
     if (event.state) {
       if(f_MainPage){                
         refreshIDX();
-        MSG_SHOW(vbYesNo,"CONFIRM: ","Close the App?",function(){          
+        MSG_SHOW(vbYesNo,"CONFIRM: ","Close the App?",function(){                    
           window.history.go(0);
           f_reload=true;
         },function(){});                  
@@ -620,6 +620,16 @@
   })
   
   //=========START ENGINE=================
+  /*
+  fetch('client.json')
+    .then(response => response.json())
+    .then(data => {
+      CURR_CLIENT=data['client'];      
+      CURR_SITE=data['site'];  
+      document.title = data['title'];
+    }
+  );
+  */
 
   document.getElementById('wrapper').style.display='block';
   showProgress(false);
