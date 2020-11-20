@@ -1,4 +1,4 @@
-const cacheName = 'RUBY_173237';
+const cacheName = 'RUBY_1793237';
 const staticAssets = [
   './',
   './index.html',
