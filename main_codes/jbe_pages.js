@@ -205,7 +205,7 @@ function view_dtl_stock(f_showComm,stockno,pg){
 
       '</div>'+
 
-      '<div id="view_stock_box2" style="margin-top:0px;width:100%;text-align:left;padding:0px;font-size:14px;font-weight:normal;color:black;background:whitesmoke;">'+
+      '<div id="view_stock_box2" style="margin-top:0px;width:100%;text-align:center;padding:0px;font-size:14px;font-weight:normal;color:black;background:whitesmoke;">'+
           stockname+
       '</div>'+ 
       
