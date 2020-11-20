@@ -187,7 +187,7 @@ function view_dtl_stock(f_showComm,stockno,pg){
 
       '<div id="view_stock_box1" data-pos=1 data-max=0 style="position:relative;width:100%;text-align:center;border:0px solid lightgray;background:white;">'+
   
-        '<div style="float:left;width:10%;height:100%;padding:12% 0 0 0;background:none;">'+
+        '<div style="float:left;width:10%;height:100%;padding:65px 0 0 0;background:none;">'+
           '<img id="jPrev" onclick="slyder(-1)" style="width:100%;border-radius:50%;padding:2px;background:lightgray;" src="../../main_gfx/jPrev.png" alt="" />'+        
         '</div>'+
 
@@ -197,7 +197,7 @@ function view_dtl_stock(f_showComm,stockno,pg){
           '</div>'+
         '</div>'+ 
 
-        '<div style="float:left;width:10%;height:100%;padding:12% 0 0 0;background:none;">'+
+        '<div style="float:left;width:10%;height:100%;padding:65px 0 0 0;background:none;">'+
           '<img id="jNext" onclick="slyder(1)" style="width:100%;border-radius:50%;padding:2px;background:lightgray;" src="../../main_gfx/jNext.png" alt="" />'+      
         '</div>'+
         
@@ -236,7 +236,8 @@ function view_dtl_stock(f_showComm,stockno,pg){
   //alert('WATCH: '+dtl);
   openView(dtl,'Item View','close_view_dtl_stock|'+pg);
   
-  var bx1=H_BODY/4;
+  //var bx1=H_BODY/3;
+  var bx1=170;
   if(!JBE_MOBILE){ bx1=300; }
   var bx2=20;
   var bx3=140;
@@ -326,7 +327,7 @@ function disp_comm(stockno){
         '</div>'+     
 
         '<div style="float:left;margin-top:0px;width:100%;height:40px;max-height:100%;padding:1px;background-color:none;">'+          
-          '<div style="float:left;width:80%;height:100%;overflow:auto;margin-left:10px;border-radius:5px;padding:1px;background-color:lightgray;">'+              
+          '<div style="float:left;width:80%;height:100%;overflow:auto;margin-left:10px;border-radius:5px;padding:2px;background-color:lightgray;">'+              
              aryDB[i]['comment']+
           '</div>'+ 
           '<button onclick="del_comm('+aryDB[i]['id']+',&quot;'+stockno+'&quot;)" style="display:'+v_dele+';float:right;width:25px;height:25px;text-align:center;border-radius:5px;border:1px solid white;color:white;background-color:red;">X</button>'+                        

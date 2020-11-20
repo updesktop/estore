@@ -292,11 +292,9 @@ function update_price(v){
   //document.getElementById('inp_stock_price').value=formatNumber2(v);
 }
 
-
 function saveStock(){
   var vmode=parseInt(document.getElementById('div_solo_stock').getAttribute('data-new'));  
   var stockno=document.getElementById('div_solo_stock').getAttribute('data-stockno');
-  
   var aryDB=JBE_GETARRY(DB_STOCK,'stockno',stockno);
   
   var catno=document.getElementById('sel_stock').value;    
