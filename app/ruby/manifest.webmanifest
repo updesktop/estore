@@ -1,7 +1,7 @@
 {
       "name": "Ruby's Flower Gallery",
       "short_name": "Ruby's Gallery",
-      "start_url": "https://updesktop.github.io/estore/app/ruby/",
+      "start_url": ".",
       "display": "standalone",
       "orientation": "portrait",
       "background_color": "#a9a9a9",
