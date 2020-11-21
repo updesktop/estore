@@ -1,4 +1,4 @@
-const cacheName = 'upd_081732';
+const cacheName = 'upd_00732';
 const staticAssets = [
   './',
   './index.html',
@@ -37,7 +37,7 @@ const staticAssets = [
   '../../main_gfx/jimg_error.png',     '../../main_gfx/jNext.png', 
   
   '../../main_gfx/jnotif.png',    '../../main_gfx/jPrev.png', 
-  '../../main_gfx/jproduct.png', 
+  '../../main_gfx/jproduct.png',    '../../main_gfx/jshare.png', 
   '../../main_gfx/jpromo.png',    '../../main_gfx/jpurchase.png',  
   '../../main_gfx/jrefresh.png',  '../../main_gfx/jsave.png',
   '../../main_gfx/jsearch.png',   '../../main_gfx/jsend.png',
@@ -80,44 +80,3 @@ self.addEventListener('fetch', event => {
     return fetch(event.request);
   }());
 });
-
-/*
-self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    fetch(event.request).catch(function() {
-      return caches.match(event.request);
-    })
-  );
-});
-*/
-
-/*
-self.addEventListener('fetch', async e => {
-  const req = e.request;
-  const url = new URL(req.url);
-
-  if(url.origin === location.origin) {
-    e.respondWith(cacheFirst(req));
-  } else {
-    e.respondWith(networkAndCache(req));
-  }
-});
-
-async function cacheFirst(req) {
-  const cache = await caches.open(cacheName);
-  const cached = await cache.match(req);
-  return cached || fetch(req);
-}
-
-async function networkAndCache(req){
-  const cache = await caches.open(cacheName);
-  try {
-    const fresh = await fetch(req);
-    await cache.put(req,fresh.clone());
-    return fresh;
-  } catch (e) {
-    const cached = await cache.match(req);
-    return cached;
-  }
-}
-*/
