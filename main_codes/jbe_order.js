@@ -1,5 +1,5 @@
 function showOrder(vmode){
-  alert(vmode);
+  //alert(vmode);
   if(!JBE_ONLINE){ 
     snackBar('OFFLINE');
     return;
