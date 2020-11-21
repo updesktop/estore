@@ -211,7 +211,7 @@ function fm_admin(){
         '</div>'+
         
         '<div onclick="share_app()" style="width:100%;height:40px;margin-top:20px;padding:5px;cursor:pointer;background:none;">'+
-          '<img src="../../main_gfx/jcategory.png" style="float:left;height:100%;"/>'+
+          '<img src="../../main_gfx/jshare.png" style="float:left;height:100%;"/>'+
           '<span style="float:left;margin-left:5px;padding:5px;">Share the App</span>'+
         '</div>'+
 
