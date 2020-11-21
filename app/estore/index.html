@@ -20,7 +20,7 @@
   var CURR_CLIENT='ESTORE';
   var CURR_SITE='estore';   
   var JBE_API=window.location.origin+'/api/';  
-  JBE_API='https://aidfimonitoring.com/api/';  
+  //JBE_API='https://aidfimonitoring.com/api/';  
 </script>
 <!-- ****************************************************************** -->
 <!-- ****************************************************************** -->
@@ -259,7 +259,7 @@
 
       <div class="nav_title">M A I N &nbsp;&nbsp;&nbsp; M E N U</div>
       
-      <a href="javascript:showOrder(1)" class="nav_menu" style="margin-top:20px;">
+      <a href="javascript:showOrder(2)" class="nav_menu" style="margin-top:20px;">
         <div style="width:100%;height:100%;">
           <img src="../../main_gfx/jcategory.png" alt="category image"/>
           <span>Placed Orders</span>
@@ -608,9 +608,9 @@
       //alert('we are on page 1');
     //}
     
-    if (event.state) {
+    if (event.state) {      
       if(f_MainPage){                
-        refreshIDX();
+        //refreshIDX();
         MSG_SHOW(vbYesNo,"CONFIRM: ","Close the App?",function(){                    
           window.history.go(0);
           f_reload=true;
