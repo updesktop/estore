@@ -280,6 +280,13 @@ function JBE_BASE64(src,callback){
 }
 
 function JBE_BLOB(n,img) {
+  return new Promise(resolve => {
+    JBE_getBLOB(n,img,function(uurl){       
+      resolve(uurl);       
+    });           
+  });
+}
+function xxJBE_BLOB(n,img) {
   //alert('prime JBE_BLOB: n='+n+'  img:'+img);
   return new Promise(resolve => {
     //getBlob("gfx/slide"+n+".jpg",function(uurl){       

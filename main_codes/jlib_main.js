@@ -73,7 +73,7 @@ function close_calltext(){
 //=============================================================
 
 function jeff(){  
-  if(CURR_AXTYPE < 5){ return; }
+  if(CURR_AXTYPE < 9){ return; }
   alert(
     'DB_USER: '+DB_USER.length+
     '\nDB_CAT: '+DB_CAT.length+
@@ -427,7 +427,7 @@ function save_get_image(divImg){
 }
 
 function uploadNOW(file,newName,dir,ndiv){    
-  let ddir=dir.substr(dir.indexOf('/app/')); 
+  var ddir=dir.substr(dir.indexOf('/app/')); 
   //var phpDir='../api/app/'+CURR_SITE+'/upload/';
   var phpDir='../api'+ddir;
   /*
@@ -474,7 +474,7 @@ function uploadNOW(file,newName,dir,ndiv){
 
 function RefreshImage(dir,newName,ndiv){    
   var n = new Date().toLocaleTimeString('it-IT');
-  let targ=dir+newName+'?'+n;
+  var targ=dir+newName+'?'+n;
   /*
   alert(
     'dir :'+dir+'\n'+
