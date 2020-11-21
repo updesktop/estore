@@ -8,7 +8,8 @@ function callText(){
   var vimgSms='../../main_gfx/jsms.png';
   
   var dtl=      
-    '<div id="div_calltext" data-zoom=0 style="width:100%;height:'+(H_BODY-350)+'px;overflow:auto;text-align:center;padding:0px;background-color:white;">'+
+    //'<div id="div_calltext" data-zoom=0 style="width:100%;height:'+(H_BODY-350)+'px;overflow:auto;text-align:center;padding:0px;background-color:white;">'+
+    '<div id="div_calltext" data-zoom=0 style="width:100%;height:'+105+'px;overflow:auto;text-align:center;padding:0px;background-color:white;">'+
       /*
       for(var i=0;i<DB_CLIENTS.length;i++){
         

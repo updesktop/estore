@@ -209,6 +209,11 @@ function fm_admin(){
           '<img src="../../main_gfx/jcategory.png" style="float:left;height:100%;"/>'+
           '<span style="float:left;margin-left:5px;padding:5px;">App QR-Code</span>'+
         '</div>'+
+        
+        '<div onclick="share_app()" style="width:100%;height:40px;margin-top:20px;padding:5px;cursor:pointer;background:none;">'+
+          '<img src="../../main_gfx/jcategory.png" style="float:left;height:100%;"/>'+
+          '<span style="float:left;margin-left:5px;padding:5px;">Share the App</span>'+
+        '</div>'+
 
         '<div onclick="layas()" style="width:100%;height:40px;margin-top:50px;padding:5px;cursor:pointer;background:none;">'+
           '<img src="../../main_gfx/jedit.png" style="float:left;height:100%;"/>'+
@@ -678,8 +683,23 @@ function showQR(){
     width: 246,
     height: 246
   });
-  //https://updesktop.github.io/estore/app/ee/
-  
+  //https://updesktop.github.io/estore/app/ee/ 
   //alert(txt);
   qrcode.makeCode(txt);
+}
+
+function share_app(){
+  if(navigator.share) {
+    navigator.share({
+      title: document.title,
+      //text: 'E-Store App',
+      text: document.title,
+      url: location.href,
+    })
+    .then(() => console.log('Successful share'))
+    .catch((error) => {
+      console.log('Error sharing', error);
+      MSG_SHOW(vbOk,"Error sharing:",error,function(){},function(){});
+     })
+  }
 }

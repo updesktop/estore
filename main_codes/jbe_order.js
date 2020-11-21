@@ -1,5 +1,5 @@
 function showOrder(vmode){
-    //alert(vmode);
+  alert(vmode);
   if(!JBE_ONLINE){ 
     snackBar('OFFLINE');
     return;
@@ -75,10 +75,10 @@ function mnu_showorder(vmode){
 function close_showOrder(){ 
   var vmode=document.getElementById('div_main_order').getAttribute('data-vmode');
   //alert(vmode);
-  showMainPage();
-  //if(vmode==2){    
-   // showMainPage();
-  //}
+  //showMainPage();
+  if(vmode==2){    
+    showMainPage();
+  }
 }
 
 function dispOrders(vmode,c,v){

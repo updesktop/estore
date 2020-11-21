@@ -170,6 +170,8 @@ function getDataFromIDX(i,db2) {
           txclor2:cursor.value.txclor2, 
           txclor3:cursor.value.txclor3,
           txclor4:cursor.value.txclor4,
+          telno:cursor.value.telno,
+          celno:cursor.value.celno,
           slide1:cursor.value.slide1, 
           slide2:cursor.value.slide2, 
           slide3:cursor.value.slide3
@@ -348,6 +350,8 @@ async function putDataToIDX(i,aryDB,n){
       txclor2:aryDB[i]['txclor2'],
       txclor3:aryDB[i]['txclor3'],
       txclor4:aryDB[i]['txclor4'],
+      telno:aryDB[i]['telno'],
+      celno:aryDB[i]['celno'],
       slide1:slide1,
       slide2:slide2,
       slide3:slide3
