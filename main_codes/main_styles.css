@@ -435,15 +435,13 @@ body {
 }
 
 .class_footer{
-  float:left;height:100%;width:100%;
+  float:left;height:100%;width:100%;cursor:pointer; 
 }
     .class_footer img{
-      float:left;height:auto;max-height:100%;width:auto;margin-left:20%;background:none;     
-      cursor:pointer; 
+      float:left;height:auto;max-height:100%;width:auto;margin-left:20%;background:none;           
     }
     .class_footer span{
       float:left;height:100%;width:auto;padding:7px 0 0 10px;font-size:22px;background:none;
-      cursor:pointer;
     }
 
 
@@ -504,7 +502,7 @@ img.center {display: block;margin-left: auto;margin-right: auto;}
   border-radius:5px;color:red;
 }
 
-#staff_name_width{ width:630px; }
+#staff_name_width{ width:600px; }
 
 .class_input{
   font-size:11px;color:red;padding:0px;border:1px solid black;background:none;

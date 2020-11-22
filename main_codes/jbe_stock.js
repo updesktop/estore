@@ -452,7 +452,7 @@ function delStock(){
     .then(function (response) {     
       console.log(response.data); 
       DB_STOCK=response.data;  
-      alert(response.data);
+      //alert(response.data);
       JBE_CLOSEBOX();
       showProgress(false);      
       dispAllStocks(catno_first);    

@@ -633,12 +633,14 @@ function del_staff(usercode){
   }
   var username=JBE_GETFLD('username',DB_CLIENTS,'usercode',usercode); 
   var photo=JBE_GETFLD('photo',DB_CLIENTS,'usercode',usercode); 
- 
+  var ddir='app/'+CURR_SITE+'/upload/users/';
+
   MSG_SHOW(vbYesNo,"CONFIRM: ","Are you sure to Delete user: "+username+"?",function(){
     showProgress(true);      
     axios.post(JBE_API+'z_user.php', { clientno:CURR_CLIENT, request: 4, 
       usercode: usercode,
-      photo: photo
+      photo: photo,
+      ddir:ddir
     },JBE_HEADER)
     .then(function (response) {
       showProgress(false);      
