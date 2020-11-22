@@ -259,7 +259,7 @@
 
       <div class="nav_title">M A I N &nbsp;&nbsp;&nbsp; M E N U</div>
       
-      <a href="javascript:showOrder(1)" class="nav_menu" style="margin-top:20px;">
+      <a href="javascript:showOrder(2)" class="nav_menu" style="margin-top:20px;">
         <div style="width:100%;height:100%;">
           <img src="../../main_gfx/jcategory.png" alt="category image"/>
           <span>Placed Orders</span>
@@ -395,29 +395,21 @@
         
     <div id="mnu_mainmenu" class="menu_class" style="display:none;width:100%;height:100%;">   
           
-      <div onclick="refreshMain()" style="float:left;width:20%;height:100%;background: none;">
-        
+      <div onclick="refreshMain()" style="float:left;width:25%;height:100%;background:none;">        
         <div class="class_footer">
           <img src="../../main_gfx/jhome.png" alt="home image" />                  
           <span>Refresh</span>
-        </div>
-        
+        </div>        
       </div> 
       <!-- two menus -->
-      <div id="mnu_main" style="float:left;width:55%;height:100%;background:none;">         
-        <div onclick="callText('call')" style="float:left;width:50%;height:100%;background: none;">
+      <div id="mnu_main" style="float:left;width:50%;height:100%;background:none;">         
+        <div onclick="callText('call')" style="float:left;width:50%;height:100%;background:none;">
           <div class="class_footer">
             <img src="../../main_gfx/jcall.png" alt="call image" />
             <span>Call / Text</span>
           </div>
-        </div>   
-        <!--div onclick="callText('txt')" style="float:left;width:33.3%;height:100%;background: none;">          
-          <div class="class_footer">
-            <img src="../../main_gfx/jsms.png"  alt="home image" />                    
-            <span>Text</span>          
-          </div>      
-        </div-->
-        <div onclick="fm_chat('')" style="float:left;width:50%;height:100%;background: none;">
+        </div>           
+        <div onclick="fm_chat('')" style="float:left;width:50%;height:100%;background:none;">
           <div class="class_footer">
             <img src="../../main_gfx/jchat.png"  alt="home image" />
             <span>Chat</span>
@@ -425,8 +417,8 @@
         </div>        
       </div>
 
-      <div id="mnu_main_owner" style="display:none;float:left;width:55%;height:100%;">
-        <div onclick="chat_owner()" style="float:right;width:50%;height:100%;background: none;">
+      <div id="mnu_main_owner" style="display:none;float:left;width:50%;height:100%;">
+        <div onclick="chat_owner()" style="float:right;width:50%;height:100%;background:none;">
           <div style="width:100%;height:100%;position:relative;">
             <div class="class_footer">
               <img src="../../main_gfx/jnotif.png"  alt="home image" />          
@@ -446,7 +438,7 @@
         </div>
       </div>
 
-      <div onclick="main_login()" style="float:right;width:25%;height:100%;">
+      <div onclick="main_login()" style="float:right;width:25%;height:100%;background:none;">
         <div class="class_footer">
           <img id="log_avatar" src="../../main_gfx/avatar.png" onerror="imgOnError(this)" style="height:100%;border-radius:50%;border:1px solid black;" alt="admin image" />
           <span>Account</span>
@@ -608,9 +600,9 @@
       //alert('we are on page 1');
     //}
     
-    if (event.state) {
+    if (event.state) {      
       if(f_MainPage){                
-        refreshIDX();
+        //refreshIDX();
         MSG_SHOW(vbYesNo,"CONFIRM: ","Close the App?",function(){                    
           window.history.go(0);
           f_reload=true;
