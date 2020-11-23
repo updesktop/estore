@@ -1,7 +1,7 @@
 {
   "name": "E-Store",
   "short_name": "E-Store",
-  "start_url": "estore/app/estore/",
+  "start_url": ".",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#a9a9a9",
