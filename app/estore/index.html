@@ -20,10 +20,6 @@
   var CURR_SITE='';   
   var JBE_API=window.location.origin+'/api/';  
   //JBE_API='https://aidfimonitoring.com/api/';  
-
-  
-  
-  
 </script>
 <!-- ****************************************************************** -->
 <!-- ****************************************************************** -->
@@ -623,42 +619,38 @@
     //alert('after  readClientJSON: '+CURR_CLIENT);
 
   
-  async function readClientJSON(){
-    await fetch('client.json')
-      .then(response => response.json())
-      .then(data => {        
-        CURR_CLIENT=data['client'];      
-        CURR_SITE=data['site'];  
-        document.title = data['title'];
-        //alert('readClientJSON CURR_CLIENT: '+CURR_CLIENT);        
+    async function readClientJSON(){
+      await fetch('client.json')
+        .then(response => response.json())
+        .then(data => {        
+          CURR_CLIENT=data['client'];      
+          CURR_SITE=data['site'];  
+          document.title = data['title'];
+          //alert('readClientJSON CURR_CLIENT: '+CURR_CLIENT);        
         
-        if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('SW_'+CURR_CLIENT+'.js', { scope: './' }).then(function(registration) {
-          console.log('Service worker registration succeeded:', registration);        
-        }).catch(function(error) {
-          console.log('Service worker registration failed:', error);   
-        });
-      } else {
-        console.log('Service workers are not supported.');
-      }
-      
-      
-      //alert('final CURR_CLIENT: '+CURR_CLIENT);
-      COOK_CLIENT=readCookie('cok_client_'+CURR_CLIENT);
-      CURR_USER=readCookie('cok_user_'+CURR_CLIENT);
-      if(!CURR_USER){ CURR_USER=''; }
-      CURR_NAME=readCookie('cok_name_'+CURR_CLIENT);
-      CURR_AXTYPE=readCookie('cok_axtype_'+CURR_CLIENT);
+          if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('SW_'+CURR_CLIENT+'.js', { scope: './' }).then(function(registration) {
+              console.log('Service worker registration succeeded:', registration);        
+            }).catch(function(error) {
+              console.log('Service worker registration failed:', error);   
+            });
+          } else {
+            console.log('Service workers are not supported.');
+          }
+            
+          //alert('final CURR_CLIENT: '+CURR_CLIENT);
+          COOK_CLIENT=readCookie('cok_client_'+CURR_CLIENT);
+          CURR_USER=readCookie('cok_user_'+CURR_CLIENT);
+          if(!CURR_USER){ CURR_USER=''; }
+          CURR_NAME=readCookie('cok_name_'+CURR_CLIENT);
+          CURR_AXTYPE=readCookie('cok_axtype_'+CURR_CLIENT);
    
-      CURR_IDX_DB='DB_'+CURR_CLIENT;      
-      initDb();      
-      start_app();   
-        
-        
-        
-      }
-    );
-  }   
+          CURR_IDX_DB='DB_'+CURR_CLIENT;      
+          initDb();      
+          start_app();   
+        }
+      );
+    }   
 
       
       
