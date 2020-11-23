@@ -1,3 +1,11 @@
+var THISFILE=[];
+THISFILE[0]=null;
+THISFILE[1]=null;
+THISFILE[2]=null;
+THISFILE[3]=null;
+THISFILE[4]=null;
+var JBE_EMPTY_IMG='../../main_gfx/jimg_error.png';
+
 function writeAllToIDX(aryDB,n) {    
   //alert(n);
   console.log('Saving File '+MAIN_STORE_IDX[n]['flename']+' == '+aryDB.length);
