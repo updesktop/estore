@@ -12,14 +12,18 @@
 
 <link rel="manifest" href="./manifest.webmanifest">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+<!-- ****************************************************************** -->
+<!-- ****************************************************************** -->
 <title></title>
-<!-- ****************************************************************** -->
-<!-- ****************************************************************** -->
-<script>  
+<script>
   var CURR_CLIENT='';
   var CURR_SITE='';   
   var JBE_API=window.location.origin+'/api/';  
   //JBE_API='https://aidfimonitoring.com/api/';  
+
+  
+    
 </script>
 <!-- ****************************************************************** -->
 <!-- ****************************************************************** -->
@@ -137,8 +141,8 @@
         ************************************************************************** -->
   <div id="wrapper" style="position:relative;display:none;height:100%;background-color:lightgray;padding:0px;">  
   
-    <!--  ************************* PERMANENT *************************************************** -->
-    <div id="page_main" class="page_class" style="display:block;width:100%;height:auto;background-color:none;">
+      <!--  ************************* PERMANENT *************************************************** -->
+      <div id="page_main" class="page_class" style="display:block;width:100%;height:auto;background-color:none;">
       
       <div id="div_header" class="jheader" style="width:100%;height:70px;opacity:0;position:absolute;z-index:5;text-align:center;padding:0px;border:0px solid gray;">              
       </div>
@@ -444,12 +448,14 @@
           </div> 
         </div>
   
+        
+  
       </div> <!--menu-->
   
     </div> <!--footer-->
   
   </div> <!--main div-->
-    
+  
   <link rel="stylesheet" href="../../main_codes/main_styles.css">
   <link rel="stylesheet" href="../../main_codes/mobile.css">
   
@@ -495,8 +501,7 @@
   <script>
   
     //alert('index: '+JBE_API+'\nOnline: '+navigator.onLine);  
-    //alert('CURR_CLIENT: '+CURR_CLIENT);
-
+    
     var jbe_screen_mode=0;
     
     var JBE_CLOR='#0080ff'; 
@@ -514,8 +519,6 @@
   
     var JBE_DEF_IMG='../../main_gfx/jimage.png';
   
-    var CURR_IDX_DB='';
-    
     var DB_USER=[];  
     var DB_CLIENTS=[];    
     var DB_CAT=[];  
@@ -534,7 +537,6 @@
     var CLIENT_TRANS2=[];
     var CLIENT_CHAT=[];  
   
-    var COOK_CLIENT='';
     var CURR_REC='';
     var CURR_USER=''; 
     var CURR_NAME='';    
@@ -577,7 +579,8 @@
     ];
   
     /***************************************************** */
-    //alert('CURR_CLIENT: '+CURR_CLIENT);
+    
+    
     
     /***************************************************** */
     
@@ -603,55 +606,50 @@
       }
     })
     
-    var d = new Date();  
-    var n = d.toLocaleTimeString('it-IT');
     
+  
     document.getElementById('wrapper').style.display='block';
     showProgress(false);
-    window.history.pushState({ noBackExitsApp: true }, '');
-    f_MainPage=false;
-    document.getElementById('div_bar').style.display='block';
+    var COOK_CLIENT=readCookie('cok_client_'+CURR_CLIENT);
+    CURR_USER=readCookie('cok_user_'+CURR_CLIENT);
+    CURR_NAME=readCookie('cok_name_'+CURR_CLIENT);
+    CURR_AXTYPE=readCookie('cok_axtype_'+CURR_CLIENT);
+  
+    var d = new Date();  
+    var n = d.toLocaleTimeString('it-IT');
+  
+    if(!CURR_USER){ CURR_USER=''; }
+  
     myResizeFunction();   
     document.getElementById('divUL').style.height=(H_BODY-H_HEADER)+'px';
-    //alert('tapos CURR_CLIENT: '+CURR_CLIENT);
+      
+    var CURR_IDX_DB='DB_'+CURR_CLIENT;      
+    initDb();      
+    window.history.pushState({ noBackExitsApp: true }, '');
+    f_MainPage=false;
     
-    readClientJSON();
-    //alert('after  readClientJSON: '+CURR_CLIENT);
+    document.getElementById('div_bar').style.display='block';
 
-  
-    async function readClientJSON(){
-      await fetch('client.json')
-        .then(response => response.json())
-        .then(data => {        
-          CURR_CLIENT=data['client'];      
-          CURR_SITE=data['site'];  
-          document.title = data['title'];
-          //alert('readClientJSON CURR_CLIENT: '+CURR_CLIENT);        
-        
-          if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('SW_'+CURR_CLIENT+'.js', { scope: './' }).then(function(registration) {
-              console.log('Service worker registration succeeded:', registration);        
-            }).catch(function(error) {
-              console.log('Service worker registration failed:', error);   
-            });
-          } else {
-            console.log('Service workers are not supported.');
-          }
-            
-          //alert('final CURR_CLIENT: '+CURR_CLIENT);
-          COOK_CLIENT=readCookie('cok_client_'+CURR_CLIENT);
-          CURR_USER=readCookie('cok_user_'+CURR_CLIENT);
-          if(!CURR_USER){ CURR_USER=''; }
-          CURR_NAME=readCookie('cok_name_'+CURR_CLIENT);
-          CURR_AXTYPE=readCookie('cok_axtype_'+CURR_CLIENT);
-   
-          CURR_IDX_DB='DB_'+CURR_CLIENT;      
-          initDb();      
-          start_app();   
+    //=========FETCH CLIENT DATA AND START ENGINE=================
+    fetch('client.json')
+      .then(response => response.json())
+      .then(data => {
+        CURR_CLIENT=data['client'];      
+        CURR_SITE=data['site'];  
+        document.title = data['title'];
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('SW_'+CURR_CLIENT+'.js', { scope: './' }).then(function(registration) {
+            console.log('Service worker registration succeeded:', registration);
+            start_app();  
+          }).catch(function(error) {
+            console.log('Service worker registration failed:', error);
+          });
+        } else {
+          console.log('Service workers are not supported.');
         }
-      );
-    }   
-
+      }
+    );
+  
   </script>
   
   </body>
