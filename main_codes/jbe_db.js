@@ -14,8 +14,6 @@ if (navigator.storage && navigator.storage.persist)
   }
 );
 
-
-
 function initDb() {
   console.log('initDb activated...'+JBE_ONLINE);
   var request = indexedDB.open(CURR_IDX_DB, dbVersion);

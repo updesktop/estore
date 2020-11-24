@@ -16,13 +16,11 @@ function start_app(){
   //**************** 
   //alert('start_app api dir: '+JBE_API);
   //alert('zOnline '+JBE_API);
-  //alert('atay: '+JBE_HEADER);
+  //alert('atay CURR_SITE: '+CURR_SITE);
 
   var dir_gfx=JBE_API+'app/'+CURR_SITE+'/gfx/';
-  var v_banner=dir_gfx+'banner.jpg?'+n;  
-  
-  
-  document.getElementById('div_header').style.background='url("'+v_banner+'") center no-repeat';
+    
+  document.getElementById('div_header').style.background='url("'+dir_gfx+'banner.jpg?'+n+'") center no-repeat';
   document.getElementById('ds1').style.background='url("'+dir_gfx+'slide1.jpg?'+n+'") center no-repeat';
   document.getElementById('ds2').style.background='url("'+dir_gfx+'slide2.jpg?'+n+'") center no-repeat';
   
@@ -453,6 +451,7 @@ function showSystem(){
   }
 
   document.getElementById('div_pg_title').innerHTML=aryDB[0]['pg_title'];
+  if(!aryDB[0]['pg_title']){ document.getElementById('div_pg_title').innerHTML=aryDB[0]['clientname']; }
   document.getElementById('div_pg_body').value=aryDB[0]['pg_body'];
   
   setSysColors();    
