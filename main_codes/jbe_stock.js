@@ -133,10 +133,10 @@ function add_edit_stock(vmode,vstockno){
   var descrp='';  
   var price='';
   var photo=JBE_DEF_IMG;
-  var photo2=JBE_DEF_IMG;
-  var photo3=JBE_DEF_IMG;
-  var photo4=JBE_DEF_IMG;
-  var photo5=JBE_DEF_IMG;
+  var photo2=JBE_EMPTY_IMG;
+  var photo3=JBE_EMPTY_IMG;
+  var photo4=JBE_EMPTY_IMG;
+  var photo5=JBE_EMPTY_IMG;
   var cap_img='ADD ITEM RECORD';
   var catno=document.getElementById('div_sel_cat').value;  
   
@@ -154,15 +154,17 @@ function add_edit_stock(vmode,vstockno){
     stockname=aryDB['stockname'];
     descrp=aryDB['descrp'];
     price=aryDB['price'];
-    photo=document.getElementById('photo_stock_'+stockno).src;        
-    photo2=aryDB['photo2'];
-    //v_mphoto=JBE_API+'app/'+CURR_SITE+'/upload/users/'+CURR_USER+'.jpg?'+n;
-    photo3=aryDB['photo3'];
-    photo4=aryDB['photo4'];
-    photo5=aryDB['photo5'];
+    photo=document.getElementById('photo_stock_'+stockno).src;         
+    photo2=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB['photo2']+'?'+n;
+    photo3=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB['photo3']+'?'+n;
+    photo4=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB['photo4']+'?'+n;
+    photo5=JBE_API+'app/'+CURR_SITE+'/upload/'+aryDB['photo5']+'?'+n;
+  
     cap_img='EDIT ITEM RECORD';
-    //document.getElementById('btn_stock2_dele').style.display='block';  
+  
   }
+
+  
   
   var dtl=    
     '<div id="div_solo_stock" data-new='+vmode+' data-stockno="'+stockno+'" data-img="'+photo+'" data-oldimg="'+photo+'" style="width:100%;height:'+(H_BODY-50)+'px;overflow:auto;background:none;">'+      
@@ -181,33 +183,33 @@ function add_edit_stock(vmode,vstockno){
       '<div style="margin-top:0px;width:100%;height:70px;border:1px solid gray;padding:2px;background:lightgray;">'+
       
         '<div style="float:left;margin-left:0.5%;position:relative;border:1px solid black;height:100%;width:24%;padding:5px;background:white;">'+         
-          '<img id="prev_photo_stock2" name="prev_photo_stock2" data-img="" alt="pic image2" src="'+JBE_API+'app/'+CURR_SITE+'/upload/'+photo2+'?'+n+'" onerror="imgOnError(this)" style="height:auto;max-height:100%;width:auto;max-width:100%;" alt="" />'+       
+          '<img id="prev_photo_stock2" name="prev_photo_stock2" data-img="" alt="pic image2" src="'+photo2+'" onerror="imgOnError(this)" style="height:auto;max-height:100%;width:auto;max-width:100%;" alt="" />'+       
           '<input type="file" id="inp_file_stock2" data-sel=0 name="inp_file_stock2" hidden="hidden" />'+
           '<img src="../../main_gfx/jcam.png" onclick="JBE_PICK_IMAGE(1,inp_file_stock2.id,prev_photo_stock2.id)" style="position:absolute;bottom:2%;right:2%;cursor:pointer;border-radius:50%;border:1px solid black;padding:2px;width:30px;background:#434343;"/>'+
           '<button id="btnPhoto2" onclick="del_prev_photo(2)" style="position:absolute;top:2%;right:2%;cursor:pointer;border-radius:50%;border:1px solid black;height:20px;width:20px;padding:0px;color:white;background:red;">X</button>'+
         '</div>'+
         
         '<div style="float:left;margin-left:1%;position:relative;border:1px solid black;height:100%;width:24%;padding:5px;background:white;">'+         
-          '<img id="prev_photo_stock3" name="prev_photo_stock3" data-img="" alt="pic image3" src="'+JBE_API+'app/'+CURR_SITE+'/upload/'+photo3+'?'+n+'" onerror="imgOnError(this)" style="height:auto;max-height:100%;width:auto;max-width:100%;" alt="" />'+       
+          '<img id="prev_photo_stock3" name="prev_photo_stock3" data-img="" alt="pic image3" src="'+photo3+'" onerror="imgOnError(this)" style="height:auto;max-height:100%;width:auto;max-width:100%;" alt="" />'+       
           '<input type="file" id="inp_file_stock3" data-sel=0 name="inp_file_stock3" hidden="hidden" />'+
           '<img src="../../main_gfx/jcam.png" onclick="JBE_PICK_IMAGE(2,inp_file_stock3.id,prev_photo_stock3.id)" style="position:absolute;bottom:5%;right:5%;cursor:pointer;border-radius:50%;border:1px solid black;padding:2px;width:30px;background:#434343;"/>'+
           '<button id="btnPhoto3" onclick="del_prev_photo(3)" style="position:absolute;top:2%;right:2%;cursor:pointer;border-radius:50%;border:1px solid black;height:20px;width:20px;padding:0px;color:white;background:red;">X</button>'+
         '</div>'+
         
         '<div style="float:left;margin-left:1%;position:relative;border:1px solid black;height:100%;width:24%;padding:5px;background:white;">'+         
-          '<img id="prev_photo_stock4" name="prev_photo_stock4" data-img="" alt="pic image3" src="'+JBE_API+'app/'+CURR_SITE+'/upload/'+photo4+'?'+n+'" onerror="imgOnError(this)" style="height:auto;max-height:100%;width:auto;max-width:100%;" alt="" />'+       
+          '<img id="prev_photo_stock4" name="prev_photo_stock4" data-img="" alt="pic image3" src="'+photo4+'" onerror="imgOnError(this)" style="height:auto;max-height:100%;width:auto;max-width:100%;" alt="" />'+       
           '<input type="file" id="inp_file_stock4" data-sel=0 name="inp_file_stock4" hidden="hidden" />'+
           '<img src="../../main_gfx/jcam.png" onclick="JBE_PICK_IMAGE(3,inp_file_stock4.id,prev_photo_stock4.id)" style="position:absolute;bottom:5%;right:5%;cursor:pointer;border-radius:50%;border:1px solid black;padding:2px;width:30px;background:#434343;"/>'+
           '<button id="btnPhoto4" onclick="del_prev_photo(4)" style="position:absolute;top:2%;right:2%;cursor:pointer;border-radius:50%;border:1px solid black;height:20px;width:20px;padding:0px;color:white;background:red;">X</button>'+
         '</div>'+
         
         '<div style="float:left;margin-left:1%;position:relative;border:1px solid black;height:100%;width:24%;padding:5px;background:white;">'+         
-          '<img id="prev_photo_stock5" name="prev_photo_stock5" data-img="" alt="pic image5" src="'+JBE_API+'app/'+CURR_SITE+'/upload/'+photo5+'?'+n+'" onerror="imgOnError(this)" style="height:auto;max-height:100%;width:auto;max-width:100%;" alt="" />'+       
+          '<img id="prev_photo_stock5" name="prev_photo_stock5" data-img="" alt="pic image5" src="'+photo5+'" onerror="imgOnError(this)" style="height:auto;max-height:100%;width:auto;max-width:100%;" alt="" />'+       
           '<input type="file" id="inp_file_stock5" data-sel=0 name="inp_file_stock5" hidden="hidden" />'+
           '<img src="../../main_gfx/jcam.png" onclick="JBE_PICK_IMAGE(4,inp_file_stock5.id,prev_photo_stock5.id)" style="position:absolute;bottom:5%;right:5%;cursor:pointer;border-radius:50%;border:1px solid black;padding:2px;width:30px;background:#434343;"/>'+
           '<button id="btnPhoto5" onclick="del_prev_photo(5)" style="position:absolute;top:2%;right:2%;cursor:pointer;border-radius:50%;border:1px solid black;height:20px;width:20px;padding:0px;color:white;background:red;">X</button>'+
         '</div>'+
-        
+       
       '</div>'+
       
       '<div id="box_stockname" style="margin-top:5px;width:100%;height:25px;border:1px solid gray;padding:3px;background:lightgray;">'+

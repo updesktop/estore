@@ -430,7 +430,7 @@ function view_dtl_cat(catno){
       '<div onclick="view_dtl_stock(true,&quot;'+v_mcode+'&quot;,2)" class="class_items">'+      
         '<div style="position:relative;height:70%;width:100%;border-radius:10px;border:1px solid lightgray;background:none;">'+
           '<div class="class_center_div">'+
-            '<img id="photo_stock_'+v_mcode+'" class="asyncImage" src="'+v_mphoto+'" onerror="imgOnError(this)" alt="item image" style="height:auto;max-height:100%;width:auto;max-width:100%;background:none;"/>'+
+            '<img id="pg_photo_stock_'+v_mcode+'" class="asyncImage" src="'+v_mphoto+'" onerror="imgOnError(this)" alt="item image" style="height:auto;max-height:100%;width:auto;max-width:100%;background:none;"/>'+
           '</div>'+
         '</div>'+
         '<div style="height:30%;width:100%;">'+
