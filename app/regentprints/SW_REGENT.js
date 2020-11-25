@@ -1,4 +1,4 @@
-const cacheName = 'regent_010732';
+const cacheName = 'regent_1010732';
 const staticAssets = [
   './',
   './index.html',
