@@ -614,13 +614,8 @@
     myResizeFunction();   
     document.getElementById('divUL').style.height=(H_BODY-H_HEADER)+'px';
     //alert('tapos CURR_CLIENT: '+CURR_CLIENT);
-    
-    readClientJSON();
-    //alert('after  readClientJSON: '+CURR_CLIENT);
 
-  
-    async function readClientJSON(){
-      await fetch('client.json')
+    fetch('client.json')
         .then(response => response.json())
         .then(data => {        
           CURR_CLIENT=data['client'];      
@@ -650,7 +645,7 @@
           start_app();   
         }
       );
-    }   
+       
 
   </script>
   
