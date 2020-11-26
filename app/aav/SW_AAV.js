@@ -1,4 +1,4 @@
-const cacheName = 'aav_001732';
+const cacheName = 'aav_001532';
 const staticAssets = [
   './',
   './index.html',
