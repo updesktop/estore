@@ -1,5 +1,4 @@
-const cacheName = 'rm_601116
-6732';
+const cacheName = 'rm_6019;
 const staticAssets = [
   './',
   './index.html',
