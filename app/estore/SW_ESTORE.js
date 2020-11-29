@@ -1,4 +1,4 @@
-const cacheName = 'estore_342732';
+const cacheName = 'estore_442732';
 const staticAssets = [
   './',
   './index.html',
