@@ -282,6 +282,7 @@ function get_db_sys(){
       clearStore(JBE_STORE_IDX[2]['flename']); saveDataToIDX(DB_SYS,2);       
     }     
     document.querySelector('meta[property="og:description"]').setAttribute("content", DB_SYS[0]['descrp']);
+alert('meta updated');
     showSystem(); 
   })    
   .catch(function (error) { showOffline(); console.log(error); }); 
