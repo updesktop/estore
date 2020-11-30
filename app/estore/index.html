@@ -6,7 +6,29 @@
 <meta name="theme-color" content="#000000"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <meta name="description" content="E-STORE your online store.">
-<meta name="image" content="gfx/icon-192x192.png">
+<meta name="og:image" content="gfx/icon-192x192.png">
+
+<!-- HTML Meta Tags 
+<!-- Google / Search Engine Tags -->
+<meta itemprop="name" content="Test website">
+<meta itemprop="description" content="This is the website description. Nice eh?">
+<meta itemprop="image" content="gfx/icon-192x192.png">
+ 
+<!-- Facebook Meta Tags -->
+<meta property="og:url" content="https://nothing.com">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Test website">
+<meta property="og:description" content="This is the website description. Nice eh?">
+<meta property="og:image" content="https://lorempixel.com/400/200/">
+ 
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Test website">
+<meta name="twitter:description" content="This is the website description. Nice eh?">
+<meta name="twitter:image" content="https://lorempixel.com/400/200/">
+ 
+<!-- Meta Tags Generated via https://heymeta.com
+<!--meta property="og:image" content= "gfx/icon-192x192.png"-->
 <link rel="shortcut icon" href="../../main_gfx/favicon.ico">
 <link rel="icon" href="../../main_gfx/favicon.ico">
 <link rel="apple-touch-icon" href="../../main_gfx/apple-touch-icon.png">
@@ -21,7 +43,7 @@
   var CURR_CLIENT='ESTORE';
   var CURR_SITE='estore';   
   var JBE_API=window.location.origin+'/api/';  
-  JBE_API='https://aidfimonitoring.com/api/';  
+  //JBE_API='https://aidfimonitoring.com/api/';  
 </script>
 <!-- ****************************************************************** -->
 <!-- ****************************************************************** -->
@@ -137,11 +159,11 @@
 <!--  *************************PAGES***************************************************
       ************************************************************************** -->
 <div id="wrapper" style="position:relative;display:none;height:100%;background-color:lightgray;padding:0px;">  
-    <div id="myImg"  style="width:100%;height:100px;text-align:center;">
-      <img  src="gfx/icon-192x192.png" style="height:100%;" alt="first_logo image" >      
-    </div> 
+    <!--div id="app-logo"  style="width:100%;height:100px;text-align:center;">
+      <img  src="./gfx/icon-192x192.png" style="height:100%;" alt="first_logo image" >      
+    </div--> 
     <!--  ************************* PERMANENT *************************************************** -->
-    <div id="page_main" class="page_class" style="display:block;width:100%;height:auto;background-color:none;">
+  <div id="page_main" class="page_class" style="display:block;width:100%;height:auto;background-color:none;">
     
     <div id="div_header" class="jheader" style="width:100%;height:70px;opacity:0;position:absolute;z-index:5;text-align:center;padding:0px;border:0px solid gray;">              
     </div>
@@ -498,7 +520,7 @@
 <script>
 
   //alert('index: '+JBE_API+'\nOnline: '+navigator.onLine);  
-  document.getElementById('myImg').style.display='none';
+  //document.getElementById('app-logo').style.display='none';
   var jbe_screen_mode=0;
   
   var JBE_CLOR='#0080ff'; 
