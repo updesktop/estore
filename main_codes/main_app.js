@@ -81,6 +81,8 @@ function showOnline(){
 
 function showOffline(){    
   JBE_ONLINE=false;
+  CURR_USER='';
+  CURR_AXTYPE=0;
   dispMenu(true,'mnu_main'); 
   getAllDataFromIDX(0);
     
@@ -279,6 +281,7 @@ function get_db_sys(){
       //alert('xxxcopy sysfile to idx '+DB_SYS.length);      
       clearStore(JBE_STORE_IDX[2]['flename']); saveDataToIDX(DB_SYS,2);       
     }     
+    document.querySelector('meta[property="og:description"]').setAttribute("content", DB_SYS[0]['descrp']);
     showSystem(); 
   })    
   .catch(function (error) { showOffline(); console.log(error); }); 
@@ -611,11 +614,8 @@ function showPromos(){
   //alert(ctrDiv);
   width_slider=(ctrDiv*4)*10;
   var divWidth=(25/width_slider)*100;
-  document.getElementById('div_promo').style.width=width_slider+'%';
-  
+  document.getElementById('div_promo').style.width=width_slider+'%';  
   //document.querySelectorAll('#slider .clsDiv').style.width=(ctrDiv/1.6)+'%';
-
-
   document.querySelectorAll('.clsDiv').forEach(function(el) {
       el.style.width = divWidth+'%';        
   });
