@@ -281,8 +281,16 @@ function get_db_sys(){
       //alert('xxxcopy sysfile to idx '+DB_SYS.length);      
       clearStore(JBE_STORE_IDX[2]['flename']); saveDataToIDX(DB_SYS,2);       
     }     
+    //Google / Search Engine Tags
+    document.querySelector('meta[itemprop="name"]').setAttribute("content", DB_SYS[0]['appname']);
+    document.querySelector('meta[itemprop="description"]').setAttribute("content", DB_SYS[0]['descrp']);
+    //Facebook Meta Tags 
+    document.querySelector('meta[property="og:title"]').setAttribute("content", DB_SYS[0]['appname']);
     document.querySelector('meta[property="og:description"]').setAttribute("content", DB_SYS[0]['descrp']);
-alert('meta updated');
+    //Twitter Meta Tags
+    document.querySelector('meta[name="twitter:title"]').setAttribute("content", DB_SYS[0]['appname']);
+    document.querySelector('meta[name="twitter:description"]').setAttribute("content", DB_SYS[0]['descrp']);
+    alert('meta updated');
     showSystem(); 
   })    
   .catch(function (error) { showOffline(); console.log(error); }); 
