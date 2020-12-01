@@ -5,7 +5,28 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="theme-color" content="#000000"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="description" content="E-STORE your online store.">
+<meta name="og:image" content="gfx/icon-192x192.png">
 
+<!-- HTML Meta Tags 
+<!-- Google / Search Engine Tags -->
+<meta itemprop="name" content="E-STORE App">
+<meta itemprop="description" content="E-STORE your online store.">
+<meta itemprop="image" content="gfx/icon-192x192.png">
+ 
+<!-- Facebook Meta Tags -->
+<!--meta property="og:url" content="https://nothing.com"-->
+<meta property="og:type" content="website">
+<meta property="og:title" content="E-STORE App">
+<meta property="og:description" content="E-STORE your online store.">
+<meta property="og:image" content="gfx/icon-192x192.png">
+ 
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="E-STORE App">
+<meta name="twitter:description" content="E-STORE your online store.">
+<meta name="twitter:image" content="gfx/icon-192x192.png">
+ 
 <link rel="shortcut icon" href="../../main_gfx/favicon.ico">
 <link rel="icon" href="../../main_gfx/favicon.ico">
 <link rel="apple-touch-icon" href="../../main_gfx/apple-touch-icon.png">
@@ -15,16 +36,19 @@
 
 <!-- ****************************************************************** -->
 <!-- ****************************************************************** -->
-<title>RM Southern Trading</title>
+<title>E-STORE APP</title>
 <script>
-  var CURR_CLIENT='RMST';
-  var CURR_SITE='rmst';   
-  var JBE_API=window.location.origin+'/api/';  
-  JBE_API='https://aidfimonitoring.com/api/';  
+  var CURR_CLIENT='ESTORE';
+  var CURR_SITE='estore';    
+  
+  var JBE_API='https://aidfimonitoring.com/api/';  
+  var pathloc=window.location.origin.substr(0,16);
+  if(pathloc == 'http://localhost') { 
+    JBE_API=window.location.origin+'/api/';  
+  }
 </script>
 <!-- ****************************************************************** -->
 <!-- ****************************************************************** -->
-
 </head>
 
 <body style="color:#252526;background:#E8E8E8;padding:0px;">
@@ -137,9 +161,11 @@
 <!--  *************************PAGES***************************************************
       ************************************************************************** -->
 <div id="wrapper" style="position:relative;display:none;height:100%;background-color:lightgray;padding:0px;">  
-
+    <!--div id="app-logo"  style="width:100%;height:100px;text-align:center;">
+      <img  src="./gfx/icon-192x192.png" style="height:100%;" alt="first_logo image" >      
+    </div--> 
     <!--  ************************* PERMANENT *************************************************** -->
-    <div id="page_main" class="page_class" style="display:block;width:100%;height:auto;background-color:none;">
+  <div id="page_main" class="page_class" style="display:block;width:100%;height:auto;background-color:none;">
     
     <div id="div_header" class="jheader" style="width:100%;height:70px;opacity:0;position:absolute;z-index:5;text-align:center;padding:0px;border:0px solid gray;">              
     </div>
@@ -445,8 +471,6 @@
         </div> 
       </div>
 
-      
-
     </div> <!--menu-->
 
   </div> <!--footer-->
@@ -498,7 +522,7 @@
 <script>
 
   //alert('index: '+JBE_API+'\nOnline: '+navigator.onLine);  
-  
+  //document.getElementById('app-logo').style.display='none';
   var jbe_screen_mode=0;
   
   var JBE_CLOR='#0080ff'; 
@@ -625,6 +649,7 @@
 
   document.getElementById('wrapper').style.display='block';
   showProgress(false);
+  
   var COOK_CLIENT=readCookie('cok_client_'+CURR_CLIENT);
   CURR_USER=readCookie('cok_user_'+CURR_CLIENT);
   CURR_NAME=readCookie('cok_name_'+CURR_CLIENT);
@@ -636,6 +661,7 @@
   if(!CURR_USER){ CURR_USER=''; }
 
   myResizeFunction();   
+  
   document.getElementById('divUL').style.height=(H_BODY-H_HEADER)+'px';
     
   var CURR_IDX_DB='DB_'+CURR_CLIENT;      
