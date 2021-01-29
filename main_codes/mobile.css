@@ -166,5 +166,9 @@
     width: auto;
     height: 100%;
   }
+
+  .cls_map_panel{
+    width:120px;
+  }
   
 }

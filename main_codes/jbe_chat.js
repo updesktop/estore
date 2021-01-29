@@ -1,4 +1,5 @@
 function fm_chat(usercode){
+  THISFILE[0]=null;
   if(!JBE_ONLINE){ 
     snackBar('OFFLINE');
     return;

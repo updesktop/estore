@@ -33,6 +33,11 @@ function showMap(vmode,usercode){
     snackBar('OFFLINE');
     return;
   }    
+  var u_lat=0;
+  var u_lng=0;
+  var aryDB=JBE_GETARRY(DB_USER,'usercode',usercode);
+  u_lat=aryDB['lat'];
+  u_lng=aryDB['lng'];
   //getCurrPos();
   var dtl='';
   var dtl2='';
@@ -87,28 +92,28 @@ function showMap(vmode,usercode){
           dtl2=      
     '<div style="width:100%;height:100%;background:none;">'+
 
-      '<div style="float:left;width:120px;height:100%;margin-left:2%;color:'+JBE_TXCLOR1+';background:none;">'+        
-        '<input id="inpLat" type="number" disabled style="text-align:center;width:100%;height:70%;">'+
-        '<span class="footer_fonts">Latitude</span>'+
-      '</div>'+
+      '<div style="float:left;width:28%;height:100%;text-align:center;color:'+JBE_TXCLOR1+';background:none;">'+
+        '<input id="inpLat" type="number" disabled style="width:100%;height:60%;text-align:center;" value='+u_lat+'>'+        
+        '<span style="width:100%;height:40%;">Latitude</span>'+
+      '</div>'+  
+
+      '<div style="float:left;width:28%;height:100%;text-align:center;margin-left:2%;color:'+JBE_TXCLOR1+';background:none;">'+
+        '<input id="inpLng" type="number" disabled style="width:100%;height:60%;text-align:center;" value='+u_lng+'>'+        
+        '<span style="width:100%;height:40%;">Longitude</span>'+
+      '</div>'+ 
       
-      '<div style="float:left;width:120px;height:100%;margin-left:2%;color:'+JBE_TXCLOR1+';background:none;">'+        
-        '<input id="inpLng" type="number" disabled style="text-align:center;width:100%;height:70%;">'+
-        '<span class="footer_fonts">Longitude</span>'+
-      '</div>'+
-      
-      '<div id="divCANCEL" onclick="procSave(0)" style="display:block;float:right;width:40px;height:100%;color:'+JBE_TXCLOR1+';background:none;">'+        
+      '<div id="divCANCEL" onclick="procAUTO()" style="display:block;float:right;width:auto;height:100%;cursor:pointer;color:'+JBE_TXCLOR1+';background:none;">'+        
         '<div class="footer_gfxs">'+
           '<img id="imgCancel" src="../../main_gfx/jsite.png"  style="height:100%;" alt="site image" />'+
         '</div>'+
-        '<span id="txtCancel" class="footer_fonts">Auto</span>'+
+        '<span id="txtAUTO" class="footer_fonts">Auto</span>'+
       '</div>'+
 
-      '<div onclick="procSave(1)" style="float:right;width:50px;height:100%;color:'+JBE_TXCLOR1+';background:none;">'+        
+      '<div onclick="procSave()" style="float:right;width:auto;height:100%;cursor:pointer;margin-right:2%;color:'+JBE_TXCLOR1+';background:none;">'+        
         '<div class="footer_gfxs">'+
           '<img id="imgLatLng" src="../../main_gfx/jedit.png"  style="height:100%;" alt="site image" />'+
         '</div>'+
-        '<span id="txtLatLng" class="footer_fonts">Edit</span>'+
+        '<span id="txtEDIT" class="footer_fonts">Edit</span>'+
       '</div>'+
          
     '</div>';
@@ -125,7 +130,7 @@ function showMap(vmode,usercode){
     });
     
     map.on('click', function(e){       
-    var txt=document.getElementById('txtLatLng').innerHTML;       
+    var txt=document.getElementById('txtEDIT').innerHTML;       
     if(txt!='Save'){ return; }
     
     var coord = e.latlng;
@@ -205,56 +210,69 @@ function close_showmap(){
   }
 }
 
-function procSave(vm){
+function procSave(){
 	var usercode=document.getElementById('div_showmap').getAttribute('data-usercode');
-	var txt=document.getElementById('txtLatLng').innerHTML;
-	
-	var vsrc='../../main_gfx/jedit.png';
+  var txt=document.getElementById('txtEDIT').innerHTML;
+  
+  if(txt=='Save'){
+    //alert('do saving...');
+    saveUserPosition(document.getElementById('inpLat').value,document.getElementById('inpLng').value);
+    procPANEL(0);
+  }else{
+    procPANEL(1);
+  }
+}
+
+function procAUTO(){
+	var usercode=document.getElementById('div_showmap').getAttribute('data-usercode');
+  var txt=document.getElementById('txtAUTO').innerHTML;
+  
+  if(txt=='Cancel'){
+    //alert('go cancel');
+    procPANEL(0);
+    /*
+    var markers=JBE_GETARRY(DB_CLIENTS,'usercode',usercode);    
+    var vlat= parseFloat(markers['lat']);
+    var vlng=parseFloat(markers['lng']);    
+    alert(vlat+' vs '+vlng);
+    marker_client.setLatLng([vlat,vlng]).update();  
+    gotoMarker(marker_client);
+    //enableAuto(false);
+    */
+  }else{
+    //alert('go auto');
+    goAuto();    
+  }
+}
+
+function procPANEL(v){
+  var vsrc='../../main_gfx/jedit.png';
 	var vsrc2='../../main_gfx/jsite.png';
 	var vcap='Edit';
 	var vcap2='Auto';
 	var vdis1=true;
 	var vdis2=true;
-	var vdispcan='none';
-	
-	if(vm==1){
-		//alert('edit  '+txt);
-		if(txt=='Save'){
-			//alert('do saving...');
-			saveUserPosition(document.getElementById('inpLat').value,document.getElementById('inpLng').value);
-		}else{
-	        vsrc='../../main_gfx/jsave.png';
-	        vsrc2='../../main_gfx/jcancel.png';
-	        vcap='Save';
-	        vcap2='Cancel';
-	        vdis1=false;
-	        vdis2=false;
-	        vdispcan='block';
-	    }
-	    //enableAuto(true);
-	}else if(vm==0){
-		//alert('cancel');
-		if(txt=='Save'){
-		    var markers=JBE_GETARRY(DB_CLIENTS,'usercode',usercode);    
-		    var vlat= parseFloat(markers['lat']);
-            var vlng=parseFloat(markers['lng']);    
-		    marker_client.setLatLng([vlat,vlng]).update();  
-		    gotoMarker(marker_client);
-		    //enableAuto(false);
-		}else{
-			goAuto();
-			return;
-		}
-	}
+  var vdispcan='none';
+
+  if(v==1){    
+    vsrc='../../main_gfx/jsave.png';
+    vsrc2='../../main_gfx/jcancel.png';
+    vcap='Save';
+    vcap2='Cancel';
+    vdis1=false;
+    vdis2=false;
+    vdispcan='block';  
+  }
 	
 	document.getElementById('imgLatLng').src=vsrc;
 	document.getElementById('imgCancel').src=vsrc2;
-	document.getElementById('txtLatLng').innerHTML=vcap;
-	document.getElementById('txtCancel').innerHTML=vcap2;
+	document.getElementById('txtEDIT').innerHTML=vcap;
+	document.getElementById('txtAUTO').innerHTML=vcap2;
 	document.getElementById('inpLat').disabled=vdis1;
 	document.getElementById('inpLng').disabled=vdis2;
 	//document.getElementById('divCANCEL').style.display=vdispcan;
 }
+
 
 
 function showClientBox(meLat,meLng){ 
@@ -347,7 +365,6 @@ function jlocate(f,z) {
 function saveUserPosition(lat,lng){
   // record your current position  
   var usercode=document.getElementById('div_showmap').getAttribute('data-usercode');
-  //alert(usercode);
   axios.post(JBE_API+'z_user.php', {  clientno:CURR_CLIENT, request: 302, 
     usercode: usercode, 
     lat:lat,
@@ -357,6 +374,7 @@ function saveUserPosition(lat,lng){
     console.log(response.data);
     //alert(response.data);
     DB_CLIENTS=response.data;
+    DB_USER=response.data;
     marker_client.setLatLng([lat,lng]).update();  
     gotoMarker(marker_client);
     snackBar('LOCATION CHANGED');
@@ -394,7 +412,7 @@ function goLive(){
 }
 
 function goAuto(){
-	//var txt=document.getElementById('txtLatLng').innerHTML;
+	//var txt=document.getElementById('txtEDIT').innerHTML;
 	//alert(txt);
 	//if(txt!='Save'){ return; }
 	var lat=current_accuracy.getLatLng().lat;
