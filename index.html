@@ -13,13 +13,20 @@
 <!--link rel="manifest" href="./ENADSTORE.webmanifest"-->
 
 <script>
-  
-
-  var JBE_API=window.location.origin+'/api/';  
   var JBE_HOST=window.location.href;  
+/*
+  var JBE_API=window.location.origin+'/estore_api/';  
+  
     
-  JBE_API='https://aidfimonitoring.com/api/';
+  JBE_API='https://aidfimonitoring.com/estore_api/';
   //alert('index main: '+JBE_API);
+*/
+
+  var JBE_API='https://aidfimonitoring.com/estore_api/';  
+  var pathloc=window.location.origin.substr(0,16);
+  if(pathloc == 'http://localhost') { 
+    JBE_API=window.location.origin+'/estore_api/';  
+  }
 
   var CURR_LOCATION=window.location.href;
   
@@ -364,6 +371,7 @@
       snackBar('Press Back key to Exit');    
       f_reload=false;
     }    
+    //alert('mainpage '+f_MainPage);
     console.log('mainpage '+f_MainPage);
     openPage('page_main');      
     showMenu('mnu_main');   
@@ -489,30 +497,33 @@
   }
   
   function updateSite(){      
-      var clientno=document.getElementById('div_site').getAttribute('data-clientno');
-      var site=document.getElementById('div_site').getAttribute('data-site');
-      var appname=document.getElementById('div_site').getAttribute('data-appname');
-      var vDate=new Date();  
-      var vTime = vDate.toLocaleTimeString('it-IT'); 
-      vDate = new Date(vDate.getTime() - (vDate.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];  
-      var sw_version=vDate+'_'+vTime;
-      sw_version = sw_version.replace(/-/g, "").replace(/:/g, "").replace("T", "-");            
-      showProgress(true);  
-      axios.post(JBE_API+'main.php', { clientno:clientno, request: 5,    
-          appname:appname,
-          site:site,        
-          sw_version:sw_version
-      },JBE_HEADER)
-      .then(function (response) {    
-          showProgress(false); 
-          //console.log(response.data); 
-          //alert(response.data); 
-          //DB_SYS=response.data;    
-          dispClients();
-          showMainPage0();
-          snackBar('SITE UPDATED');
-      })    
-      .catch(function (error) { console.log(error); showProgress(false); });   
+    MSG_SHOW(vbOk,"ERROR:","Temporarily Disabled.",function(){},function(){}); 
+    return;
+    var clientno=document.getElementById('div_site').getAttribute('data-clientno');
+    var site=document.getElementById('div_site').getAttribute('data-site');
+    var appname=document.getElementById('div_site').getAttribute('data-appname');
+    var vDate=new Date();  
+    var vTime = vDate.toLocaleTimeString('it-IT'); 
+    vDate = new Date(vDate.getTime() - (vDate.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];  
+    var sw_version=vDate+'_'+vTime;
+    sw_version = sw_version.replace(/-/g, "").replace(/:/g, "").replace("T", "-");            
+    showProgress(true);  
+    axios.post(JBE_API+'main.php', { clientno:clientno, request: 5,    
+      clientno:clientno,
+      appname:appname,
+      site:site,        
+      sw_version:sw_version
+    },JBE_HEADER)
+    .then(function (response) {    
+        showProgress(false); 
+        //console.log(response.data); 
+        alert(response.data); 
+        //DB_SYS=response.data;    
+        dispClients();
+        showMainPage0();
+        snackBar('SITE UPDATED');
+    })    
+    .catch(function (error) { console.log(error); showProgress(false); });   
   }
 
   function gotoSite(){       
@@ -845,7 +856,7 @@
     "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
     "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
     "Access-Control-Allow-Origin": "*"
-  }
+    }
     //alert(JBE_API+'main.php');
     axios.post(JBE_API+'main.php', { clientno:'', request: 404 },xhead)     
     .then(function (response) {   
