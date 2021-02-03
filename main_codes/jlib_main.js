@@ -426,10 +426,8 @@ function save_get_image(divImg){
   JBE_CLOSEBOX();
 }
 
-function uploadNOW(file,newName,dir,ndiv){    
-  var ddir=dir.substr(dir.indexOf('/app/')); 
-  //var phpDir='../api/app/'+CURR_SITE+'/upload/';
-  var phpDir='../api'+ddir;
+function uploadNOW(file,newName,dir,ndiv){  
+  var phpDir=dir.substr(JBE_API.length); 
   /*
   alert(
     'file     : '+file+'\n'+
