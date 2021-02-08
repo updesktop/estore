@@ -283,25 +283,32 @@
       <div style="width:100%;height:100%;border:2px solid white;border-radius:10px;background:none;font-size:16px;color:white;
             text-align:center;padding:5px;background:none;font-weight:bold;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
 
-        <div style="float:left;width:24%;height:100%;background: none;">          
+        <div style="float:left;width:23%;height:100%;background: none;">          
           <div class="class_footer" onclick="fm_site(2)">
             <img src="main_gfx/jedit.png"  alt="home image" />          
             <span>Edit</span>
           </div>
         </div>    
-        <div style="float:left;width:24%;height:100%;background: none;">          
+        <div style="float:left;width:23%;height:100%;background: none;">          
           <div class="class_footer" onclick="delSite()">
             <img src="main_gfx/jdele.png"  alt="home image" />          
             <span>Delete</span>
           </div>
         </div>    
-        <div style="float:left;width:24%;height:100%;background: none;">          
+        <div style="float:left;width:23%;height:100%;background: none;">          
           <div class="class_footer" onclick="updateSite()">
             <img src="main_gfx/jproduct.png"  alt="home image" />          
             <span>Update</span>
           </div>
         </div>    
-        <div style="float:right;width:28%;height:100%;background: none;">            
+        
+        <!--a href="down_app/app-debug.apk" download="RAMPUMP.apk">
+          <div style="width:100%;">
+            <img src="gfx/down_app.png" />
+            <span>Download App</span>
+          </div>      
+        </a-->
+        <div style="float:right;width:31%;height:100%;background: none;">            
           <div class="class_footer" onclick="gotoSite()">
             <img src="main_gfx/jsite.png" alt="call image" />          
             <span>View App</span>
@@ -463,9 +470,16 @@
                 '<img src="'+v_logo+'" alt="category image" style="border-radius:2%;border:2px solid white;height:auto;max-height:100%;width:auto;max-width:100%;background:none;"/>'+
               '</div>'+
             '<div style="width:100%;height:20%;padding:2px;font-size:20px;color:white;background:none;">'+aryDB['appname']+'</div>'+
-          '</div>'+          
+          '</div>'+        
+            
         '</div>'+
         
+        '<div style="width:100%;height:30px;margin-top:20px;text-align:center;background:none;">'+
+          //'<form method="post" action="">'+
+          //  '<input type="submit" name="download" value="Download" />'+
+          //'</form>'+
+          '<input type="button" style="height:100%;width:200px;" onclick="dl_zip()" value="Download Folder" />'
+        '</div>'+
 
       '</div>';
 
@@ -517,7 +531,7 @@
     .then(function (response) {    
         showProgress(false); 
         //console.log(response.data); 
-        alert(response.data); 
+        //alert(response.data); 
         //DB_SYS=response.data;    
         dispClients();
         showMainPage0();
@@ -757,10 +771,35 @@
       //alert('save site: '+response.data.length); 
       //alert('BANTAY: '+response.data);
       DB_SYS=response.data;
-      dispClients();      
+      dispClients();  
       showMainPage0();      
     })    
     .catch(function (error) { console.log(error); showProgress(false); });
+  }
+
+  function dl_zip(){    
+    var clientno=document.getElementById('div_site').getAttribute('data-clientno');    
+    var zipFile=clientno+'.zip';
+    showProgress(true);     
+    axios({
+      url: JBE_API+'temp/'+zipFile, //your url
+      method: 'GET',
+      responseType: 'blob', // important
+    }).then((response) => {
+      showProgress(false);     
+      //alert(response);
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', zipFile); //or any other extension
+      document.body.appendChild(link);
+      link.click();
+    })
+    .catch(function (error) { 
+      showProgress(false); 
+      MSG_SHOW(vbOk,"ERROR:",error,function(){},function(){});      
+    });
+
   }
 
   function showMenu(m){  
