@@ -462,7 +462,7 @@
         
         '<div style="width:100%;height:2px;margin-top:0px;background:white;"></div>'+
         
-        '<div style="margin:0 auto;width:70%;height:auto;margin-top:30%;padding:10px;background:none;'+
+        '<div style="margin:0 auto;width:70%;height:auto;margin-top:25%;padding:10px;background:none;'+
             'border-radius:10px;border:2px solid white;text-align:center;">'+
 
           '<div style="width:100%;height:200px;background:none;">'+                
@@ -493,6 +493,7 @@
   function delSite(){
     var clientno=document.getElementById('div_site').getAttribute('data-clientno');
     var site=document.getElementById('div_site').getAttribute('data-site');
+    
     MSG_SHOW(vbYesNo,"CONFIRM: ","Are you sure to Delete this Site: "+site+"?",function(){
       showProgress(true);  
       axios.post(JBE_API+'main.php', { clientno:clientno, request: 4,    
@@ -772,7 +773,8 @@
       //alert('BANTAY: '+response.data);
       DB_SYS=response.data;
       dispClients();  
-      showMainPage0();      
+      showMainPage0();
+      snackBar('App Saved... '+DB_SYS.length);
     })    
     .catch(function (error) { console.log(error); showProgress(false); });
   }
@@ -787,8 +789,7 @@
       method: 'GET',
       responseType: 'blob', // important
     }).then((response) => {
-      showProgress(false);     
-      //alert(response);
+      showProgress(false);   
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
@@ -800,7 +801,6 @@
       showProgress(false); 
       MSG_SHOW(vbOk,"ERROR:",error,function(){},function(){});      
     });
-
   }
 
   function showMenu(m){  
