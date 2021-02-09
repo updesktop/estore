@@ -1,9 +1,10 @@
-const cacheName = '20700120_010101';
+/* ORIG SERVICE WORKER OF ESTORE */
+const cacheName = '20210209_183647';
 const staticAssets = [
   './',
   './index.html',
   './gfx/banner.jpg',     './gfx/slide1.jpg',  './gfx/slide2.jpg',  './gfx/slide3.jpg',  
-  './gfx/icon-logo.png',  './gfx/icon-512x512.png',  
+  './gfx/icon-192x192.png',  './gfx/icon-512x512.png',  
   './gfx/logo.jpg',       '../../main_gfx/jadmin.jpg',
 
   '../../main_jslib/leaflet.js',              '../../main_jslib/leaflet.css',
