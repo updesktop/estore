@@ -1,4 +1,5 @@
-const cacheName = 'aav_111532';
+/* ORIG SERVICE WORKER OF ESTORE */
+const cacheName = '20210210_041243';
 const staticAssets = [
   './',
   './index.html',
