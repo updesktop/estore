@@ -521,6 +521,7 @@
     var vTime = vDate.toLocaleTimeString('it-IT'); 
     vDate = new Date(vDate.getTime() - (vDate.getTimezoneOffset() * 60000 )).toISOString().split("T")[0];  
     var sw_version=vDate+'_'+vTime;
+    
     sw_version = sw_version.replace(/-/g, "").replace(/:/g, "").replace("T", "-");            
     showProgress(true);  
     axios.post(JBE_API+'main.php', { clientno:clientno, request: 5,    
@@ -725,7 +726,6 @@
 	}
     
     var dvLogo=document.getElementById('id_logo'+vmode).getAttribute('data-img');
-    
     if(clientno=='' || dvAppname=='' || dvShortname=='' || dvDescrp=='' || dvSite=='' || dvLogo==''){
       var vmsg='';
       if(clientno==''){ vmsg='Client Code is Empty'; }
@@ -774,7 +774,7 @@
       DB_SYS=response.data;
       dispClients();  
       showMainPage0();
-      snackBar('App Saved... '+DB_SYS.length);
+      snackBar('App Saved...');
     })    
     .catch(function (error) { console.log(error); showProgress(false); });
   }
