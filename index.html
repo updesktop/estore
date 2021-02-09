@@ -779,7 +779,8 @@
 
   function dl_zip(){    
     var clientno=document.getElementById('div_site').getAttribute('data-clientno');    
-    var zipFile=clientno+'.zip';
+    var site=document.getElementById('div_site').getAttribute('data-site');
+    var zipFile=site+'.zip';
     showProgress(true);     
     axios({
       url: JBE_API+'temp/'+zipFile, //your url
