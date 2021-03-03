@@ -145,7 +145,7 @@ function dispChatDtl(){
   if(CURR_AXTYPE > 0) { f_owner=true; }
 
   var aryChat=DB_CHAT;
-  aryChat.sort(sortByMultipleKey(['trandate','trantime']));  
+  aryChat.sort(sortByMultipleKey(['id']));  
   //aryChat.sort(sortByMultipleKey(['id']));  
      
   var dtl='<div style="width:100%;height:auto;padding:5px;background-color:none;">';
