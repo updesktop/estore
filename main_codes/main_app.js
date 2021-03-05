@@ -12,7 +12,7 @@ function start_app(){
   JBE_ONLINE_NAVI=navigator.onLine;    
   JBE_ONLINE=false;   
   //****************
-  JBE_ONLINE_NAVI=true;
+  //JBE_ONLINE_NAVI=true;
   //**************** 
   //alert('start_app api dir: '+JBE_API);
   //alert('zOnline '+JBE_API);

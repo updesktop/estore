@@ -216,7 +216,7 @@ function fm_admin(){
         '</div>'+
 
         '<div onclick="layas()" style="width:100%;height:40px;margin-top:50px;padding:5px;cursor:pointer;background:none;">'+
-          '<img src="../../main_gfx/jedit.png" style="float:left;height:100%;"/>'+
+          '<img src="../../main_gfx/jcancel.png" style="float:left;height:100%;"/>'+
           '<span style="float:left;margin-left:5px;padding:5px;color:red;">Log Out</span>'+
         '</div>'+
          
