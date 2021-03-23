@@ -1,7 +1,7 @@
 {
         "name": "UPDESKTOP",
         "short_name": "UPDESKTOP",
-        "start_url": ".",
+        "/index.htm": ".",
         "display": "standalone",
         "orientation": "portrait",
         "background_color": "#a9a9a9",
