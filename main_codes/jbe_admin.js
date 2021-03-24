@@ -101,7 +101,7 @@ function chk_lognow(){
     }
   })    
   .catch(function (error) { 
-    console.log(error); alert('login err '+error);showProgress(false);
+    console.log(error);showProgress(false);
   });
 }
 
@@ -515,7 +515,6 @@ function save_profile(){
   })
   .catch(function (error) { console.log(error); 
     showProgress(false);
-    alert('saving '+error);
   });  
 }
   
@@ -701,7 +700,7 @@ function share_app(){
     .then(() => console.log('Successful share'))
     .catch((error) => {
       console.log('Error sharing', error);
-      MSG_SHOW(vbOk,"Error sharing:",error,function(){},function(){});
+      //MSG_SHOW(vbOk,"Error sharing:",error,function(){},function(){});
      })
   }
 }
